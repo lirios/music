@@ -34,8 +34,18 @@ FluidWindow {
 
         actions: [
             Action {
-                iconName: "av/play"
-                text: "Test"
+                iconName: "action/view_module"
+                text: "Grid View"
+            },
+
+            Action {
+                iconName: "action/view_list"
+                text: "List View"
+            },
+
+            Action {
+                iconName: "action/settings"
+                text: "Settings"
             }
         ]
 
