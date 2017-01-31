@@ -96,6 +96,7 @@ FluidWindow {
 
 
             // Pages content should ideally go here...
+        AllAlbums {}
 
 
         AudioControls {}

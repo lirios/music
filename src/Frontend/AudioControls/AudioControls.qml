@@ -119,4 +119,57 @@ Pane {
         source: "av/play_arrow"
 
     }
+
+    Image {
+        id: nowPlayingArt
+        height: 50
+        width: 50
+        anchors {
+            top: parent.top
+            left:parent.left
+            topMargin: 25
+            leftMargin:10
+        }
+        source: "qrc:/Images/cover.jpg"
+    }
+
+    Label {
+        id: nowPlayingSong
+        text: "Bowerstone"
+        anchors {
+            left: nowPlayingArt.right
+            top: parent.top
+            topMargin:25
+            leftMargin: 10
+        }
+        color: "#444"
+    }
+
+    Label {
+        id: nowPlayingAlbum
+        text: "Fable II OST"
+        anchors {
+            left: nowPlayingArt.right
+            top: nowPlayingSong.bottom
+            leftMargin: 10
+            topMargin: 4
+        }
+        font.pixelSize: 12
+        color: "#666"
+
+    }
+
+    Label {
+        id: nowPlayingArtist
+        text: "Russel Shaw"
+        anchors {
+            left: nowPlayingArt.right
+            top: nowPlayingAlbum.bottom
+            leftMargin: 10
+            topMargin: 4
+        }
+        font.pixelSize: 12
+        color: "#666"
+
+    }
 }

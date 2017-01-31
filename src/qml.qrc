@@ -7,5 +7,8 @@
         <file>Frontend/Content/Artists/AllArtists.qml</file>
         <file>Frontend/Content/Settings/Settings.qml</file>
         <file>Frontend/AudioControls/AudioControls.qml</file>
+        <file>Images/cover.jpg</file>
+        <file>Images/cover2.jpg</file>
+        <file>Images/cover3.jpg</file>
     </qresource>
 </RCC>
