@@ -10,5 +10,12 @@
         <file>Images/cover.jpg</file>
         <file>Images/cover2.jpg</file>
         <file>Images/cover3.jpg</file>
+        <file>Frontend/Content/Albums/Album.qml</file>
+        <file>Images/eminem.jpg</file>
+        <file>Images/lp1.jpg</file>
+        <file>Images/lp2.png</file>
+        <file>Images/lp3.jpg</file>
+        <file>main.cpp</file>
+        <file>Frontend/Content/Artists/Artist.qml</file>
     </qresource>
 </RCC>

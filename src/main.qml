@@ -25,81 +25,67 @@ FluidWindow {
     Material.accent: Material.Blue
 
 
+    Pane {
+        id: listPane
+        anchors {
+            left: parent.left
+            top: parent.top
+            bottom: parent.bottom
+            topMargin:0
+        }
+        width: 240
+        padding: 0
+        z: 1
+        height:parent.height
 
-    initialPage: Page {
-        title: window.title
-        anchors.fill:parent
-        Material.background: "#f9f9f9"
+        Material.background: "white"
+        Material.elevation: 2
 
 
-        actions: [
-            Action {
-                iconName: "action/view_module"
-                text: "Grid View"
-            },
 
-            Action {
-                iconName: "action/view_list"
-                text: "List View"
-            },
 
-            Action {
-                iconName: "action/settings"
-                text: "Settings"
+        ListView {
+            anchors.fill:parent
+            id: mainNav
+            currentIndex: 0
+
+            model: ListModel {
+                ListElement {title: "Albums"; iconSource: "av/album"; source: "/Frontend/Content/Albums/AllAlbums.qml"}
+                ListElement {title: "Artists"; iconSource: "social/group"; source: "/Frontend/Content/Artists/AllArtists.qml"}
+                ListElement {title: "All Songs"; iconSource: "action/list"; source: "/Frontend/Content/Songs/AllSongs.qml"}
+                ListElement {title: "Streams"; iconSource: "action/language"; source: "/Frontend/Content/Albums/AllAlbums.qml"}
+                ListElement {title: "Setting"; iconSource: "action/settings"; source: "/Frontend/Content/Albums/AllAlbums.qml"}
+
             }
-        ]
+
+            delegate: ListItem {
+                width: parent.width
+                iconName: model.iconSource
+                text: model.title
+                highlighted: ListView.isCurrentItem
 
 
-        Pane {
-            id: listPane
-            anchors {
-                left: parent.left
-                top: parent.top
-                bottom: parent.bottom
-                topMargin:-47
-            }
-            width: 240
-            padding: 0
-            z: 1
-            height:parent.height
-
-            Material.background: "white"
-            Material.elevation: 2
-
-
-
-
-            ListView {
-                anchors.fill:parent
-
-
-                model: ListModel {
-                    ListElement {title: "Albums"; iconSource: "av/album"}
-                    ListElement {title: "Artists"; iconSource: "social/group"}
-                    ListElement {title: "All Songs"; iconSource: "action/list"}
-                    ListElement {title: "Streams"; iconSource: "action/language"}
-                    ListElement {title: "Setting"; iconSource: "action/settings"}
-
+                onClicked: {
+                    mainNav.currentIndex = index
+                    window.pageStack.push(Qt.resolvedUrl(model.source))
                 }
 
-                delegate: ListItem {
-                    width: parent.width
-                    iconName: model.iconSource
-                    text: model.title
-
-                }
             }
-
-
-
         }
 
 
-            // Pages content should ideally go here...
-        AllAlbums {}
+
+    }
+
+
 
 
         AudioControls {}
+
+        Component.onCompleted: {
+            window.pageStack.push(Qt.resolvedUrl("/Frontend/Content/Albums/AllAlbums.qml"))
+        }
+
 
     }
 
@@ -107,4 +93,4 @@ FluidWindow {
 
 
 
-}
+
