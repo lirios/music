@@ -1,9 +1,12 @@
-import QtQuick 2.4
+import QtQuick 2.7
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.0
 import QtQuick.Controls.Material 2.0
+import Material 0.2
 import Fluid.Controls 1.0
 import Fluid.Material 1.0 as FluidMaterial
+import QtQuick.Controls.Styles 1.4
+
 
 import "Frontend/Content/Albums"
 import "Frontend/Content/Artists"
@@ -21,8 +24,20 @@ FluidWindow {
 
     title: qsTr("Liri Music")
 
-    Material.primary: Material.LightBlue
-    Material.accent: Material.Blue
+    Material.primary: Material.DeepOrange
+    Material.accent: Material.DeepOrange
+
+    initialPage: TabbedPage {
+        title: window.title
+
+        AllAlbums {}
+        AllArtists {}
+        AllSongs {}
+        Settings {}
+
+    }
+
+    /*
 
 
     Pane {
@@ -40,9 +55,6 @@ FluidWindow {
 
         Material.background: "white"
         Material.elevation: 2
-
-
-
 
         ListView {
             anchors.fill:parent
@@ -72,10 +84,8 @@ FluidWindow {
 
             }
         }
-
-
-
     }
+    */
 
 
 
@@ -83,7 +93,7 @@ FluidWindow {
         AudioControls {}
 
         Component.onCompleted: {
-            window.pageStack.push(Qt.resolvedUrl("/Frontend/Content/Albums/AllAlbums.qml"))
+            //window.pageStack.push(Qt.resolvedUrl("/Frontend/Content/Albums/AllAlbums.qml"))
         }
 
 

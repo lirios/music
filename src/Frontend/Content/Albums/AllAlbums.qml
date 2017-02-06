@@ -7,45 +7,20 @@ import Fluid.Material 1.0 as FluidMaterial
 
 
 
-Page {
-    title: "All Albums"
-    width:parent.width
-
-    height:parent.height + 30
-
-    anchors {
-        left: parent.left
-        top: parent.top
-        right: parent.right
-        bottom: parent.bottom
-        leftMargin: 260
-        topMargin: -30
-    }
-
+Tab {
+    title: "Albums"
 
     Flickable {
-        anchors {
-            left: parent.left
-            right:parent.right
-            bottom:parent.bottom
-            top:parent.top
-
-        }
-
+        anchors.fill: parent
         clip: true
         contentHeight: 400
-        width:parent.width
-        height:parent.height + 30
-        anchors.topMargin: -30
-
-
-
         Material.background: "#777"
 
         Item {
             Material.background: "#999"
             anchors.fill: parent
             anchors.topMargin: 30
+            anchors.leftMargin: 30
 
             GridView {
                 id: albumView
