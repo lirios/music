@@ -2,9 +2,7 @@ import QtQuick 2.7
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.0
 import QtQuick.Controls.Material 2.0
-import Material 0.2
-import Fluid.Controls 1.0
-import Fluid.Material 1.0 as FluidMaterial
+import Fluid.Controls 1.0 as FluidControls
 import QtQuick.Controls.Styles 1.4
 
 
@@ -14,7 +12,7 @@ import "Frontend/Content/AllSongs"
 import "Frontend/Content/Settings"
 import "Frontend/AudioControls"
 
-FluidWindow {
+FluidControls.ApplicationWindow {
     id: window
 
     visible: true
@@ -27,7 +25,7 @@ FluidWindow {
     Material.primary: Material.DeepOrange
     Material.accent: Material.DeepOrange
 
-    initialPage: TabbedPage {
+    initialPage: FluidControls.TabbedPage {
         title: window.title
 
         AllAlbums {}

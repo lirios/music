@@ -2,8 +2,7 @@ import QtQuick 2.4
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.0
 import QtQuick.Controls.Material 2.0
-import Fluid.Controls 1.0
-import Fluid.Material 1.0
+import Fluid.Controls 1.0 as FluidControls
 
 
 Pane {
@@ -43,10 +42,9 @@ Pane {
 
 
 
-        IconButton {
+        FluidControls.ToolButton {
             id: playButton
-            iconName: "av/play_arrow"
-            iconSize: 32
+            icon.source: FluidControls.Utils.iconUrl("av/play_arrow")
             width:80
 
             Material.elevation: 5
@@ -59,19 +57,17 @@ Pane {
             }
         }
 
-        IconButton {
+        FluidControls.ToolButton {
             id: prevButton
-            iconName: "av/skip_previous"
-            iconSize: 32
+            icon.source: FluidControls.Utils.iconUrl("av/skip_previous")
             anchors {
                 right: playButton.left
             }
         }
 
-        IconButton {
+        FluidControls.ToolButton {
             id: nextButton
-            iconName: "av/skip_next"
-            iconSize: 32
+            icon.source: FluidControls.Utils.iconUrl("av/skip_next")
             anchors {
                 left: playButton.right
             }
@@ -93,9 +89,9 @@ Pane {
         }
     }
 
-    IconButton {
+    FluidControls.ToolButton {
         id: volumeButton
-        iconName: "av/volume_up"
+        icon.source: FluidControls.Utils.iconUrl("av/volume_up")
         anchors {
             top:parent.top
             right: volumeSlider.left
@@ -103,9 +99,9 @@ Pane {
         }
     }
 
-    IconButton {
+    FluidControls.ToolButton {
         id: shuffleButton
-        iconName: "av/shuffle"
+        icon.source: FluidControls.Utils.iconUrl("av/shuffle")
         anchors {
             top:parent.top
             right: volumeButton.left
@@ -114,11 +110,6 @@ Pane {
     }
 
 
-    // Now Playing stuff
-    Icon {
-        source: "av/play_arrow"
-
-    }
 
     Image {
         id: nowPlayingArt

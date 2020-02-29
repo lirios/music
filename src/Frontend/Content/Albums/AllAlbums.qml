@@ -3,8 +3,6 @@ import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.0
 import QtQuick.Controls.Material 2.0
 import Fluid.Controls 1.0
-import Fluid.Material 1.0 as FluidMaterial
-
 
 
 Tab {
@@ -29,7 +27,6 @@ Tab {
                 Material.background: "#777"
 
                 model: ListModel {
-                    ListElement {text: "Fable II OST"; art: "qrc:/Images/cover.jpg"}
                     ListElement {text: "Fable II OST"; art: "qrc:/Images/cover.jpg"}
                     ListElement {text: "Marshal Mathers LP 2"; art: "qrc:/Images/cover2.jpg"}
                     ListElement {text: "Hybrid Theory"; art: "qrc:/Images/cover3.jpg"}
