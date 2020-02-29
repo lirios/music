@@ -2,7 +2,7 @@
 
 Very alpha stage music player written in C++, using Qt5 and Fluid.  It's basically unusable as-is.  I'm working to migrate all the previous code into the new project, while making improvements during the code migration.  It's going to take a while.
 
-![Liri UI](https://github.com/lirios/music/blob/master/images/liri.png "Liri UI")
+![Liri UI](https://github.com/lirios/music/blob/master/images/liri.PNG "Liri UI")
 
 ## Installation
 
