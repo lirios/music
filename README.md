@@ -7,10 +7,10 @@ Very alpha stage music player written in C++, using Qt5 and Fluid.  It's basical
 ## Installation
 
 #### Requirements
-    gstreamer ([https://gstreamer.freedesktop.org](https://gstreamer.freedesktop.org/documentation/installing/index.html?gi-language=c))
-    TagLib ([http://taglib.github.io/](http://taglib.github.io/))
-    Qt 5.14 ([https://www.qt.io/](https://www.qt.io/))
-    Fluid ([https://github.com/lirios/fluid](https://github.com/lirios/fluid))
+- gstreamer ([https://gstreamer.freedesktop.org](https://gstreamer.freedesktop.org/documentation/installing/index.html?gi-language=c))
+- TagLib ([http://taglib.github.io/](http://taglib.github.io/))
+- Qt 5.14 ([https://www.qt.io/](https://www.qt.io/))
+- Fluid ([https://github.com/lirios/fluid](https://github.com/lirios/fluid))
 
 #### Building
 
