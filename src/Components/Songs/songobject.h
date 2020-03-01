@@ -12,11 +12,13 @@ class SongObject : public QObject
     Q_PROPERTY(QString album READ album CONSTANT)
     Q_PROPERTY(QString artist READ artist CONSTANT)
     Q_PROPERTY(QString art READ art CONSTANT)
+    Q_PROPERTY(QString length READ length CONSTANT)
     QString m_path;
     QString m_title;
     QString m_album;
     QString m_artist;
     QString m_art;
+    QString m_length;
 
 
     QString path() { return m_path;}
@@ -24,15 +26,17 @@ class SongObject : public QObject
     QString album() { return m_album;}
     QString artist() {return m_artist;}
     QString art() {return m_art;}
+    QString length() {return m_length;}
 
 public:
-    explicit SongObject(const QString &path, const QString &title, const QString &album, const QString &artist, const QString &art) :
+    explicit SongObject(const QString &path, const QString &title, const QString &album, const QString &artist, const QString &art, const QString &length) :
         QObject(),
         m_path(path),
         m_title(title),
         m_album(album),
         m_artist(artist),
-        m_art(art)
+        m_art(art),
+        m_length(length)
     {}
 
 };

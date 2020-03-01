@@ -87,10 +87,11 @@ class AlbumObject : public QObject {
                     QString album = getSongs.value(4).toString();
                     QString artist = getSongs.value(3).toString();
                     QString art = getSongs.value(5).toString();
+                    QString length = getSongs.value(6).toString();
                     std::cout << "Song is: " + path.toStdString() << std::endl;
 
                     //std::cout << title.toStdString() << std::endl;
-                    songList.append(new SongObject(path, QString::fromStdString(title.toStdString()), album, artist, art));
+                    songList.append(new SongObject(path, QString::fromStdString(title.toStdString()), album, artist, art, length));
                     //songList.append(new SongObject(getSongs.value(2).fromValue, getSongs.value(1).fromValue, getSongs.value(4).fromValue, getSongs.value(3).fromValue));
                 }
             }

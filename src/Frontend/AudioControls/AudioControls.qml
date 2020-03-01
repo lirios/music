@@ -20,13 +20,16 @@ Pane {
     }
 
     Slider {
-        value: 0.5
+        id: durationBar
         width:parent.width
         anchors {
             top: parent.top
             topMargin: -10
         }
         z: 4
+        value: playMusic.position
+        from: 0
+        to: playMusic.duration
     }
 
     Pane {
@@ -44,7 +47,7 @@ Pane {
 
         FluidControls.ToolButton {
             id: playButton
-            icon.source: FluidControls.Utils.iconUrl("av/play_arrow")
+            icon.source: window.isPlaying ? FluidControls.Utils.iconUrl("av/pause") : FluidControls.Utils.iconUrl("av/play_arrow")
             width:80
 
             Material.elevation: 5
@@ -54,6 +57,10 @@ Pane {
                 topMargin: -5
                 leftMargin: 10
                 rightMargin: 10
+            }
+
+            onClicked: {
+                window.playTriggerAction()
             }
         }
 
@@ -121,12 +128,12 @@ Pane {
             topMargin: 25
             leftMargin:10
         }
-        source: "qrc:/Images/cover.jpg"
+        source: "file:///" + window.currentSong.art
     }
 
     Label {
         id: nowPlayingSong
-        text: "Bowerstone"
+        text: window.currentSong.title
         anchors {
             left: nowPlayingArt.right
             top: parent.top
@@ -138,7 +145,7 @@ Pane {
 
     Label {
         id: nowPlayingAlbum
-        text: "Fable II OST"
+        text: window.currentSong.album
         anchors {
             left: nowPlayingArt.right
             top: nowPlayingSong.bottom
@@ -152,7 +159,7 @@ Pane {
 
     Label {
         id: nowPlayingArtist
-        text: "Russel Shaw"
+        text: window.currentSong.artist
         anchors {
             left: nowPlayingArt.right
             top: nowPlayingAlbum.bottom

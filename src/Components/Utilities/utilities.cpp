@@ -37,11 +37,14 @@ void Utilities::addSongsToDatabase(QDir dir, TagLib::String path, QString newpat
     QString artist = tag->artist().toCString(true);
     QString title = tag->title().toCString(true);
     QString album = tag->album().toCString(true);
+    TagLib::AudioProperties *prop = f.audioProperties();
+    QString len = QString::number(prop->length());
+
     //QString art = tag->
 
     if(db.open()){
         QSqlQuery qry;
-        qry.prepare("CREATE TABLE IF NOT EXISTS Songs(id INTEGER PRIMARY KEY AUTOINCREMENT, path TEXT, title TEXT, artist TEXT, album TEXT, art TEXT)");
+        qry.prepare("CREATE TABLE IF NOT EXISTS Songs(id INTEGER PRIMARY KEY AUTOINCREMENT, path TEXT, title TEXT, artist TEXT, album TEXT, art TEXT, length TEXT)");
 
         if(qry.exec()){
             //std::cout << "Created table" << std::endl;
@@ -146,8 +149,8 @@ void Utilities::addSongsToDatabase(QDir dir, TagLib::String path, QString newpat
                     std::cout << "Empty title"
 ;                    title = filename;
                 }
-                insertqry.prepare("INSERT INTO Songs (id, path, title, artist, album, art) VALUES "
-                                  "(NULL, '"+ newpath +"', '"+ title +"', '"+ artist +"', '"+ album +"', '"+art+"')");
+                insertqry.prepare("INSERT INTO Songs (id, path, title, artist, album, art, length) VALUES "
+                                  "(NULL, '"+ newpath +"', '"+ title +"', '"+ artist +"', '"+ album +"', '"+art+"', '" + len + "')");
                 if(insertqry.exec()){
                     std::cout << "Inserted data successfully: " << title.toStdString() << " " << std::endl;
                 }else{

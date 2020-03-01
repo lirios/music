@@ -127,14 +127,13 @@ Page {
 
                     delegate: ListItem {
                         text: {
-                            console.log("MOD", model.modelData, model.modelData.title);
                             return model.modelData.title
                         }
                         width: parent.width
-                        highlighted: ListView.isCurrentItem
+                        highlighted: window.currentSong ? (model.modelData.title == window.currentSong.title) : false
 
                         Text {
-                            text: model.modelData.artist
+                            text: window.formatTime(model.modelData.length)
                             anchors {
                                 top: parent.top
                                 right: parent.right
@@ -144,6 +143,16 @@ Page {
 
                             color: "#666"
                             font.pixelSize: 12
+                        }
+
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: {
+                                window.currentSong = model.modelData
+                                playMusic.source = "file:///" + model.modelData.path
+                                playMusic.play()
+
+                            }
                         }
                     }
                 }
