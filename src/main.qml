@@ -15,7 +15,10 @@ import "Frontend/AudioControls"
 FluidControls.ApplicationWindow {
     id: window
 
-    visible: true
+    visible: function () {
+        console.log(allAlbums)
+        return true
+    }
 
     width: 1024
     height: 600

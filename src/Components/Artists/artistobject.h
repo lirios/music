@@ -6,7 +6,7 @@
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlQuery>
 #include <QList>
-#include "songobject.h"
+#include "Components/Songs/songobject.h"
 #include <QVariant>
 
 class ArtistObject : public QObject {

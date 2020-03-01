@@ -26,11 +26,7 @@ Tab {
                 anchors.fill: parent
                 Material.background: "#777"
 
-                model: ListModel {
-                    ListElement {text: "Linkin Part"; art: "qrc:/Images/lp1.jpg"}
-                    ListElement {text: "Eminem"; art: "qrc:/Images/eminem.jpg"}
-
-                }
+                model: allArtists
 
                 delegate: Item {
                     Material.elevation: 2
@@ -56,7 +52,7 @@ Tab {
 
 
                             Text {
-                                text: model.text
+                                text: model.artist
                                 anchors {
                                     bottom: parent.bottom
                                     left: parent.left

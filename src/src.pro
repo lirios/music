@@ -28,19 +28,20 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 SOURCES += main.cpp \
-    musicfolders.cpp \
-    albumobject.cpp \
-    songobject.cpp \
-    artistobject.cpp \
-    utilities.cpp
+    Components/Base/base.cpp \
+    Components/Utilities/musicfolders.cpp \
+    Components/Albums/albumobject.cpp \
+    Components/Songs/songobject.cpp \
+    Components/Artists/artistobject.cpp \
+    Components/Utilities/utilities.cpp
 
 HEADERS += \
-    main.h \
-    albumobject.h \
-    songobject.h \
-    artistobject.h \
-    musicfolders.h \
-    utilities.h
+    Components/Base/base.h \
+    Components/Albums/albumobject.h \
+    Components/Songs/songobject.h \
+    Components/Artists/artistobject.h \
+    Components/Utilities/musicfolders.h \
+    Components/Utilities/utilities.h
 
 android {
     # Bundle Fluid QML plugins with the application

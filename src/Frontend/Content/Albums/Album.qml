@@ -15,8 +15,10 @@ Page {
         top: parent.top
         right: parent.right
         bottom: parent.bottom
-        leftMargin: 260
-        topMargin: -30
+
+        topMargin: 30
+        leftMargin: 30
+        rightMargin: 30
     }
 
 
@@ -33,7 +35,7 @@ Page {
         contentHeight: 400
         width:parent.width
         height:parent.height + 30
-        Material.background: "#777"
+
 
         RowLayout {
             anchors.fill: parent
@@ -45,6 +47,8 @@ Page {
                 Layout.preferredWidth: 200
                 Layout.maximumWidth: 220
                 Layout.minimumHeight: 500
+                Material.elevation: 0
+                color: "transparent"
 
                 ColumnLayout {
                     spacing: 10
@@ -57,24 +61,25 @@ Page {
 
                     Text {
                         text: "Marshal Mathers LP 2"
-                        Layout.preferredHeight: 15
+                        Layout.preferredHeight: 22
                         Layout.preferredWidth: 200
+                        font.pixelSize: 20
                     }
 
                     Text {
                         text: "Eminem"
-                        Layout.preferredHeight: 12
+                        Layout.preferredHeight: 16
                         Layout.preferredWidth: 200
                         color: "#666"
-                        font.pixelSize: 12
+                        font.pixelSize: 16
                     }
 
                     Text {
                         text: "2013"
-                        Layout.preferredHeight: 12
+                        Layout.preferredHeight: 16
                         Layout.preferredWidth: 200
                         color: "#666"
-                        font.pixelSize: 12
+                        font.pixelSize: 16
                     }
 
 
@@ -93,6 +98,7 @@ Page {
 
                 ListView {
                     anchors.fill: parent
+                    Material.elevation: 2
 
 
                     model: ListModel {
@@ -137,6 +143,7 @@ Page {
                     }
                 }
             }
+
         }
 
 

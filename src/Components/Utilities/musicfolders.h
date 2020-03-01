@@ -6,7 +6,7 @@
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlQuery>
 #include <QList>
-#include "songobject.h"
+#include "Components/Songs/songobject.h"
 #include <QVariant>
 #include <iostream>
 #include <C:/Program Files (x86)/taglib/include/taglib/taglib.h>
@@ -23,8 +23,8 @@
 #include <QDir>
 #include <stdlib.h>
 #include <sstream>
-#include "utilities.h"
-#include "albumobject.h"
+#include "Components/Utilities/utilities.h"
+#include "Components/Albums/albumobject.h"
 
 
 class MusicFolders : public QObject {

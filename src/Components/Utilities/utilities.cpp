@@ -7,7 +7,7 @@
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlQuery>
 #include <QList>
-#include "songobject.h"
+#include "Components/Songs/songobject.h"
 #include <QVariant>
 #include <iostream>
 #include <taglib/taglib.h>
@@ -22,6 +22,7 @@
 #include <QQmlContext>
 #include <QFileInfo>
 #include "musicfolders.h"
+#include <QStandardPaths>
 
 Utilities::Utilities(QObject *parent)
 {
@@ -199,8 +200,15 @@ void Utilities::setMusicScan(QDir d, bool recursive=true, bool symlinks=false ) 
 void Utilities::run(){
     qDebug() << "Running thread";
     std::cout << "START NEUTILS" << std::endl;
-    QDir d = QDir::homePath() + QLatin1String("/Music");
-    this->setMusicScan(d);
+    // QDir d = QDir::homePath() + QLatin1String("/Music");
+    QStringList d = QStandardPaths::standardLocations(QStandardPaths::MusicLocation);
+    for(int i = 0; i < d.size(); i++) {
+
+        std::cout << "Found location" << d[i].toStdString() << std::endl;
+        QDir directory = d[i];
+        this->setMusicScan(directory);
+    }
+
 
 
 }

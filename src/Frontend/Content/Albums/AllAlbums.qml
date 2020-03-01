@@ -1,4 +1,4 @@
-import QtQuick 2.7
+import QtQuick 2.14
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.0
 import QtQuick.Controls.Material 2.0
@@ -25,11 +25,17 @@ Tab {
                 cellWidth: 200; cellHeight: 200
                 anchors.fill: parent
                 Material.background: "#777"
-
+                /*
                 model: ListModel {
                     ListElement {text: "Fable II OST"; art: "qrc:/Images/cover.jpg"}
                     ListElement {text: "Marshal Mathers LP 2"; art: "qrc:/Images/cover2.jpg"}
                     ListElement {text: "Hybrid Theory"; art: "qrc:/Images/cover3.jpg"}
+                }
+                */
+                model: {
+                    if(allAlbums){
+                        return allAlbums
+                    }
                 }
 
                 delegate: Item {
@@ -42,7 +48,7 @@ Tab {
                         Image {
                             height: parent.height
                             width: parent.width
-                            source: model.art
+                            source:  "file:///" + model.art
 
                         }
 
@@ -56,7 +62,7 @@ Tab {
 
 
                             Text {
-                                text: model.text
+                                text: model.title
                                 anchors {
                                     bottom: parent.bottom
                                     left: parent.left
