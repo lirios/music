@@ -1,5 +1,5 @@
 import QtQuick 2.4
-import QtQuick.Controls 2.0
+import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.0
 import QtQuick.Controls.Material 2.0
 import Fluid.Controls 1.0 as FluidControls
@@ -24,12 +24,20 @@ Pane {
         width:parent.width
         anchors {
             top: parent.top
-            topMargin: -10
+            topMargin: -20
         }
+        Material.background: Material.secondaryTextColor
+        live: false
         z: 4
-        value: playMusic.position
+        value: this.pressed ? this.value : playMusic.position
         from: 0
         to: playMusic.duration
+
+        onValueChanged: {
+            if(durationBar.pressed){
+               window.seek(this.value);
+            }
+        }
     }
 
     Pane {
@@ -70,6 +78,7 @@ Pane {
             anchors {
                 right: playButton.left
             }
+            onClicked: window.previousSong()
         }
 
         FluidControls.ToolButton {
@@ -78,6 +87,7 @@ Pane {
             anchors {
                 left: playButton.right
             }
+            onClicked: window.nextSong()
         }
 
 
@@ -94,6 +104,20 @@ Pane {
             topMargin:25
             top:parent.top
         }
+        onValueChanged: {
+            if(this.value == 0.00){
+                volumeButton.icon.source = FluidControls.Utils.iconUrl('av/volume_off')
+                volumeButton.Material.foreground = Material.Dark;
+
+            }else if(this.value > 0.00 && this.value <= 0.60){
+                volumeButton.icon.source = FluidControls.Utils.iconUrl('av/volume_down')
+                volumeButton.Material.foreground = Material.primaryTextColor;
+            }else{
+                volumeButton.icon.source = FluidControls.Utils.iconUrl('av/volume_up')
+                volumeButton.Material.foreground = Material.primaryTextColor;
+            }
+            window.setAudioVolume(this.value)
+        }
     }
 
     FluidControls.ToolButton {
@@ -103,6 +127,19 @@ Pane {
             top:parent.top
             right: volumeSlider.left
             topMargin: 25
+        }
+
+        onClicked: {
+            if(volumeSlider.value == 0.00){
+                volumeSlider.value = 1
+                volumeButton.icon.source = FluidControls.Utils.iconUrl('av/volume_up')
+                volumeButton.Material.foreground = Material.primaryTextColor;
+
+            }else{
+                volumeSlider.value = 0.00
+                volumeButton.icon.source = FluidControls.Utils.iconUrl('av/volume_off')
+                volumeButton.Material.foreground = Material.Dark;
+            }
         }
     }
 
@@ -114,6 +151,14 @@ Pane {
             right: volumeButton.left
             topMargin: 25
         }
+        Material.foreground: {
+            if(window.isShuffled){
+                return Material.accentColor;
+            }else{
+                return Material.primaryTextColor;
+            }
+        }
+        onClicked: window.manageShuffle()
     }
 
 

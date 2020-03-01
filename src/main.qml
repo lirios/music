@@ -51,12 +51,105 @@ FluidControls.ApplicationWindow {
     property var currentTime: 0;
     property var isSeeking: false;
     property var currentSongLength: 0;
+    property var currentSongList;
+    property var currentSongIndex: 0;
+    property var isShuffled: false;
+
 
     function getAlbumsSongs(album){
         singleAlbum = album;
         singleAlbum.songList = album.getSong;
-
     }
+
+    function nextSong(){
+        if(currentSongIndex < currentSongList.length - 1) {
+            currentSong = currentSongList[currentSongIndex + 1]
+            currentSongIndex += 1;
+            playMusic.source = "file:///" + currentSong.path
+            playMusic.play()
+        }
+    }
+
+    function previousSong(){
+        if(currentSongIndex > 0) {
+            currentSong = currentSongList[currentSongIndex - 1]
+            currentSongIndex -= 1;
+            playMusic.source = "file:///" + currentSong.path
+            playMusic.play()
+        }
+    }
+
+    function seek(val) {
+        window.isSeeking = true;
+        durationTimer.stop()
+        playMusic.pause()
+        var newseek = parseInt(val * 1)
+        playMusic.seek(newseek)
+        playMusic.play()
+        durationTimer.start()
+        isSeeking = false;
+    }
+
+    function setAudioVolume(vol) {
+        playMusic.volume = vol
+    }
+
+    function shuffleOrder(a, b){
+          if ( a.track < b.track ){
+            return -1;
+          }
+          if ( a.track > b.track ){
+            return 1;
+          }
+          return 0;
+    }
+
+    function putCurrentSongFirst(){
+        window.currentSongList.splice(window.currentSongIndex, 1);
+        window.currentSongList.unshift(window.currentSong);
+        window.currentSongIndex = 0;
+    }
+
+    function shuffle(array) {
+      var currentIndex = array.length, temporaryValue, randomIndex;
+
+      // While there remain elements to shuffle...
+      while (0 !== currentIndex) {
+
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+
+        // And swap it with the current element.
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+      }
+
+      return array;
+    }
+
+    function manageShuffle(){
+        if(window.isShuffled){
+            window.isShuffled = false;
+            let songlist = [];
+            window.currentSongList.sort(shuffleOrder);
+
+        } else {
+            window.isShuffled = true;
+            shuffle(window.currentSongList);
+
+        }
+        window.currentSongList.map((s, i) => {
+            if(s.track == window.currentSong.track) {
+                window.currentSongIndex = i;
+            }
+        })
+
+        putCurrentSongFirst()
+    }
+
+
 
     Timer {
         id: delayedPlay
@@ -91,7 +184,7 @@ FluidControls.ApplicationWindow {
 
         onStatusChanged: {
             if (status == MediaPlayer.EndOfMedia) {
-
+                nextSong();
             }
         }
 

@@ -6,7 +6,8 @@ import Fluid.Controls 1.0
 
 
 Page {
-    title: "Album"
+    id: albumPage
+    title: window.singleAlbum.title
     width:parent.width
     height:parent.height + 30
 
@@ -125,6 +126,8 @@ Page {
                             anchors.fill: parent
                             onClicked: {
                                 window.currentSong = model.modelData
+                                window.currentSongList = window.singleAlbum.songList
+                                window.currentSongIndex = model.index;
                                 playMusic.source = "file:///" + model.modelData.path
                                 playMusic.play()
 
