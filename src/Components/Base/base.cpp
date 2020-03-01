@@ -82,8 +82,9 @@ QList<QObject*> Base::getAllSongs(QSqlDatabase db){
                 QString artist = getSongs.value(3).toString();
                 QString art = getSongs.value(5).toString();
                 QString length = getSongs.value(6).toString();
+                QString track = getSongs.value(7).toString();
                 //std::cout << art.toStdString() << std::endl;
-                songList.append(new SongObject(path, QString::fromStdString(title.toStdString()), album, artist, art, length));
+                songList.append(new SongObject(path, QString::fromStdString(title.toStdString()), album, artist, art, length, track));
                 //songList.append(new SongObject(getSongs.value(2).fromValue, getSongs.value(1).fromValue, getSongs.value(4).fromValue, getSongs.value(3).fromValue));
             }
         }
@@ -94,7 +95,7 @@ QList<QObject*> Base::getAllSongs(QSqlDatabase db){
         songList[0]->setObjectName("allSongObjects");
         return songList;
     }else{
-        songList.append(new SongObject("undefined", "undefined", "undefined", "undefined", "undefined", "undefined"));
+        songList.append(new SongObject("undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined"));
         songList[0]->setObjectName("allSongObjects");
         return songList;
     }

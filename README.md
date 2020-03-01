@@ -4,6 +4,8 @@ Very alpha stage music player written in C++, using Qt5 and Fluid.  It's basical
 
 ![Liri UI](https://github.com/lirios/music/blob/master/images/liri.PNG "Liri UI")
 
+![Liri UI](https://github.com/lirios/music/blob/master/images/liri2.PNG "Liri Single Album View")
+
 ## Installation
 
 #### Requirements
@@ -14,7 +16,7 @@ Very alpha stage music player written in C++, using Qt5 and Fluid.  It's basical
 
 #### Building
 
-Before building Liri Music, you need to make sure that you install TagLib into C:/Program Files (x86)/taglib.  Not sure why it has to be included by absolute path, but at first glance it appears that's the only way it works.
+After installing Qt5 and TagLib, cd wherever you want to store this project, and:
 
     git clone https://github.com/liri-project/liri-music.git
     cd liri-music

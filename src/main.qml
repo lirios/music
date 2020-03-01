@@ -41,7 +41,6 @@ FluidControls.ApplicationWindow {
         var minutes = Math.floor((sec_num) / 60);
         var seconds = sec_num - (hours * 3600) - (minutes * 60);
 
-        if (minutes < 10) {minutes = "0"+minutes;}
         if (seconds < 10) {seconds = "0"+seconds;}
         return minutes+':'+seconds;
     }
