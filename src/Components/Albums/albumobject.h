@@ -68,9 +68,7 @@ class AlbumObject : public QObject {
     QString m_artist;
     QString m_art;
 
-    QString title() {return m_title;}
-    QString artist() {return m_artist;}
-    QString art() {return m_art;}
+
     QList<QObject*> getSong(){
         QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
         db.setHostName("localhost");
@@ -108,6 +106,9 @@ public:
         m_artist(artist),
         m_art(art)
     {}
+    QString title() {return m_title;}
+    QString artist() {return m_artist;}
+    QString art() {return m_art;}
 
 };
 

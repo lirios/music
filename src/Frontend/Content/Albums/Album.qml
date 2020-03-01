@@ -56,18 +56,18 @@ Page {
                     Image {
                         Layout.preferredHeight: 200
                         Layout.preferredWidth: 200
-                        source: "qrc:/Images/cover2.jpg"
+                        source: "file:///" + window.singleAlbum.art
                     }
 
                     Text {
-                        text: "Marshal Mathers LP 2"
+                        text: window.singleAlbum.title
                         Layout.preferredHeight: 22
                         Layout.preferredWidth: 200
                         font.pixelSize: 20
                     }
 
                     Text {
-                        text: "Eminem"
+                        text: window.singleAlbum.artist
                         Layout.preferredHeight: 16
                         Layout.preferredWidth: 200
                         color: "#666"
@@ -75,7 +75,7 @@ Page {
                     }
 
                     Text {
-                        text: "2013"
+                        text: ""
                         Layout.preferredHeight: 16
                         Layout.preferredWidth: 200
                         color: "#666"
@@ -101,7 +101,9 @@ Page {
                     Material.elevation: 2
 
 
-                    model: ListModel {
+                    model: window.singleAlbum.songList
+
+                        /*ListModel {
                         ListElement {number: "1"; text: "Bad Guy"; length: "7:14"}
                         ListElement {number: "2"; text: "Parking Lot"; length: "0:55"}
                         ListElement {number: "3"; text: "Rhyme or Reason"; length: "5:01"}
@@ -121,15 +123,18 @@ Page {
                         ListElement {number: "17"; text: "Don't Front"; length: "4:44"}
                         ListElement {number: "18"; text: "Baby"; length: "4:23"}
                         ListElement {number: "19"; text: "Desperation"; length: "3:56"}
-                    }
+                    }*/
 
                     delegate: ListItem {
-                        text: model.number + ". " + model.text
+                        text: {
+                            console.log("MOD", model.modelData, model.modelData.title);
+                            return model.modelData.title
+                        }
                         width: parent.width
                         highlighted: ListView.isCurrentItem
 
                         Text {
-                            text: model.length
+                            text: model.modelData.artist
                             anchors {
                                 top: parent.top
                                 right: parent.right

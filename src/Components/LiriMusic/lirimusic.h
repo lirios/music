@@ -1,7 +1,5 @@
-#ifndef BASE_H
-#define BASE_H
-
-#include <QMainWindow>
+#ifndef LIRIMUSIC_H
+#define LIRIMUSIC_H
 #include <QObject>
 #include <QWidget>
 #include <QFrame>
@@ -15,20 +13,25 @@
 #include <QQmlApplicationEngine>
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
-#include "Components/LiriMusic/lirimusic.h"
 
-class Base : public QQmlApplicationEngine
+class LiriMusic : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(QVariant allAlbums READ getAlbums NOTIFY albumsChanged)
 public:
-    explicit Base();
-    ~Base();
-    QList<QObject*> getAlbums(QSqlDatabase);
-    QList<QObject*> getArtists(QSqlDatabase);
-    QList<QObject*> getAllSongs(QSqlDatabase);
-    bool initialQuery(QSqlDatabase);
-    void createWindow();
+    LiriMusic();
 
+    Q_INVOKABLE QVariant getAlbums();
+    Q_INVOKABLE bool beginMusicScan();
+
+    MusicFolders defaultFolders;
+    Utilities newUtils;
+
+
+    QSqlDatabase db;
+
+signals:
+    void albumsChanged();
 };
 
-#endif // BASE_H
+#endif // LIRIMUSIC_H

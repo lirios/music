@@ -7,8 +7,11 @@ import Fluid.Controls 1.0
 
 Tab {
     title: "Albums"
+    id: albumsComponent
+
 
     Flickable {
+        id: flickable
         anchors.fill: parent
         clip: true
         contentHeight: 400
@@ -19,6 +22,7 @@ Tab {
             anchors.fill: parent
             anchors.topMargin: 30
             anchors.leftMargin: 30
+            id: container
 
             GridView {
                 id: albumView
@@ -32,14 +36,14 @@ Tab {
                     ListElement {text: "Hybrid Theory"; art: "qrc:/Images/cover3.jpg"}
                 }
                 */
-                model: {
-                    if(allAlbums){
-                        return allAlbums
-                    }
-                }
+                model: window.getAlbums()
+
 
                 delegate: Item {
                     Material.elevation: 2
+                    Component.onCompleted: {
+                        console.log("MODEL !", model);
+                    }
 
                     Rectangle {
                         height: 180
@@ -48,7 +52,7 @@ Tab {
                         Image {
                             height: parent.height
                             width: parent.width
-                            source:  "file:///" + model.art
+                            source:  "file:///" + model.modelData.art
 
                         }
 
@@ -62,7 +66,7 @@ Tab {
 
 
                             Text {
-                                text: model.title
+                                text: model.modelData.title
                                 anchors {
                                     bottom: parent.bottom
                                     left: parent.left
@@ -78,7 +82,9 @@ Tab {
                             MouseArea {
                                 anchors.fill: parent
                                 onClicked: {
+                                    window.getAlbumsSongs(model.modelData);
                                     window.pageStack.push(Qt.resolvedUrl("/Frontend/Content/Albums/Album.qml"))
+
                                 }
                             }
                         }

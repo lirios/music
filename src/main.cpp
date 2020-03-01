@@ -36,6 +36,7 @@
 #include "Components/Utilities/musicfolders.h"
 #include "Components/Utilities/utilities.h"
 #include "Components/Base/base.h"
+#include "Components/LiriMusic/lirimusic.h"
 
 #ifdef QT_STATIC
 #  include <QQmlExtensionPlugin>
@@ -51,6 +52,8 @@ int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QGuiApplication app(argc, argv);
+    // Register Liri Music
+    qmlRegisterType<LiriMusic>("com.liri.music", 1, 0, "LiriMusic");
 
     Base engine;
 

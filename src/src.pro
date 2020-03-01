@@ -29,6 +29,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 SOURCES += main.cpp \
     Components/Base/base.cpp \
+    Components/LiriMusic/lirimusic.cpp \
     Components/Utilities/musicfolders.cpp \
     Components/Albums/albumobject.cpp \
     Components/Songs/songobject.cpp \
@@ -38,6 +39,7 @@ SOURCES += main.cpp \
 HEADERS += \
     Components/Base/base.h \
     Components/Albums/albumobject.h \
+    Components/LiriMusic/lirimusic.h \
     Components/Songs/songobject.h \
     Components/Artists/artistobject.h \
     Components/Utilities/musicfolders.h \

@@ -4,7 +4,7 @@ import QtQuick.Layouts 1.0
 import QtQuick.Controls.Material 2.0
 import Fluid.Controls 1.0 as FluidControls
 import QtQuick.Controls.Styles 1.4
-
+import com.liri.music 1.0
 
 import "Frontend/Content/Albums"
 import "Frontend/Content/Artists"
@@ -12,13 +12,47 @@ import "Frontend/Content/AllSongs"
 import "Frontend/Content/Settings"
 import "Frontend/AudioControls"
 
+
+
+
 FluidControls.ApplicationWindow {
     id: window
 
-    visible: function () {
-        console.log(allAlbums)
+    function getAlbums() {
+        let albums = musichelper.allAlbums;
+        return albums;
+    }
+
+    property var singleAlbum;
+
+    function getAlbumsSongs(album){
+        singleAlbum = album;
+        singleAlbum.songList = album.getSong;
+
+    }
+
+    LiriMusic {
+        id: musichelper
+        property Item contents: Rectangle {
+            Component.onCompleted:  {
+
+
+                    let didScan = musichelper.beginMusicScan();
+
+
+            }
+        }
+    }
+
+    visible: {
+
         return true
     }
+
+
+
+    // Try to call liri getAlbums:
+
 
     width: 1024
     height: 600
@@ -28,13 +62,19 @@ FluidControls.ApplicationWindow {
     Material.primary: Material.DeepOrange
     Material.accent: Material.DeepOrange
 
+
+
     initialPage: FluidControls.TabbedPage {
         title: window.title
 
-        AllAlbums {}
+        AllAlbums {
+            id: albumsComponent
+        }
         AllArtists {}
         AllSongs {}
         Settings {}
+
+
 
     }
 
@@ -99,9 +139,5 @@ FluidControls.ApplicationWindow {
 
 
     }
-
-
-
-
 
 

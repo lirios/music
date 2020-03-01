@@ -161,6 +161,7 @@ void Base::createWindow() {
     std::cout << "Loading database data. " << db.connectionName().toStdString() << std::endl;
 
 
+
     if(this->initialQuery(db)){
 
     }
@@ -184,13 +185,6 @@ void Base::createWindow() {
     this->rootContext()->setContextProperty("allAlbums", QVariant::fromValue(getAlbums(db)));
     //db.close();
 
-    MusicFolders defaultFolders;
-    Utilities newUtils;
-
-    QObject::connect(&newUtils,SIGNAL(allAlbumschanged()),&defaultFolders,SLOT(onAlbumsChanged()));
-    newUtils.start();
-
-    this->rootContext()->setContextProperty("musicFolder", &defaultFolders);
 
     this->addImportPath(QCoreApplication::applicationDirPath() + QDir::separator() + QLatin1String("..") +
                          QDir::separator() + QLatin1String("fluid") + QDir::separator() + QLatin1String("qml"));
