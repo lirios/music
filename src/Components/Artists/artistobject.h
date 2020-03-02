@@ -18,6 +18,7 @@ class ArtistObject : public QObject {
     QString m_artist;
 
     QString artist() {return m_artist;}
+
     QList<QObject*> getSong(){
         QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
         db.setHostName("localhost");

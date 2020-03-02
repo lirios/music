@@ -150,8 +150,10 @@ void Utilities::addSongsToDatabase(QDir dir, TagLib::String path, QString newpat
                     std::cout << "Empty title"
 ;                    title = filename;
                 }
+
+                title = title.replace("'", "");
                 insertqry.prepare("INSERT INTO Songs (id, path, title, artist, album, art, length, track) VALUES "
-                                  "(NULL, '"+ newpath +"', '"+ title +"', '"+ artist +"', '"+ album +"', '"+art+"', '" + len + "', '" + number +"' )");
+                                  "(NULL, '"+ newpath +"', '" + title + "', '"+ artist +"', '"+ album +"', '"+art+"', '" + len + "', '" + number +"' )");
                 if(insertqry.exec()){
                     std::cout << "Inserted data successfully: " << title.toStdString() << " " << std::endl;
                 }else{

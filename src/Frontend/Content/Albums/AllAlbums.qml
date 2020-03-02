@@ -10,6 +10,7 @@ Tab {
     id: albumsComponent
 
 
+
     Flickable {
         id: flickable
         anchors.fill: parent

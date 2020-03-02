@@ -26,6 +26,7 @@ public:
     Q_INVOKABLE QVariant getAlbums();
     Q_INVOKABLE QVariant getFolders();
     Q_INVOKABLE bool beginMusicScan();
+    Q_INVOKABLE QVariant getArtistAlbums(QString);
 
     MusicFolders defaultFolders;
     Utilities newUtils;

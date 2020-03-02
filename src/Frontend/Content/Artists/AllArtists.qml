@@ -68,7 +68,8 @@ Tab {
                             MouseArea {
                                 anchors.fill: parent
                                 onClicked: {
-                                    window.pageStack.push(Qt.resolvedUrl("/Frontend/Content/Albums/Album.qml"))
+                                    window.getArtistAlbums(model.modelData.artist);
+                                    window.pageStack.push(Qt.resolvedUrl("/Frontend/Content/Artists/Artist.qml"))
                                 }
                             }
                         }

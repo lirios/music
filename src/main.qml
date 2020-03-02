@@ -59,11 +59,15 @@ FluidControls.ApplicationWindow {
     property var currentSongList;
     property var currentSongIndex: 0;
     property var isShuffled: false;
+    property var artistAlbums;
 
-
-    function getAlbumsSongs(album){
+    function getAlbumSongs(album){
         singleAlbum = album;
         singleAlbum.songList = album.getSong;
+    }
+
+    function getArtistAlbums(artist){
+        artistAlbums = musichelper.getArtistAlbums(artist)
     }
 
     function nextSong(){

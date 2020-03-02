@@ -63,10 +63,14 @@ class AlbumObject : public QObject {
     Q_PROPERTY(QString artist READ artist CONSTANT)
     Q_PROPERTY(QString art READ art CONSTANT)
     Q_PROPERTY(QList<QObject*> getSong READ getSong CONSTANT)
+    Q_PROPERTY(QVariant songList READ songList)
 
     QString m_title;
     QString m_artist;
     QString m_art;
+
+    QVariant m_songList;
+
 
 
     QList<QObject*> getSong(){
@@ -111,6 +115,40 @@ public:
     QString title() {return m_title;}
     QString artist() {return m_artist;}
     QString art() {return m_art;}
+    QVariant songList(){return m_songList;}
+
+    void getAllSongs(){
+        QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+        db.setHostName("localhost");
+        db.setDatabaseName("vinylmusic");
+        QList<QObject*> sl;
+
+        if(db.open()){
+            // DB is open; lets get all songs
+            QSqlQuery getSongs;
+            getSongs.prepare("Select * FROM Songs where album='"+ m_title +"'");
+            if(getSongs.exec()){
+                while(getSongs.next()){
+
+                    QString title = getSongs.value(2).toString();
+                    QString path = getSongs.value(1).toString();
+                    QString album = getSongs.value(4).toString();
+                    QString artist = getSongs.value(3).toString();
+                    QString art = getSongs.value(5).toString();
+                    QString length = getSongs.value(6).toString();
+                    QString track = getSongs.value(7).toString();
+
+                    std::cout << "Adding song: " << title.toStdString() << std::endl;
+
+                    //std::cout << title.toStdString() << std::endl;
+                    sl.append(new SongObject(path, QString::fromStdString(title.toStdString()), album, artist, art, length, track));
+                    //songList.append(new SongObject(getSongs.value(2).fromValue, getSongs.value(1).fromValue, getSongs.value(4).fromValue, getSongs.value(3).fromValue));
+                }
+            }
+        }
+
+        m_songList = QVariant::fromValue(sl);
+    }
 
 };
 
