@@ -1,5 +1,5 @@
 import QtQuick 2.7
-import QtQuick.Controls 2.0
+import QtQuick.Controls 2.8
 import QtQuick.Layouts 1.0
 import QtQuick.Controls.Material 2.0
 import Fluid.Controls 1.0 as FluidControls
@@ -22,6 +22,11 @@ FluidControls.ApplicationWindow {
     function getAlbums() {
         let albums = musichelper.allAlbums;
         return albums;
+    }
+
+    function getFolders(){
+        let folders = musichelper.folders;
+        return folders;
     }
 
     function playTriggerAction(){
@@ -239,6 +244,7 @@ FluidControls.ApplicationWindow {
 
     initialPage: FluidControls.TabbedPage {
         title: window.title
+        height: window.height
 
         AllAlbums {
             id: albumsComponent
@@ -246,9 +252,6 @@ FluidControls.ApplicationWindow {
         AllArtists {}
         AllSongs {}
         Settings {}
-
-
-
     }
 
     /*

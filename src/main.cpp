@@ -27,6 +27,7 @@
 #include <QStandardPaths>
 #include <unistd.h>
 #include <QFileDialog>
+#include <QDialog>
 
 #include "Components/Albums/albumobject.h"
 #include "Components/Artists/artistobject.h"

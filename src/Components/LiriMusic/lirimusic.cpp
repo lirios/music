@@ -37,6 +37,28 @@ QVariant LiriMusic::getAlbums(){
     }
 }
 
+QVariant LiriMusic::getFolders(){
+    QList<QObject*> folderList;
+    if(db.open()){
+        QSqlQuery getAllFolders;
+        getAllFolders.prepare("select * from Settings where setting='folder'");
+        if(getAllFolders.exec()){
+            while(getAllFolders.next()){
+                QString setting = getAllFolders.value(1).toString();
+                QString value = getAllFolders.value(2).toString();
+                folderList.append(new SettingObject(setting, value));
+            }
+        }
+    }
+
+    if(folderList.count() > 0) {
+        return QVariant::fromValue(folderList);
+    }else{
+        folderList.append(new SettingObject("", ""));
+        return QVariant::fromValue(folderList);
+    }
+}
+
 
 
 bool LiriMusic::beginMusicScan(){

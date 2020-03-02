@@ -30,6 +30,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += main.cpp \
     Components/Base/base.cpp \
     Components/LiriMusic/lirimusic.cpp \
+    Components/Settings/settingobject.cpp \
     Components/Utilities/musicfolders.cpp \
     Components/Albums/albumobject.cpp \
     Components/Songs/songobject.cpp \
@@ -40,6 +41,7 @@ HEADERS += \
     Components/Base/base.h \
     Components/Albums/albumobject.h \
     Components/LiriMusic/lirimusic.h \
+    Components/Settings/settingobject.h \
     Components/Songs/songobject.h \
     Components/Artists/artistobject.h \
     Components/Utilities/musicfolders.h \

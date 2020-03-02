@@ -1,7 +1,7 @@
-import QtQuick 2.7
-import QtQuick.Controls 2.0
-import QtQuick.Layouts 1.0
-import QtQuick.Controls.Material 2.0
+import QtQuick 2.14
+import QtQuick.Controls 2.8
+import QtQuick.Layouts 1.14
+import QtQuick.Controls.Material 2.12
 import Fluid.Controls 1.0
 
 
@@ -11,48 +11,63 @@ Page {
     width:parent.width
     height:parent.height + 30
 
+
+
     anchors {
         left: parent.left
         top: parent.top
         right: parent.right
         bottom: parent.bottom
 
-        topMargin: 30
-        leftMargin: 30
-        rightMargin: 30
+
     }
 
 
     Flickable {
+        id: flicker
         anchors {
             left: parent.left
             right:parent.right
             bottom:parent.bottom
             top:parent.top
-
+            bottomMargin: 100
         }
 
         clip: true
-        contentHeight: 400
         width:parent.width
-        height:parent.height + 30
+        height:parent.height - 200
+        contentHeight: (lv.model.length * 50) + 50
 
 
         RowLayout {
-            anchors.fill: parent
-            spacing: 10
+            id: rl
+            width: parent.width
+            spacing: 30
+            anchors {
+                top: parent.top
+                topMargin: 30
+                left: parent.left
+                leftMargin: 30
+                right: parent.right
+                rightMargin: 30
+                bottomMargin: 50
+            }
+
+
 
             Rectangle {
                 Layout.fillWidth: true
                 Layout.minimumWidth: 200
                 Layout.preferredWidth: 200
                 Layout.maximumWidth: 220
-                Layout.minimumHeight: 500
+                Layout.minimumHeight: lv.model.length * 50
                 Material.elevation: 0
                 color: "transparent"
 
+
                 ColumnLayout {
                     spacing: 10
+
 
                     Image {
                         Layout.preferredHeight: 200
@@ -88,23 +103,28 @@ Page {
 
             }
 
-            Rectangle {
+            Pane {
+                id: rect
                 Layout.fillWidth: true
-                Layout.fillHeight: false
-                anchors {
-                    top: parent.top
-                    right: parent.right
-                    bottom: parent.bottom
-                }
+                Layout.fillHeight: true
+
+                height: parent.height
+
+                Material.elevation: 3
+                Material.background: "white"
+                z: 3
+                padding: 0
+
 
                 ListView {
-                    anchors.fill: parent
                     Material.elevation: 2
                     model: window.singleAlbum.songList
+                    id: lv
+                    anchors.fill: parent
 
                     delegate: ListItem {
                         text: {
-                            return model.modelData.track ? model.modelData.track + " - " + model.modelData.title : model.modelData.title
+                            return model.modelData.track ? model.modelData.track + ". " + model.modelData.title : model.modelData.title
                         }
                         width: parent.width
                         highlighted: window.currentSong ? (model.modelData.title == window.currentSong.title) : false
@@ -133,6 +153,9 @@ Page {
 
                             }
                         }
+                    }
+                    Component.onCompleted: {
+
                     }
                 }
             }
