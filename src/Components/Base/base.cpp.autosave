@@ -57,5 +57,5 @@ void Base::createWindow() {
 }
 
 void Base::refreshAlbums(Album &album){
-
+    
 }

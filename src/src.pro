@@ -29,23 +29,31 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 SOURCES += main.cpp \
     Components/Base/base.cpp \
+    Components/Albums/album.cpp \
+    Components/Albums/albumartprovider.cpp \
+    Components/Albums/albummodel.cpp \
+    Components/Artists/artist.cpp \
     Components/LiriMusic/lirimusic.cpp \
-    Components/Settings/settingobject.cpp \
-    Components/Utilities/musicfolders.cpp \
-    Components/Albums/albumobject.cpp \
-    Components/Songs/songobject.cpp \
-    Components/Artists/artistobject.cpp \
-    Components/Utilities/utilities.cpp
+    Components/Settings/settings.cpp \
+    Components/Songs/song.cpp \
+    Components/Songs/songmodel.cpp \
+    Components/Utilities/musicdatabase.cpp \
+    Components/Utilities/musicscanner.cpp
 
 HEADERS += \
     Components/Base/base.h \
-    Components/Albums/albumobject.h \
+    Components/Albums/album.h \
+    Components/Albums/albumartprovider.h \
+    Components/Albums/albummodel.h \
+    Components/Artists/artist.h \
     Components/LiriMusic/lirimusic.h \
-    Components/Settings/settingobject.h \
-    Components/Songs/songobject.h \
-    Components/Artists/artistobject.h \
-    Components/Utilities/musicfolders.h \
-    Components/Utilities/utilities.h
+    Components/Settings/settings.h \
+    Components/Songs/song.h \
+    Components/Songs/songmodel.h \
+    Components/Utilities/musicdatabase.h \
+    Components/Utilities/musicscanner.h \
+    Components/Utilities/database.h \
+    Components/Utilities/schema.h
 
 android {
     # Bundle Fluid QML plugins with the application

@@ -8,10 +8,17 @@
 #include <QList>
 #include <QSqlDatabase>
 #include <QtSql>
-#include <Components/Albums/albumobject.h>
-#include <Components/Artists/artistobject.h>
-#include <Components/Utilities/musicfolders.h>
-#include <Components/Utilities/utilities.h>
+#include <iostream>
+#include <QQmlContext>
+
+#include "Components/Albums/album.h"
+#include "Components/Albums/albummodel.h"
+#include "Components/Songs/song.h"
+#include "Components/Songs/songmodel.h"
+#include "Components/Utilities/musicdatabase.h"
+#include "Components/Utilities/musicscanner.h"
+#include "Components/Albums/albumartprovider.h"
+
 #include <QQmlApplicationEngine>
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
@@ -23,11 +30,11 @@ class Base : public QQmlApplicationEngine
 public:
     explicit Base();
     ~Base();
-    QList<QObject*> getAlbums(QSqlDatabase);
-    QList<QObject*> getArtists(QSqlDatabase);
-    QList<QObject*> getAllSongs(QSqlDatabase);
-    bool initialQuery(QSqlDatabase);
+
     void createWindow();
+
+public slots:
+    void refreshAlbums(Album &album);
 
 };
 

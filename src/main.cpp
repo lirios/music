@@ -29,15 +29,20 @@
 #include <QFileDialog>
 #include <QDialog>
 
-#include "Components/Albums/albumobject.h"
-#include "Components/Artists/artistobject.h"
+
 #include <QStandardPaths>
-#include "Components/Songs/songobject.h"
+
 #include <unistd.h>
-#include "Components/Utilities/musicfolders.h"
-#include "Components/Utilities/utilities.h"
 #include "Components/Base/base.h"
 #include "Components/LiriMusic/lirimusic.h"
+
+#include "Components/Albums/album.h"
+#include "Components/Albums/albummodel.h"
+#include "Components/Songs/song.h"
+#include "Components/Songs/songmodel.h"
+#include "Components/Utilities/musicdatabase.h"
+#include "Components/Utilities/musicscanner.h"
+#include "Components/Albums/albumartprovider.h"
 
 #ifdef QT_STATIC
 #  include <QQmlExtensionPlugin>
