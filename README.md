@@ -1,6 +1,6 @@
 # Liri Music
 
-Very alpha stage music player written in C++, using Qt5 and Fluid.  It's basically unusable as-is.  I'm working to migrate all the previous code into the new project, while making improvements during the code migration.  It's going to take a while.
+A modern music app for modern computers.
 
 ![Liri UI](https://github.com/lirios/music/blob/master/images/liri.PNG "Liri UI")
 
@@ -8,15 +8,24 @@ Very alpha stage music player written in C++, using Qt5 and Fluid.  It's basical
 
 ## Installation
 
-#### Requirements
-- gstreamer ([https://gstreamer.freedesktop.org](https://gstreamer.freedesktop.org/documentation/installing/index.html?gi-language=c))
-- TagLib ([http://taglib.github.io/](http://taglib.github.io/))
-- Qt 5.14 ([https://www.qt.io/](https://www.qt.io/))
-- Fluid ([https://github.com/lirios/fluid](https://github.com/lirios/fluid))
+### Requirements
+- [gstreamer](https://gstreamer.freedesktop.org/documentation/installing/index.html?gi-language=c)
+- [QtGstreamer](https://gstreamer.freedesktop.org/modules/qt-gstreamer.html)
+- [Qt 5.14](https://www.qt.io/) (Other versions may work, but Liri Music was developed using 5.14)
+- [Fluid](https://github.com/lirios/fluid) (Included as a submodule)
 
-#### Building
+#### Environment Prep
 
-After installing Qt5 and TagLib, cd wherever you want to store this project, and:
+##### Windows
+Download Qt5 installer, GStreamer binaries, and QtGstreamer source.  Install Qt5 and GStreamer.  The QtGstreamer bindings require manual compilation.  Use CMake to build, and install.
+
+##### Linux
+Everything should be available via repos.  You could install Qt5 via its installer.
+
+
+### Building
+
+After installing Qt5, gstreamer, and QtGstreamer, cd wherever you want to store this project, and:
 
     git clone https://github.com/liri-project/liri-music.git
     cd liri-music
