@@ -35,5 +35,5 @@ After installing Qt5, gstreamer, and QtGstreamer, cd wherever you want to store 
     cd fluid
     ./scripts/fetch_icons.sh # this will take a while
 
-Now open "musicparent.pro" in QtCreator and run.  In the bottom left, when you click the icon that says "musicparent" and it loads the popover, under the "run" column, make sure "src" is selected.
+Now open "liri-music.pro" in QtCreator and run.  In the bottom left, when you click the icon that says "liri-music" and it loads the popover, under the "run" column, make sure "src" is selected.
 
