@@ -1,11 +1,11 @@
 Liri Music
 ==========
 
-# Core Developers
+#### Core Developers
 
- * Nick Germaine
+ * [Nick Qi](https://github.com/nickqidev)
 
-# Contributors
+#### Contributors
 
 You can see the list of contributors to this code base,
 and the number of their commits with:
