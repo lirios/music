@@ -5,7 +5,7 @@
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlQuery>
 
-#include "Components/Songs/song.h"
+#include "../Songs/song.h"
 
 Artist::Artist() :
     QObject() {

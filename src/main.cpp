@@ -6,11 +6,6 @@
 #include <iomanip>
 #include <stdio.h>
 #include <stdlib.h>
-#include <C:/Program Files (x86)/taglib/include/taglib/taglib.h>
-#include <C:/Program Files (x86)/taglib/include/taglib/tag.h>
-#include <C:/Program Files (x86)/taglib/include/taglib/fileref.h>
-#include <C:/Program Files (x86)/taglib/include/taglib/taglib_config.h>
-#include <C:/Program Files (x86)/taglib/include/taglib/tpropertymap.h>
 #include <qdebug.h>
 #include <qqml.h>
 #include <QQuickView>
@@ -28,6 +23,7 @@
 #include <unistd.h>
 #include <QFileDialog>
 #include <QDialog>
+#include <QQuickView>
 
 
 #include <QStandardPaths>
@@ -57,12 +53,12 @@ Q_IMPORT_PLUGIN(FluidTemplatesPlugin)
 int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+
     QGuiApplication app(argc, argv);
     // Register Liri Music
     qmlRegisterType<LiriMusic>("com.liri.music", 1, 0, "LiriMusic");
 
     Base engine;
-
 
     return app.exec();
 }

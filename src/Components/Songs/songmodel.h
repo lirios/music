@@ -6,7 +6,7 @@
 #include <QList>
 #include <QString>
 
-#include "Components/Songs/song.h"
+#include "../Songs/song.h"
 
 class SongModel : public QAbstractListModel
 {

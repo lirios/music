@@ -5,7 +5,7 @@
 #include <QModelIndex>
 #include <QList>
 
-#include "Components/Albums/album.h"
+#include "album.h"
 
 class AlbumModel : public QAbstractListModel
 {

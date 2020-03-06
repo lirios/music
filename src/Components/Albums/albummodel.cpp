@@ -1,5 +1,5 @@
 #include "albummodel.h"
-#include "Components/Utilities/musicdatabase.h"
+#include "../Utilities/musicdatabase.h"
 #include "moc_albummodel.cpp"
 #include <stdio.h>
 #include <iostream>

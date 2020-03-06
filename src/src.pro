@@ -1,6 +1,6 @@
 TEMPLATE = app
 
-QT += qml quick quickcontrols2 core gui sql widgets
+QT += qml svg quick quickcontrols2 core gui sql widgets
 
 CONFIG += c++11
 
@@ -14,8 +14,9 @@ QML_IMPORT_PATH = $$OUT_PWD/../fluid/qml
 
 # Additional import path used to resolve QML modules just for Qt Quick Designer
 QML_DESIGNER_IMPORT_PATH =
-QMAKE_CXXFLAGS += -ltag
-QMAKE_CXXFLAGS += -DTAGLIB_STATIC
+CONFIG += link_pkgconfig
+PKGCONFIG += Qt5GStreamer-1.0
+
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked deprecated (the exact warnings
@@ -123,7 +124,6 @@ win32:CONFIG(release, debug|release): {
     INCLUDEPATH += "C:/Program Files (x86)/taglib/include"
     DEPENDPATH += "C:/Program Files (x86)/taglib/include"
 }
-
 
 DISTFILES += \
     README.md

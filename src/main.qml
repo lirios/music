@@ -1,11 +1,10 @@
-import QtQuick 2.7
-import QtQuick.Controls 2.8
+import QtQuick 2.12
 import QtQuick.Layouts 1.0
-import QtQuick.Controls.Material 2.0
 import Fluid.Controls 1.0 as FluidControls
 import QtQuick.Controls.Styles 1.4
 import com.liri.music 1.0
-import QtMultimedia 5.14
+import QtMultimedia 5.12
+import QtQuick.Controls.Material 2.12
 
 import "Frontend/Content/Albums"
 import "Frontend/Content/Artists"
@@ -149,7 +148,7 @@ FluidControls.ApplicationWindow {
             shuffle(window.currentSongList);
 
         }
-        window.currentSongList.map((s, i) => {
+        window.currentSongList.map(function(s, i){
             if(s.track == window.currentSong.track) {
                 window.currentSongIndex = i;
             }
@@ -205,7 +204,7 @@ FluidControls.ApplicationWindow {
         }
         notifyInterval: 100
         Component.onCompleted: {
-            if(filePathName){
+            if(loadedFileFolder){
                 playMusic.source = 'file:///' + filePathName
                 delayedPlay.start()
             }

@@ -1,0 +1,35 @@
+# Meta
+set(AM_MULTI_CONFIG "FALSE")
+set(AM_PARALLEL "4")
+set(AM_VERBOSITY "")
+# Directories
+set(AM_CMAKE_SOURCE_DIR "/home/nick/Projects/liri-music")
+set(AM_CMAKE_BINARY_DIR "/home/nick/Projects/liri-music/build")
+set(AM_CMAKE_CURRENT_SOURCE_DIR "/home/nick/Projects/liri-music/fluid/src/imports/core")
+set(AM_CMAKE_CURRENT_BINARY_DIR "/home/nick/Projects/liri-music/build/fluid/src/imports/core")
+set(AM_CMAKE_INCLUDE_DIRECTORIES_PROJECT_BEFORE "")
+set(AM_BUILD_DIR "/home/nick/Projects/liri-music/build/fluid/src/imports/core/fluidcoreplugin_autogen")
+set(AM_INCLUDE_DIR "/home/nick/Projects/liri-music/build/fluid/src/imports/core/fluidcoreplugin_autogen/include")
+# Files
+set(AM_SOURCES "/home/nick/Projects/liri-music/fluid/src/imports/core/clipboard.cpp;/home/nick/Projects/liri-music/fluid/src/imports/core/coreplugin.cpp;/home/nick/Projects/liri-music/fluid/src/imports/core/coreutils.cpp;/home/nick/Projects/liri-music/fluid/src/imports/core/dateutils.cpp;/home/nick/Projects/liri-music/fluid/src/imports/core/device.cpp;/home/nick/Projects/liri-music/fluid/src/imports/core/qqmlsortfilterproxymodel.cpp;/home/nick/Projects/liri-music/fluid/src/imports/core/standardpaths.cpp")
+set(AM_HEADERS "/home/nick/Projects/liri-music/fluid/src/imports/core/clipboard.h;/home/nick/Projects/liri-music/fluid/src/imports/core/coreplugin.h;/home/nick/Projects/liri-music/fluid/src/imports/core/coreutils.h;/home/nick/Projects/liri-music/fluid/src/imports/core/dateutils.h;/home/nick/Projects/liri-music/fluid/src/imports/core/device.h;/home/nick/Projects/liri-music/fluid/src/imports/core/qqmlsortfilterproxymodel.h;/home/nick/Projects/liri-music/fluid/src/imports/core/standardpaths.h")
+set(AM_SETTINGS_FILE "/home/nick/Projects/liri-music/build/fluid/src/imports/core/CMakeFiles/fluidcoreplugin_autogen.dir/AutogenOldSettings.txt")
+# Qt
+set(AM_QT_VERSION_MAJOR 5)
+set(AM_QT_MOC_EXECUTABLE "/home/nick/Qt/5.14.1/gcc_64/bin/moc")
+set(AM_QT_UIC_EXECUTABLE "/home/nick/Qt/5.14.1/gcc_64/bin/uic")
+# MOC settings
+set(AM_MOC_SKIP "")
+set(AM_MOC_DEFINITIONS "LIRI_FLUIDCORE_LIB;QT_ASCII_CAST_WARNINGS;QT_CORE_LIB;QT_DEPRECATED_WARNINGS;QT_GUI_LIB;QT_NETWORK_LIB;QT_NO_CAST_FROM_ASCII;QT_NO_CAST_TO_ASCII;QT_NO_DEBUG;QT_NO_FOREACH;QT_NO_JAVA_STYLE_ITERATORS;QT_PLUGIN;QT_QMLMODELS_LIB;QT_QML_LIB;QT_QUICK_LIB;QT_USE_QSTRINGBUILDER")
+set(AM_MOC_INCLUDES "/home/nick/Projects/liri-music/build/fluid/src/imports/core;/home/nick/Projects/liri-music/fluid/src/imports/core;/usr/include/Qt5GStreamer;/home/nick/Qt/5.14.1/gcc_64/include;/home/nick/Qt/5.14.1/gcc_64/include/QtQml;/home/nick/Qt/5.14.1/gcc_64/include/QtNetwork;/home/nick/Qt/5.14.1/gcc_64/include/QtCore;/home/nick/Qt/5.14.1/gcc_64/./mkspecs/linux-g++;/home/nick/Qt/5.14.1/gcc_64/include/QtQuick;/home/nick/Qt/5.14.1/gcc_64/include/QtQmlModels;/home/nick/Qt/5.14.1/gcc_64/include/QtGui;/usr/include")
+set(AM_MOC_OPTIONS "")
+set(AM_MOC_RELAXED_MODE "")
+set(AM_MOC_MACRO_NAMES "Q_OBJECT;Q_GADGET;Q_NAMESPACE;Q_NAMESPACE_EXPORT")
+set(AM_MOC_DEPEND_FILTERS "")
+set(AM_MOC_PREDEFS_CMD "/usr/bin/c++;-dM;-E;-c;/usr/share/cmake-3.13/Modules/CMakeCXXCompilerABI.cpp")
+# UIC settings
+set(AM_UIC_SKIP "")
+set(AM_UIC_TARGET_OPTIONS "")
+set(AM_UIC_OPTIONS_FILES "")
+set(AM_UIC_OPTIONS_OPTIONS "")
+set(AM_UIC_SEARCH_PATHS "")

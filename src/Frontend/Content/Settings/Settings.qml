@@ -11,13 +11,14 @@ FluidControls.Tab {
     title: "Settings"
     id: settings
 
+    /*
     property var deleteFolder;
     property var deleteIndex;
 
     FolderDialog {
         id: fileDialog
         title: "Please choose a folder"
-        folder: shortcuts.home
+        folder: "" //shortcuts.home
 
         onAccepted: {
             console.log("You chose: " + fileDialog.fileUrls)
@@ -39,7 +40,7 @@ FluidControls.Tab {
         modal: true
 
         contentItem: Label {
-            text: settings.deleteFolder
+            text: settings.deleteFolder ? settings.deleteFolder : ""
         }
 
         standardButtons: Dialog.Ok | Dialog.Cancel
@@ -80,11 +81,11 @@ FluidControls.Tab {
 
             anchors {
                 top: folderLabel.bottom
-                horizontalCenter: parent
-                left: parent.left + 20
+                horizontalCenter: parent.horizontalCenter
+
             }
             width: parent.width
-            height: (lv.model.length * 50) + 20
+            height: lv.model ? (lv.model.length * 50) + 20 : 0
 
             padding: 0
 

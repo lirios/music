@@ -6,7 +6,6 @@
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlQuery>
 #include <QList>
-#include "Components/Songs/song.h"
 #include <QVariant>
 
 class Song : public QObject

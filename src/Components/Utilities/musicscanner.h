@@ -5,9 +5,9 @@
 #include <QFileSystemWatcher>
 #include <QGst/Discoverer>
 #include <QGlib/Connect>
-#include "Components/Songs/song.h"
-#include "Components/Albums/album.h"
-#include "Components/Artists/artist.h"
+#include "../Songs/song.h"
+#include "../Albums/album.h"
+#include "../Artists/artist.h"
 
 class QDir;
 

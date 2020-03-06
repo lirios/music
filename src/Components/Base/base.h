@@ -11,18 +11,18 @@
 #include <iostream>
 #include <QQmlContext>
 
-#include "Components/Albums/album.h"
-#include "Components/Albums/albummodel.h"
-#include "Components/Songs/song.h"
-#include "Components/Songs/songmodel.h"
-#include "Components/Utilities/musicdatabase.h"
-#include "Components/Utilities/musicscanner.h"
-#include "Components/Albums/albumartprovider.h"
+#include "../Albums/album.h"
+#include "../Albums/albummodel.h"
+#include "../Songs/song.h"
+#include "../Songs/songmodel.h"
+#include "../Utilities/musicdatabase.h"
+#include "../Utilities/musicscanner.h"
+#include "../Albums/albumartprovider.h"
 
 #include <QQmlApplicationEngine>
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
-#include "Components/LiriMusic/lirimusic.h"
+#include "../LiriMusic/lirimusic.h"
 
 class Base : public QQmlApplicationEngine
 {
@@ -34,7 +34,7 @@ public:
     void createWindow();
 
 public slots:
-    void refreshAlbums(Album &album);
+    void refreshAlbums(Album album);
 
 };
 

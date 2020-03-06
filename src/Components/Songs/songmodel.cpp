@@ -1,5 +1,5 @@
 #include "songmodel.h"
-#include "Components/Songs/musicdatabase.h"
+#include "../Utilities/musicdatabase.h"
 #include "moc_songmodel.cpp"
 #include <stdio.h>
 #include <iostream>

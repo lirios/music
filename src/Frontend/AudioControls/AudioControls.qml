@@ -1,7 +1,7 @@
 import QtQuick 2.4
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.0
-import QtQuick.Controls.Material 2.0
+import QtQuick.Controls.Material 2.12
 import Fluid.Controls 1.0 as FluidControls
 
 
@@ -9,7 +9,7 @@ Pane {
     height:100
     width:parent.width
     Material.elevation: 3
-    Material.background: "white"
+    //Material.background: "white"
     z: 3
     padding:10
 
@@ -26,7 +26,7 @@ Pane {
             top: parent.top
             topMargin: -20
         }
-        Material.background: Material.secondaryTextColor
+        //Material.background: Material.secondaryTextColor
         live: false
         z: 4
         value: this.pressed ? this.value : playMusic.position
@@ -173,12 +173,12 @@ Pane {
             topMargin: 25
             leftMargin:10
         }
-        source: "file:///" + window.currentSong.art
+        source: window.currentSong ? "file:///" + window.currentSong.art : ""
     }
 
     Label {
         id: nowPlayingSong
-        text: window.currentSong.title
+        text: window.currentSong ? window.currentSong.title : ""
         anchors {
             left: nowPlayingArt.right
             top: parent.top
@@ -190,7 +190,7 @@ Pane {
 
     Label {
         id: nowPlayingAlbum
-        text: window.currentSong.album
+        text: window.currentSong ? window.currentSong.album : ""
         anchors {
             left: nowPlayingArt.right
             top: nowPlayingSong.bottom
@@ -204,7 +204,7 @@ Pane {
 
     Label {
         id: nowPlayingArtist
-        text: window.currentSong.artist
+        text: window.currentSong ? window.currentSong.artist : ""
         anchors {
             left: nowPlayingArt.right
             top: nowPlayingAlbum.bottom

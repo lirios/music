@@ -6,10 +6,10 @@
 
 #include <exception>
 
-#include "Components/Albums/album.h"
-#include "Components/Artists/artist.h"
-#include "Components/Songs/song.h"
-#include "Components/Settings/settings.h"
+#include "../Albums/album.h"
+#include "../Artists/artist.h"
+#include "../Songs/song.h"
+#include "../Settings/settings.h"
 
 class MusicDatabase : public QObject {
     Q_OBJECT

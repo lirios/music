@@ -1,5 +1,5 @@
 #include "albumartprovider.h"
-#include "Components/Utilities/musicdatabase.h"
+#include "../Utilities/musicdatabase.h"
 #include <QFileInfo>
 #include <QImage>
 
