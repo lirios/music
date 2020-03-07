@@ -20,9 +20,8 @@ void Base::createWindow() {
     qRegisterMetaType<Song>();
     QGst::init();
     std::cout << "APP Running At " << QCoreApplication::applicationDirPath().toStdString() << std::endl;
-    this->addImportPath(QCoreApplication:: QCoreApplication::applicationDirPath() + QDir::separator() + QLatin1String("..") +
-                        QDir::separator() + QLatin1String("fluid") +
-                         QDir::separator() + QLatin1String("lib") + QDir::separator() + QLatin1String("qml"));
+    this->addImportPath(QCoreApplication::applicationDirPath() + QDir::separator() + QLatin1String("..") +
+                        QDir::separator() + QLatin1String("fluid") + QDir::separator() + QLatin1String("qml"));
 
     this->addImportPath(QCoreApplication::applicationDirPath() + QDir::separator() + QLatin1String("qml"));
 

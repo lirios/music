@@ -1,6 +1,7 @@
 #ifndef LIRI_MUSIC_DATABASE_H
 #define LIRI_MUSIC_DATABASE_H
 
+#include <QSqlQuery>
 /*
  * API That should be supported:
  * Album = find<album::id>(id);
@@ -98,18 +99,18 @@ namespace database
         template<typename T>
         struct ComparisonClauseBuilder<T> {
             static void apply(QString& query) {
-                query += ColumnTraits<T>::name;
+                query += QLatin1String(ColumnTraits<T>::name);
                 query += " = :";
-                query += ColumnTraits<T>::name;
+                query += QLatin1String(ColumnTraits<T>::name);
             }
         };
 
         template<typename T, typename... Ts>
         struct ComparisonClauseBuilder {
             static void apply(QString& query) {
-                query += ColumnTraits<T>::name;
+                query += QLatin1String(ColumnTraits<T>::name);
                 query += " = :";
-                query += ColumnTraits<T>::name;
+                query += QLatin1String(ColumnTraits<T>::name);
                 query += " AND ";
                 ComparisonClauseBuilder<Ts...>::apply(query);
             }
@@ -126,7 +127,7 @@ namespace database
         struct ValueBinder<T> {
             static void apply(QSqlQuery& query,
                               const typename ColumnTraits<T>::type& value) {
-                query.bindValue(QString(":") + ColumnTraits<T>::name,
+                query.bindValue(QLatin1String(":") % QLatin1String(ColumnTraits<T>::name),
                                 value);
             }
         };
@@ -136,7 +137,7 @@ namespace database
             static void apply(QSqlQuery& query,
                               const typename ColumnTraits<T>::type& value,
                               const typename ColumnTraits<Ts>::type&... values) {
-                query.bindValue(QString(":") + ColumnTraits<T>::name,
+                query.bindValue(QLatin1String(":") % QLatin1String(ColumnTraits<T>::name),
                                 value);
                 ValueBinder<Ts...>::apply(query, values...);
             }
@@ -152,7 +153,7 @@ namespace database
         template<typename T>
         struct TableQueryBuilder<T> {
            static void apply(QString& query) {
-               query += ColumnTraits<T>::name;
+               query += QLatin1String(ColumnTraits<T>::name);
                query += " ";
                query += ColumnTraits<T>::dbType;
            }
@@ -161,7 +162,7 @@ namespace database
         template<typename T, typename... Ts>
         struct TableQueryBuilder {
             static void apply(QString& query) {
-                query += ColumnTraits<T>::name;
+                query += QLatin1String(ColumnTraits<T>::name);
                 query += " ";
                 query += ColumnTraits<T>::dbType;
                 query += ",";
@@ -184,9 +185,9 @@ namespace database
         template<typename T>
         struct InsertQueryBuilder<T> {
             static void apply(QString& query) {
-                if(QString(ColumnTraits<T>::name)
+                if(QLatin1String(QLatin1String(ColumnTraits<T>::name))
                         != "id") {
-                    query += ColumnTraits<T>::name;
+                    query += QLatin1String(ColumnTraits<T>::name);
                 } else {
                     query.chop(1);
                 }
@@ -196,9 +197,9 @@ namespace database
         template<typename T, typename... Ts>
         struct InsertQueryBuilder {
             static void apply(QString& query) {
-                if(QString(ColumnTraits<T>::name)
+                if(QLatin1String(QLatin1String(ColumnTraits<T>::name))
                         != "id") {
-                    query += ColumnTraits<T>::name;
+                    query += QLatin1String(ColumnTraits<T>::name);
                     query += ",";
                 }
                 InsertQueryBuilder<Ts...>::apply(query);
@@ -222,10 +223,10 @@ namespace database
         template<typename T>
         struct InsertValueBuilder<T> {
             static void apply(QString& query) {
-                if(QString(ColumnTraits<T>::name)
+                if(QLatin1String(QLatin1String(ColumnTraits<T>::name))
                         != "id") {
                     query += ":";
-                    query += ColumnTraits<T>::name;
+                    query += QLatin1String(ColumnTraits<T>::name);
                 } else {
                     query.chop(1);
                 }
@@ -235,10 +236,10 @@ namespace database
         template<typename T, typename... Ts>
         struct InsertValueBuilder {
             static void apply(QString& query) {
-                if(QString(ColumnTraits<T>::name)
+                if(QLatin1String(QLatin1String(ColumnTraits<T>::name))
                         != "id") {
                     query += ":";
-                    query += ColumnTraits<T>::name;
+                    query += QLatin1String(ColumnTraits<T>::name);
                     query += ",";
                 }
                 InsertValueBuilder<Ts...>::apply(query);
@@ -264,8 +265,8 @@ namespace database
         struct InsertBinder<T> {
             static void apply(QSqlQuery& query,
                               const typename ColumnTraits<T>::belongs_to& v) {
-                if(QString(ColumnTraits<T>::name) != "id") {
-                    query.bindValue(QString(":") + ColumnTraits<T>::name,
+                if(QLatin1String(QLatin1String(ColumnTraits<T>::name)) != "id") {
+                    query.bindValue(QLatin1String(":") + QLatin1String(ColumnTraits<T>::name),
                                     v.property(ColumnTraits<T>::name).template value<typename ColumnTraits<T>::type>());
                 }
             }
@@ -274,8 +275,8 @@ namespace database
         template<typename T, typename... Ts>
         struct InsertBinder {
             static void apply(QSqlQuery& query, const typename ColumnTraits<T>::belongs_to& v) {
-                if(QString(ColumnTraits<T>::name) != "id") {
-                    query.bindValue(QString(":") + ColumnTraits<T>::name,
+                if(QLatin1String(QLatin1String(ColumnTraits<T>::name)) != "id") {
+                    query.bindValue(QLatin1String(":") + QLatin1String(ColumnTraits<T>::name),
                                     v.property(ColumnTraits<T>::name).template value<typename ColumnTraits<T>::type>());
                 }
                 InsertBinder<Ts...>::apply(query, v);
