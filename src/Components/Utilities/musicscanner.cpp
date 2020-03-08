@@ -63,7 +63,7 @@ void MusicScanner::scan(const QDir& dir, QGst::DiscovererPtr& discoverer) {
 
                 Song song;
                 if(!info->tags().title().isEmpty()){
-                    std::cout << "Got length of " << info->tags().title().toStdString() << info->duration().toTime().toString().toStdString() << std::endl;
+                    //std::cout << "Got length of " << info->tags().title().toStdString() << info->duration().toTime().toString().toStdString() << std::endl;
                   song = Song { 0, info->uri().toLocalFile(), info->tags().title(), 0, 0, QLatin1String("placeholder"), info->duration().toTime().toString() };
                 }else {
                   QString path = MusicDatabase::get().getMusicFolder();

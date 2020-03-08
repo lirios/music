@@ -146,6 +146,7 @@ void MusicDatabase::libraryItemFound(Artist artist, Song song, Album album, QByt
     QList<Song> songs = database::find<song::title, song::artist, song::album>(db, song.title(), song.artist(), song.album());
 
     if(songs.size() == 0) {
+        std::cout << "inserting song with length " << song.track_length().toStdString() << std::endl;
         database::insert(db, song);
         songs = database::find<song::title, song::artist, song::album>(db, song.title(), song.artist(), song.album());
         emit addedNewSong(songs.front());

@@ -18,7 +18,7 @@ class Song : public QObject
     Q_PROPERTY(quint64 album READ album WRITE setAlbum CONSTANT)
     Q_PROPERTY(quint64 artist READ artist WRITE setArtist)
     Q_PROPERTY(QString art READ art CONSTANT)
-    Q_PROPERTY(QString track_length READ track_length WRITE setTrack_length CONSTANT)
+    Q_PROPERTY(QString track_length READ track_length WRITE setTrack_length)
 
 
     QString m_path;
