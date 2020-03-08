@@ -35,6 +35,8 @@ public:
     Q_INVOKABLE QString getSingleArtist(qint64);
     Q_INVOKABLE QString getSingleAlbum(qint64);
     QList<Album> getAlbums(){ return m_albums; };
+    Q_INVOKABLE QVariant getArtistAlbums(QString);
+
     void setAlbums(QList<Album> albums) {
         m_albums = albums;
         emit albumsChanged();
@@ -49,5 +51,7 @@ signals:
     void albumsChanged();
     void foldersChanged();
 };
+
+//Q_DECLARE_METATYPE(LiriMusic);
 
 #endif // LIRIMUSIC_H

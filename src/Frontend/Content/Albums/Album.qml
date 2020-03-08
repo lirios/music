@@ -132,9 +132,7 @@ Page {
                     anchors.fill: parent
 
                     delegate: ListItem {
-                        text: {
-                            return model.modelData.track ? model.modelData.track + ". " + model.modelData.title : model.modelData.title
-                        }
+                        text: model.modelData.title
                         width: parent.width
                         highlighted: window.currentSong ? (model.modelData.title == window.currentSong.title) : false
 

@@ -31,7 +31,9 @@ public:
     QList<Song> getAllSongs();
     QList<Song> getSongsByAlbum(int id);
     QList<Song> getSongsByArtist(int id);
+    QList<Album> getArtistAlbums(int id);
     QString getArtist(int id);
+    Artist getArtistByName(QString name);
     QString getAlbum(int id);
 
     QString getMusicFolder();

@@ -1,10 +1,10 @@
 # Liri Music
 
-A modern music app for modern computers.
+A modern music app for modern people.
 
-![Liri UI](https://github.com/lirios/music/blob/master/images/liri.PNG "Liri UI")
+![Liri UI](https://github.com/lirios/music/blob/master/images/liri3.png "Liri UI")
 
-![Liri UI](https://github.com/lirios/music/blob/master/images/liri2.PNG "Liri Single Album View")
+![Liri UI](https://github.com/lirios/music/blob/master/images/liri4.png "Liri Single Album View")
 
 ## Installation
 
@@ -20,7 +20,7 @@ A modern music app for modern computers.
 Download Qt5 installer, GStreamer binaries, and QtGstreamer source.  Install Qt5 and GStreamer.  The QtGstreamer bindings require manual compilation.  Use CMake to build, and install.
 
 ##### Linux
-Everything should be available via repos.  You could install Qt5 via its installer.
+Everything should be available via repos.  Install Qt5 via its installer.
 
 
 ### Building
@@ -31,9 +31,18 @@ After installing Qt5, gstreamer, and QtGstreamer, cd wherever you want to store 
     cd liri-music
 
     # init fluid submodule:
-    git submodule init && git submodule update
+    git submodule init && git submodule update --recursive
     cd fluid
     ./scripts/fetch_icons.sh # this will take a while
+
+    # still in liri-music/fluid
+    mkdir build && cd build
+    cmake .. -DCMAKE_INSTALL_PREFIX=../
+    make
+    make install
+
+
+Now open liri-music/CMakeLists.txt in QtCreator, configure project, and build.
 
 Now open "liri-music.pro" in QtCreator and run.  In the bottom left, when you click the icon that says "liri-music" and it loads the popover, under the "run" column, make sure "src" is selected.
 

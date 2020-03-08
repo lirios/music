@@ -78,6 +78,14 @@ QList<Song> MusicDatabase::getAllSongs() {
     return database::find<Song>(db);
 }
 
+QList<Album> MusicDatabase::getArtistAlbums(int id) {
+    return database::find<album::artist>(db, id);
+}
+
+Artist MusicDatabase::getArtistByName(QString name){
+    return database::find<artist::name>(db, name).front();
+}
+
 void MusicDatabase::addArtist(const Artist& artist) {
     if(database::find<artist::name>(db, artist.name()).size() == 0) {
         database::insert(db, artist);

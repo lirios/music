@@ -17,5 +17,6 @@
         <file>Images/lp3.jpg</file>
         <file>main.cpp</file>
         <file>Frontend/Content/Artists/Artist.qml</file>
+        <file>Frontend/Content/Albums/MultiAlbum.qml</file>
     </qresource>
 </RCC>

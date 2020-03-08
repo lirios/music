@@ -62,7 +62,6 @@ int main(int argc, char *argv[])
     QGst::init();
     QGuiApplication app(argc, argv);
     // Register Liri Music
-    LiriMusic lm;
     qmlRegisterType<LiriMusic>("com.liri.music", 1, 0, "LiriMusic");
 
     QQmlApplicationEngine engine;

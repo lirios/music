@@ -50,6 +50,7 @@ FluidControls.ApplicationWindow {
     }
 
     property var singleAlbum;
+    property var multiAlbum;
     property var currentSong;
     property var isPlaying: false;
     property var currentTime: 0;
@@ -66,7 +67,9 @@ FluidControls.ApplicationWindow {
     }
 
     function getArtistAlbums(artist){
-        artistAlbums = musichelper.getArtistAlbums(artist)
+        multiAlbum = musichelper.getArtistAlbums(artist);
+
+        console.log("Got albums", multiAlbum[0].title);
     }
 
     function nextSong(){
@@ -103,10 +106,10 @@ FluidControls.ApplicationWindow {
     }
 
     function shuffleOrder(a, b){
-          if ( a.track < b.track ){
+          if ( a.id < b.id ){
             return -1;
           }
-          if ( a.track > b.track ){
+          if ( a.id > b.id ){
             return 1;
           }
           return 0;

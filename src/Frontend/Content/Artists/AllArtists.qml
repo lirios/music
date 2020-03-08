@@ -71,7 +71,7 @@ Tab {
                                 anchors.fill: parent
                                 onClicked: {
                                     window.getArtistAlbums(name);
-                                    window.pageStack.push(Qt.resolvedUrl("/Frontend/Content/Artists/Artist.qml"))
+                                    window.pageStack.push(Qt.resolvedUrl("/Frontend/Content/Albums/MultiAlbum.qml"))
                                 }
                             }
                         }
