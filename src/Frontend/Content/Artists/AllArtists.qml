@@ -26,15 +26,17 @@ Tab {
                 anchors.fill: parent
                 Material.background: "#777"
 
-                model: allArtists
+                model: artistModel
 
                 delegate: Item {
                     Material.elevation: 2
 
-                    Rectangle {
+                    Pane {
                         height: 180
                         width: 180
+                        padding: 0
                         Material.elevation: 2
+
                         Image {
                             height: parent.height
                             width: parent.width
@@ -52,7 +54,7 @@ Tab {
 
 
                             Text {
-                                text: model.artist
+                                text: name
                                 anchors {
                                     bottom: parent.bottom
                                     left: parent.left
@@ -68,7 +70,7 @@ Tab {
                             MouseArea {
                                 anchors.fill: parent
                                 onClicked: {
-                                    window.getArtistAlbums(model.modelData.artist);
+                                    window.getArtistAlbums(name);
                                     window.pageStack.push(Qt.resolvedUrl("/Frontend/Content/Artists/Artist.qml"))
                                 }
                             }

@@ -35,6 +35,8 @@
 
 #include "Components/Albums/album.h"
 #include "Components/Albums/albummodel.h"
+#include "Components/Artists/artist.h"
+#include "Components/Artists/artistmodel.h"
 #include "Components/Songs/song.h"
 #include "Components/Songs/songmodel.h"
 #include "Components/Utilities/musicdatabase.h"
@@ -66,6 +68,7 @@ int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
     qRegisterMetaType<Album>();
     qRegisterMetaType<Song>();
+    qRegisterMetaType<Artist>();
 
     std::cout << "APP Running At " << QCoreApplication::applicationDirPath().toStdString() << std::endl;
     engine.addImportPath(QCoreApplication::applicationDirPath() + QDir::separator() + QLatin1String("..") +
@@ -92,24 +95,30 @@ int main(int argc, char *argv[])
 
 
     AlbumModel albumModel;
+    ArtistModel artistModel;
     SongModel songModel;
-    engine.rootContext()->setContextProperty("allSongObjects", QVariant::fromValue(MusicDatabase::get().getAllSongs()));
-    engine.rootContext()->setContextProperty("allArtists", QVariant::fromValue(MusicDatabase::get().getAllArtists()));
-    engine.rootContext()->setContextProperty("albumModel", &albumModel);
-    engine.rootContext()->setContextProperty("songModel", &songModel);
+
+    engine.rootContext()->setContextProperty(QLatin1String("allSongObjects"), QVariant::fromValue(MusicDatabase::get().getAllSongs()));
+    //engine.rootContext()->setContextProperty("allArtists", QVariant::fromValue(MusicDatabase::get().getAllArtists()));
+    engine.rootContext()->setContextProperty(QLatin1String("albumModel"), &albumModel);
+    engine.rootContext()->setContextProperty(QLatin1String("songModel"), &songModel);
+    engine.rootContext()->setContextProperty(QLatin1String("artistModel"), &artistModel);
+
     engine.addImageProvider(QLatin1String("art"), new AlbumArtProvider());
 
-    QList<Album> aa = MusicDatabase::get().getAllAlbums();
-    engine.rootContext()->setContextProperty(QLatin1String("allAlbums"), QVariant::fromValue(aa));
+
+
     MusicScanner scanner {};
     MusicDatabase& db = MusicDatabase::get();
+
+    // Connect models with scanner
     QObject::connect(&scanner, &MusicScanner::foundLibraryItem, &db, &MusicDatabase::libraryItemFound);
     QObject::connect(&db,&MusicDatabase::addedNewAlbum, &albumModel, &AlbumModel::addAlbum);
+    QObject::connect(&db, &MusicDatabase::addedNewArtist, &artistModel, &ArtistModel::addArtist);
 
-    //QObject::connect(&scanner, &MusicScanner::foundAlbumArt, &db, &MusicDatabase::addArtworkToAlbum);
     QObject::connect(&albumModel, &AlbumModel::addedNewAlbum, [&engine, &albumModel](){
         std::cout << "Adding album to ui" << std::endl;
-        engine.rootContext()->setContextProperty("albumModel", &albumModel);
+        //engine.rootContext()->setContextProperty("albumModel", &albumModel);
     });
 
 

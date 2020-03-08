@@ -46,6 +46,7 @@ set(liri_vinyl_SOURCES
   Components/Albums/album.cpp
   Components/Albums/albummodel.cpp
   Components/Artists/artist.cpp
+  Components/Artists/artistmodel.cpp
   Components/Utilities/musicdatabase.cpp
   Components/Utilities/musicscanner.cpp
   Components/Albums/albumartprovider.cpp
@@ -61,6 +62,7 @@ set(liri_vinyl_HEADERS
   Components/Albums/album.h
   Components/Albums/albummodel.h
   Components/Artists/artist.h
+  Components/Artists/artistmodel.h
   Components/Utilities/musicdatabase.h
   Components/Utilities/musicscanner.h
   Components/Albums/albumartprovider.h
