@@ -68,11 +68,20 @@ Page {
                 ColumnLayout {
                     spacing: 10
 
-
-                    Image {
+                    Pane {
                         Layout.preferredHeight: 200
                         Layout.preferredWidth: 200
-                        source:  (window.singleAlbum.art != "placeholder") ? "image://art/" + window.singleAlbum.title : ""
+                        height: 200
+                        width: 200
+                        padding: 0
+                        Material.elevation: 2
+                        Image {
+                            Layout.preferredHeight: 200
+                            Layout.preferredWidth: 200
+                            height: 200
+                            width: 200
+                            source:  (window.singleAlbum.art != "placeholder") ? "image://art/" + window.singleAlbum.title : ""
+                        }
                     }
 
                     Text {

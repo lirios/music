@@ -51,9 +51,10 @@ Tab {
                         console.log("MODEL !", title);
                     }
 
-                    Rectangle {
+                    Pane {
                         height: 180
                         width: 180
+                        padding: 0
                         Material.elevation: 2
                         Image {
                             height: parent.height
