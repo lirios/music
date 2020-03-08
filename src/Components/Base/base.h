@@ -32,6 +32,7 @@ public:
     ~Base();
 
     void createWindow();
+    QThread t;
 
 public slots:
     void refreshAlbums(Album album);

@@ -3,7 +3,7 @@ import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.0
 import QtQuick.Controls.Material 2.0
 import Fluid.Controls 1.0
-
+import com.liri.music 1.0 as LiriMusic
 
 Tab {
     title: "Albums"
@@ -37,13 +37,18 @@ Tab {
                     ListElement {text: "Hybrid Theory"; art: "qrc:/Images/cover3.jpg"}
                 }
                 */
-                model: window.getAlbums()
+                model: albumModel
+                //model: allAlbums
+
+                Component.onCompleted: {
+
+                }
 
 
                 delegate: Item {
                     Material.elevation: 2
                     Component.onCompleted: {
-                        console.log("MODEL !", model);
+                        console.log("MODEL !", title);
                     }
 
                     Rectangle {
@@ -53,7 +58,7 @@ Tab {
                         Image {
                             height: parent.height
                             width: parent.width
-                            source:  "file:///" + model.modelData.art
+                            source:  (art != "placeholder") ? "image://art/" + title : ""
 
                         }
 
@@ -67,7 +72,7 @@ Tab {
 
 
                             Text {
-                                text: model.modelData.title
+                                text: title
                                 anchors {
                                     bottom: parent.bottom
                                     left: parent.left
@@ -83,7 +88,14 @@ Tab {
                             MouseArea {
                                 anchors.fill: parent
                                 onClicked: {
-                                    window.getAlbumsSongs(model.modelData);
+                                    let albumV = {
+                                        id: id,
+                                        title: title,
+                                        art: art,
+                                        artist: musichelper.getSingleArtist(artist),
+                                        songList: songModel.getSongsByAlbum(id)
+                                    }
+                                    window.singleAlbum = albumV;
                                     window.pageStack.push(Qt.resolvedUrl("/Frontend/Content/Albums/Album.qml"))
 
                                 }

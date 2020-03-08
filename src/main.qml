@@ -218,12 +218,13 @@ FluidControls.ApplicationWindow {
             Component.onCompleted:  {
 
 
-                    let didScan = musichelper.beginMusicScan();
+                    //let didScan = musichelper.beginMusicScan();
 
 
             }
         }
     }
+
 
     visible: {
 
@@ -257,9 +258,9 @@ FluidControls.ApplicationWindow {
         Settings {}
     }
 
-    /*
 
 
+/*
     Pane {
         id: listPane
         anchors {
@@ -305,7 +306,7 @@ FluidControls.ApplicationWindow {
             }
         }
     }
-    */
+*/
 
 
 
@@ -316,7 +317,9 @@ FluidControls.ApplicationWindow {
 
         Component.onCompleted: {
             //window.pageStack.push(Qt.resolvedUrl("/Frontend/Content/Albums/AllAlbums.qml"))
+            LiriMusic.n = "Hi";
         }
+
 
 
     }

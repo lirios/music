@@ -23,7 +23,7 @@ public:
     int rowCount(const QModelIndex &parent) const;
     QVariant data(const QModelIndex &index, int role) const;
     Q_INVOKABLE QList<Song> getSingleAlbum(int id, int role) const;
-
+    QList<Album> albums;
 signals:
     void addedNewAlbum(Album);
 

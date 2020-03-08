@@ -41,7 +41,7 @@ public slots:
     void addAlbum(const Album&album);
     void addArtist(const Artist&);
     void setMusicFolder(const QString&);
-    void addArtworkToAlbum(const Album&, QByteArray);
+    void addArtworkToAlbum(Album, QByteArray);
     void libraryItemFound(Artist, Song, Album, QByteArray);
 signals:
     void musicFolderChanged(const QString& path);

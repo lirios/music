@@ -4,6 +4,7 @@
 
 Base::Base() : QQmlApplicationEngine()
 {
+    QGst::init();
     this->createWindow();
 }
 
@@ -18,7 +19,7 @@ void Base::createWindow() {
 
     qRegisterMetaType<Album>();
     qRegisterMetaType<Song>();
-    QGst::init();
+
     std::cout << "APP Running At " << QCoreApplication::applicationDirPath().toStdString() << std::endl;
     this->addImportPath(QCoreApplication::applicationDirPath() + QDir::separator() + QLatin1String("..") +
                         QDir::separator() + QLatin1String("fluid") + QDir::separator() + QLatin1String("qml"));
@@ -45,23 +46,22 @@ void Base::createWindow() {
 
     AlbumModel albumModel;
     SongModel songModel;
-    //this->rootContext()->setContextProperty("allSongObjects", QVariant::fromValue(MusicDatabase::get().getAllSongs()));
-    //this->rootContext()->setContextProperty("allArtists", QVariant::fromValue(MusicDatabase::get().getAllArtists()));
-    //this->rootContext()->setContextProperty("albumModel", &albumModel);
-    //this->rootContext()->setContextProperty("songModel", &songModel);
+    this->rootContext()->setContextProperty("allSongObjects", QVariant::fromValue(MusicDatabase::get().getAllSongs()));
+    this->rootContext()->setContextProperty("allArtists", QVariant::fromValue(MusicDatabase::get().getAllArtists()));
+    this->rootContext()->setContextProperty("albumModel", &albumModel);
+    this->rootContext()->setContextProperty("songModel", &songModel);
     this->addImageProvider("art", new AlbumArtProvider());
 
     MusicScanner scanner {};
     MusicDatabase& db = MusicDatabase::get();
     QObject::connect(&scanner, &MusicScanner::foundLibraryItem, &db, &MusicDatabase::libraryItemFound);
-    QObject::connect(&db,&MusicDatabase::addedNewAlbum, &albumModel, &AlbumModel::addAlbum);
+    //QObject::connect(&db,&MusicDatabase::addedNewAlbum, &albumModel, &AlbumModel::addAlbum);
     //QObject::connect(&albumModel, &AlbumModel::addedNewAlbum, this, &Base::refreshAlbums);
 
-    QThread t;
     scanner.moveToThread(&t);
     QObject::connect(&t, &QThread::started, &scanner, &MusicScanner::startScan);
     QObject::connect(qApp, &QCoreApplication::aboutToQuit, &scanner, &MusicScanner::stop);
-    //t.start();
+    t.start();
 
     this->load(QUrl(QStringLiteral("qrc:/main.qml")));
 

@@ -7,6 +7,7 @@
 AlbumModel::AlbumModel(QObject *parent):
     QAbstractListModel(parent)
 {
+    albums = MusicDatabase::get().getAllAlbums();
 
 }
 
@@ -15,14 +16,14 @@ int AlbumModel::rowCount(const QModelIndex &parent) const
     int result = 0;
 
     if(!parent.isValid())
-        result = MusicDatabase::get().getAllAlbums().size();
+        result = albums.size();
 
     return result;
 }
 
 QVariant AlbumModel::data(const QModelIndex &index, int role) const
 {
-    Album current = MusicDatabase::get().getAllAlbums().at(index.row());
+    Album current = albums.at(index.row());
     switch(role)
     {
     case TitleRole:
@@ -51,10 +52,10 @@ QList<Song> AlbumModel::getSingleAlbum(int id, int role) const {
 void AlbumModel::addAlbum(const Album &album)
 {
     emit beginInsertRows(QModelIndex(), rowCount(QModelIndex()), rowCount(QModelIndex()));
-    MusicDatabase::get().addAlbum(album);
-    std::cout << "album is " << album.title().toStdString() << std::endl;
+    albums.append(album);
     emit endInsertRows();
-    emit addedNewAlbum(album);
+    //emit addedNewAlbum(album);
+
 }
 
 QHash<int, QByteArray> AlbumModel::roleNames() const

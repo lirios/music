@@ -15,7 +15,6 @@ MusicScanner::MusicScanner():
     watcher()
 {
     QDir musicDirectory { MusicDatabase::get().getMusicFolder() };
-    std::cout << musicDirectory.absolutePath().toStdString() << std::endl;
     watcher.addPath(musicDirectory.absolutePath());
     QObject::connect(&watcher, SIGNAL(directoryChanged(QString)), this, SLOT(directoryChanged(QString)));
 }
@@ -37,6 +36,7 @@ void MusicScanner::scan(const QDir& dir, QGst::DiscovererPtr& discoverer) {
 
     QFileInfoList entries = dir.entryInfoList(directoryFilters, QDir::Name);
 
+
     for(const auto& entry : entries) {
         if(entry.isDir())
         {
@@ -55,42 +55,46 @@ void MusicScanner::scan(const QDir& dir, QGst::DiscovererPtr& discoverer) {
             if(info->audioStreams().count() != 0){
 
                 Artist artist;
+
                 if(!info->tags().artist().isEmpty())
                   artist = Artist { 0, info->tags().artist() };
                 else
-                  artist = Artist { 0, "Unknown Artist" };
+                  artist = Artist { 0, QLatin1String("Unknown Artist") };
 
                 Song song;
-                if(!info->tags().title().isEmpty())
-                  song = Song { 0, info->uri().toLocalFile(), info->tags().title(), 0, 0, "placeholder" };
-                else {
+                if(!info->tags().title().isEmpty()){
+                    std::cout << "Got length of " << info->tags().title().toStdString() << info->duration().toTime().toString().toStdString() << std::endl;
+                  song = Song { 0, info->uri().toLocalFile(), info->tags().title(), 0, 0, QLatin1String("placeholder"), info->duration().toTime().toString() };
+                }else {
                   QString path = MusicDatabase::get().getMusicFolder();
                   QString title = info->uri().toLocalFile().right(info->uri().toLocalFile().size() - path.size() - 1);
-                  song = Song { 0, info->uri().toLocalFile(), title, 0, 0, "placeholder" };
+                  song = Song { 0, info->uri().toLocalFile(), title, 0, 0, QLatin1String("placeholder"), info->duration().toTime().toString() };
                 }
 
                 Album album;
 
                 if(!info->tags().tagValue("album").toString().isEmpty())
-                  album = Album { 0, info->tags().tagValue("album").toString(), 0, "placeholder" };
+                  album = Album { 0, info->tags().tagValue("album").toString(), 0, QLatin1String("placeholder") };
                 else
-                  album = Album { 0, "Unknown Album", 0, "placeholder" };
+                  album = Album { 0, QLatin1String("Unknown Album"), 0, QLatin1String("placeholder") };
 
                 //emit foundSong(song);
                 //emit foundAlbum(album);
 
                 QByteArray artwork;
 
+
                 if(info->tags().image()) {
                     QGst::BufferPtr buffer = info->tags().image()->buffer();
                     // This is only necessary to keep the compile warning free
                     // Why QByteArray doesn't take a std::size_t is beyond me
                     int size = buffer->size() & std::numeric_limits<int>::max();
-                    //QByteArray outputBuffer { size, 0 };
+                    QByteArray outputBuffer { size, 0 };
                     artwork.resize(size);
                     buffer->extract(0, artwork.data(), buffer->size());
-                    //emit foundAlbumArt(album, outputBuffer);
+                    //emit foundAlbumArt(album, *artwork);
                 }
+
 
                 emit foundLibraryItem(artist, song, album, artwork);
             }

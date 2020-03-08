@@ -35,7 +35,11 @@ MusicDatabase& MusicDatabase::get() {
 }
 
 QList<Album> MusicDatabase::getAllAlbums() {
-    return database::find<Album>(db);
+    QList<Album> aa = database::find<Album>(db);
+    for(int i = 0; i < aa.count(); i++){
+        std::cout << "GOT ALBUM " << aa[i].title().toStdString() << std::endl;
+    }
+    return aa;
 }
 
 QList<Song> MusicDatabase::getSongsByAlbum(int id){
@@ -131,6 +135,7 @@ void MusicDatabase::libraryItemFound(Artist artist, Song song, Album album, QByt
     if(albums.size() == 0) {
         // Once again, not found, so insert it
         database::insert(db, album);
+        addArtworkToAlbum(database::find<album::title>(db, album.title()).front(), artwork);
         albums = database::find<album::title, album::artist>(db, album.title(), album.artist());
         emit addedNewAlbum(albums.front());
     }
@@ -147,19 +152,20 @@ void MusicDatabase::libraryItemFound(Artist artist, Song song, Album album, QByt
     }
 }
 
-void MusicDatabase::addArtworkToAlbum(const Album& album, QByteArray artwork) {
+void MusicDatabase::addArtworkToAlbum(Album album, QByteArray artwork) {
     QSqlQuery addArtQuery;
-    addArtQuery.prepare("UPDATE Albums SET image = :image WHERE (artist = :artist AND album = :album)");
-    addArtQuery.bindValue(":artist", album.artist());
-    addArtQuery.bindValue(":album", album.title());
-    addArtQuery.bindValue(":image", artwork);
+    std::cout << "Ading art " << album.title().toStdString() <<  std::endl;
+    addArtQuery.prepare(QLatin1String("UPDATE Albums SET art = :image WHERE (artist = :artist AND title = :album)"));
+    addArtQuery.bindValue(QLatin1String(":artist"), album.artist());
+    addArtQuery.bindValue(QLatin1String(":album"), album.title());
+    addArtQuery.bindValue(QLatin1String(":image"), artwork);
     addArtQuery.exec();
 }
 
 QByteArray MusicDatabase::getArt(const QString& art) {
     QSqlQuery getArtQuery;
-    getArtQuery.prepare("SELECT image FROM Albums WHERE art = :art");
-    getArtQuery.bindValue(":art", art);
+    getArtQuery.prepare(QLatin1String("SELECT art FROM Albums WHERE title = :art"));
+    getArtQuery.bindValue(QLatin1String(":art"), art);
     getArtQuery.exec();
     getArtQuery.first();
     return getArtQuery.value(0).toByteArray();

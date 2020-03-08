@@ -14,6 +14,7 @@ namespace song {
     struct title;
     struct artist;
     struct album;
+    struct track_length;
 }
 
 namespace artist {
@@ -91,6 +92,13 @@ namespace database {
         static constexpr const char* dbType = "INTEGER";
     };
 
+    template<> struct ColumnTraits<song::track_length> {
+        static constexpr const char* name = "track_length";
+        using type = QString;
+        using belongs_to = Song;
+        static constexpr const char* dbType = "TEXT";
+    };
+
     template<> struct ColumnTraits<artist::id> {
         static constexpr const char* name = "id";
         using type = quint64;
@@ -142,7 +150,8 @@ namespace database {
                                 song::title,
                                 song::path,
                                 song::artist,
-                                song::album>;
+                                song::album,
+                                song::track_length>;
     };
 
     template<> struct Table<Artist> {

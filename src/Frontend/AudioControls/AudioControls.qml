@@ -173,7 +173,7 @@ Pane {
             topMargin: 25
             leftMargin:10
         }
-        source: window.currentSong ? "file:///" + window.currentSong.art : ""
+        source: nowPlayingAlbum.text ? (nowPlayingAlbum.text != "placeholder") ? "image://art/" + nowPlayingAlbum.text : "" : ""
     }
 
     Label {
@@ -190,12 +190,12 @@ Pane {
 
     Label {
         id: nowPlayingAlbum
-        text: window.currentSong ? window.currentSong.album : ""
+        text: window.currentSong ? musichelper.getSingleAlbum(window.currentSong.album) : ""
         anchors {
             left: nowPlayingArt.right
             top: nowPlayingSong.bottom
             leftMargin: 10
-            topMargin: 4
+            topMargin: 2
         }
         font.pixelSize: 12
         color: "#666"
@@ -204,12 +204,12 @@ Pane {
 
     Label {
         id: nowPlayingArtist
-        text: window.currentSong ? window.currentSong.artist : ""
+        text: window.currentSong ? musichelper.getSingleArtist(window.currentSong.artist) : ""
         anchors {
             left: nowPlayingArt.right
             top: nowPlayingAlbum.bottom
             leftMargin: 10
-            topMargin: 4
+            topMargin: 2
         }
         font.pixelSize: 12
         color: "#666"

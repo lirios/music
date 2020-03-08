@@ -23,6 +23,7 @@ public slots:
 
 signals:
     void foundLibraryItem(Artist, Song, Album, QByteArray);
+    void foundAlbumArt(Album, QByteArray&);
 private:
     void scan(const QDir&, QGst::DiscovererPtr&);
     QFileSystemWatcher watcher;

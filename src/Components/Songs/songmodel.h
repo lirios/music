@@ -16,7 +16,8 @@ public:
         TitleRole = Qt::UserRole + 1,
         AlbumRole,
         PathRole,
-        IdRole
+        IdRole,
+        LengthRole
     };
 
     SongModel(QObject *parent = 0);

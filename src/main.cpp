@@ -26,6 +26,7 @@
 #include <QQuickView>
 
 
+
 #include <QStandardPaths>
 
 #include <unistd.h>
@@ -39,6 +40,8 @@
 #include "Components/Utilities/musicdatabase.h"
 #include "Components/Utilities/musicscanner.h"
 #include "Components/Albums/albumartprovider.h"
+#include <QGst/Init>
+#include <QtQuickControls2>
 
 #ifdef QT_STATIC
 #  include <QQmlExtensionPlugin>
@@ -54,11 +57,69 @@ int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
+    QGst::init();
     QGuiApplication app(argc, argv);
     // Register Liri Music
+    LiriMusic lm;
     qmlRegisterType<LiriMusic>("com.liri.music", 1, 0, "LiriMusic");
 
-    Base engine;
+    QQmlApplicationEngine engine;
+    qRegisterMetaType<Album>();
+    qRegisterMetaType<Song>();
+
+    std::cout << "APP Running At " << QCoreApplication::applicationDirPath().toStdString() << std::endl;
+    engine.addImportPath(QCoreApplication::applicationDirPath() + QDir::separator() + QLatin1String("..") +
+                        QDir::separator() + QLatin1String("fluid") + QDir::separator() + QLatin1String("qml"));
+
+    engine.addImportPath(QCoreApplication::applicationDirPath() + QDir::separator() + QLatin1String("qml"));
+
+    engine.rootContext()->setContextProperty("loadedFileFolder", QString());
+
+    // Set initial music folders (later: add support for manually added folders)
+    const QStringList musicLocations = QStandardPaths::standardLocations(QStandardPaths::MusicLocation);
+    QString musicLocation = musicLocations.isEmpty() ?
+                QDir::homePath() + QLatin1String("/Music") : musicLocations.first();
+
+    // Open DB and perform initial music dir scan/build Songs table
+
+    QString stream_directory = musicLocation + QLatin1String("/streams");
+
+
+    // Create path variables accessible in QML:
+    engine.rootContext()->setContextProperty("homeDirectory", musicLocation);
+    engine.rootContext()->setContextProperty("streamDirectory", stream_directory);
+    engine.rootContext()->setContextProperty("settings", QVariant());
+
+
+    AlbumModel albumModel;
+    SongModel songModel;
+    engine.rootContext()->setContextProperty("allSongObjects", QVariant::fromValue(MusicDatabase::get().getAllSongs()));
+    engine.rootContext()->setContextProperty("allArtists", QVariant::fromValue(MusicDatabase::get().getAllArtists()));
+    engine.rootContext()->setContextProperty("albumModel", &albumModel);
+    engine.rootContext()->setContextProperty("songModel", &songModel);
+    engine.addImageProvider(QLatin1String("art"), new AlbumArtProvider());
+
+    QList<Album> aa = MusicDatabase::get().getAllAlbums();
+    engine.rootContext()->setContextProperty(QLatin1String("allAlbums"), QVariant::fromValue(aa));
+    MusicScanner scanner {};
+    MusicDatabase& db = MusicDatabase::get();
+    QObject::connect(&scanner, &MusicScanner::foundLibraryItem, &db, &MusicDatabase::libraryItemFound);
+    QObject::connect(&db,&MusicDatabase::addedNewAlbum, &albumModel, &AlbumModel::addAlbum);
+
+    //QObject::connect(&scanner, &MusicScanner::foundAlbumArt, &db, &MusicDatabase::addArtworkToAlbum);
+    QObject::connect(&albumModel, &AlbumModel::addedNewAlbum, [&engine, &albumModel](){
+        std::cout << "Adding album to ui" << std::endl;
+        engine.rootContext()->setContextProperty("albumModel", &albumModel);
+    });
+
+
+    QThread t;
+    scanner.moveToThread(&t);
+    QObject::connect(&t, &QThread::started, &scanner, &MusicScanner::startScan);
+    QObject::connect(qApp, &QCoreApplication::aboutToQuit, &scanner, &MusicScanner::stop);
+    t.start();
+
+    engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 
     return app.exec();
 }

@@ -8,14 +8,15 @@ Song::Song() :
 
 
 Song::Song(quint64 id, const QString& path, const QString& title, quint64 album,
-                       quint64 artist, const QString& art) :
+                       quint64 artist, const QString& art, const QString& length) :
     QObject(),
     m_path(path),
     m_title(title),
     m_album(album),
     m_artist(artist),
     m_art(art),
-    m_id(id)
+    m_id(id),
+    m_length(length)
 {
 }
 
@@ -26,7 +27,9 @@ Song::Song(const Song& other) :
     m_album(other.m_album),
     m_artist(other.m_artist),
     m_art(other.m_art),
-    m_id(other.m_id) {
+    m_id(other.m_id),
+    m_length(other.m_length)
+{
 }
 
 Song& Song::operator=(const Song& other) {
@@ -36,6 +39,7 @@ Song& Song::operator=(const Song& other) {
     m_artist = other.m_artist;
     m_art = other.m_art;
     m_id = other.m_id;
+    m_length = other.m_length;
     return *this;
 }
 
@@ -65,6 +69,10 @@ quint64 Song::id() const {
     return m_id;
 }
 
+QString Song::track_length() const {
+    return m_length;
+}
+
 void Song::setPath(const QString& path) {
     m_path = path;
 }
@@ -83,6 +91,10 @@ void Song::setArtist(quint64 artist) {
 
 void Song::setArt(const QString& art) {
     m_art = art;
+}
+
+void Song::setTrack_length(const QString& length) {
+    m_length = length;
 }
 
 void Song::setId(quint64 id) {

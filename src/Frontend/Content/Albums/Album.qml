@@ -72,7 +72,7 @@ Page {
                     Image {
                         Layout.preferredHeight: 200
                         Layout.preferredWidth: 200
-                        source: "file:///" + window.singleAlbum.art
+                        source:  (window.singleAlbum.art != "placeholder") ? "image://art/" + window.singleAlbum.title : ""
                     }
 
                     Text {
@@ -130,7 +130,7 @@ Page {
                         highlighted: window.currentSong ? (model.modelData.title == window.currentSong.title) : false
 
                         Text {
-                            text: window.formatTime(model.modelData.length)
+                            text: model.modelData.track_length
                             anchors {
                                 top: parent.top
                                 right: parent.right
