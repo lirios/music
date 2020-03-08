@@ -44,5 +44,3 @@ After installing Qt5, gstreamer, and QtGstreamer, cd wherever you want to store 
 
 Now open liri-music/CMakeLists.txt in QtCreator, configure project, and build.
 
-Now open "liri-music.pro" in QtCreator and run.  In the bottom left, when you click the icon that says "liri-music" and it loads the popover, under the "run" column, make sure "src" is selected.
-
