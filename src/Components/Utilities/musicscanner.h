@@ -3,8 +3,16 @@
 
 #include <QObject>
 #include <QFileSystemWatcher>
-#include <QGst/Discoverer>
-#include <QGlib/Connect>
+
+
+#include <QFileSystemWatcher>
+
+#include <taglib/taglib.h>
+#include <taglib/tag.h>
+#include <taglib/fileref.h>
+#include <taglib/taglib_config.h>
+#include <taglib/tpropertymap.h>
+
 #include "../Songs/song.h"
 #include "../Albums/album.h"
 #include "../Artists/artist.h"
@@ -25,7 +33,7 @@ signals:
     void foundLibraryItem(Artist, Song, Album, QByteArray);
     void foundAlbumArt(Album, QByteArray&);
 private:
-    void scan(const QDir&, QGst::DiscovererPtr&);
+    void scan(const QDir&);
     QFileSystemWatcher watcher;
 };
 

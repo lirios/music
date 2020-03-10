@@ -1,10 +1,10 @@
 #include "base.h"
-#include <QGst/Init>
+
 #include <QtQuickControls2>
 
 Base::Base() : QQmlApplicationEngine()
 {
-    QGst::init();
+
     this->createWindow();
 }
 

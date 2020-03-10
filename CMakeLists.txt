@@ -8,6 +8,7 @@ project("LiriMusic"
 
 ## Shared macros and functions:
 set(LIRI_LOCAL_ECM TRUE)
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules)
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/fluid/cmake/shared/modules")
 
 ## Configure Fluid:
@@ -19,7 +20,7 @@ set(QT_MIN_VERSION "5.10.0")
 
 ## Liri specific setup common for all modules:
 include(LiriSetup)
-find_package(Qt5GStreamer REQUIRED)
+find_package(Taglib REQUIRED)
 
 ## Find Qt 5:
 find_package(Qt5 "${QT_MIN_VERSION}"
@@ -34,7 +35,7 @@ find_package(Qt5 "${QT_MIN_VERSION}"
 	Sql
 )
 
-include_directories(${QTGSTREAMER_INCLUDE_DIR})
+include_directories(${TAGLIB_INCLUDES})
 
 ## Add subdirectories:
 add_subdirectory(fluid)

@@ -42,7 +42,6 @@
 #include "Components/Utilities/musicdatabase.h"
 #include "Components/Utilities/musicscanner.h"
 #include "Components/Albums/albumartprovider.h"
-#include <QGst/Init>
 #include <QtQuickControls2>
 
 #ifdef QT_STATIC
@@ -59,7 +58,6 @@ int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
-    QGst::init();
     QGuiApplication app(argc, argv);
     // Register Liri Music
     qmlRegisterType<LiriMusic>("com.liri.music", 1, 0, "LiriMusic");
@@ -72,6 +70,9 @@ int main(int argc, char *argv[])
     std::cout << "APP Running At " << QCoreApplication::applicationDirPath().toStdString() << std::endl;
     engine.addImportPath(QCoreApplication::applicationDirPath() + QDir::separator() + QLatin1String("..") +
                         QDir::separator() + QLatin1String("fluid") + QDir::separator() + QLatin1String("qml"));
+
+    engine.addImportPath(QCoreApplication::applicationDirPath() + QDir::separator() + QLatin1String("..") +
+                        QDir::separator() + QLatin1String("lib") + QDir::separator() + QLatin1String("qml"));
 
     engine.addImportPath(QCoreApplication::applicationDirPath() + QDir::separator() + QLatin1String("qml"));
 
