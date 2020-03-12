@@ -24,7 +24,7 @@ Install dependencies
 
 ### Building
 
-After installing Qt5, gstreamer, and QtGstreamer, cd wherever you want to store this project, and:
+After installing Qt5 and TagLib cd wherever you want to store this project, and:
 
     git clone https://github.com/liri-project/liri-music.git
     cd liri-music
