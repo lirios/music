@@ -2,6 +2,7 @@
 #define LIRI_MUSIC_DATABASE_H
 
 #include <QSqlQuery>
+#include <iostream>
 /*
  * API That should be supported:
  * Album = find<album::id>(id);
@@ -369,7 +370,11 @@ namespace database
         queryString += ")";
         query.prepare(queryString);
         detail::InsertBinder<typename Table<T>::columns>::apply(query, item);
-        query.exec();
+
+        if(!query.exec()){
+            std::cout << "Not inserted" << std::endl;
+        }
+
     }
 
     //--------------------------------------

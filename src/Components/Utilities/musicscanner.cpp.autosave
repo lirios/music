@@ -97,7 +97,7 @@ void MusicScanner::scan(const QDir& dir) {
                 std::cout << "got file? " << mpegFile.ID3v1Tag() << std::endl;
                 TagLib::ID3v2::Tag *id3v2tag = mpegFile.ID3v2Tag();
                 TagLib::ID3v2::FrameList Frame ;
-                TagLib::ID3v2::AttachedPictureFrame *PicFrame ;
+                TagLib::ID3v2::AttachedPictureFrame *PicFrame  ;
                 void *RetImage = NULL, *SrcImage ;
 
                 static const char *IdPicture = "APIC";

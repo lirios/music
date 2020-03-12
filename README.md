@@ -9,18 +9,17 @@ A modern music app for modern people.
 ## Installation
 
 ### Requirements
-- [gstreamer](https://gstreamer.freedesktop.org/documentation/installing/index.html?gi-language=c)
-- [QtGstreamer](https://gstreamer.freedesktop.org/modules/qt-gstreamer.html)
+- [TagLib](https://taglib.org)
 - [Qt 5.14](https://www.qt.io/) (Other versions may work, but Liri Music was developed using 5.14)
 - [Fluid](https://github.com/lirios/fluid) (Included as a submodule)
 
 #### Environment Prep
 
 ##### Windows
-Download Qt5 installer, GStreamer binaries, and QtGstreamer source.  Install Qt5 and GStreamer.  The QtGstreamer bindings require manual compilation.  Use CMake to build, and install.
+Download Qt5 installer and TagLib source.  You'll need to compile Taglib (which is pretty straightforward) in Release mode, and then install.  Add Qt5 and Taglib to PATH.
 
 ##### Linux
-Everything should be available via repos.  Install Qt5 via its installer.
+Install dependencies
 
 
 ### Building
@@ -31,16 +30,25 @@ After installing Qt5, gstreamer, and QtGstreamer, cd wherever you want to store 
     cd liri-music
 
     # init fluid submodule:
-    git submodule init && git submodule update --recursive
-    cd fluid
-    ./scripts/fetch_icons.sh # this will take a while
+    git submodule init && git submodule update --init --recursive
 
-    # still in liri-music/fluid
+    # Still in Liri Music root
     mkdir build && cd build
-    cmake .. -DCMAKE_INSTALL_PREFIX=../
+
+    # NOTE
+    # CMAKE_INSTALL_PREFIX is required in order to get fluid to build lib directory.
+    # Also, make and make install are required to get everything built correctly.
+
+    # if LINUX:
+    cmake .. -DCMAKE_INSTALL_PREFIX=release
     make
     make install
 
+    # else if WINDOWS:
+    cmake .. -DCMAKE_INSTALL_PREFIX=release -G "MinGW Makefiles"
+    mingw32-make
+    mingw32-make install
 
-Now open liri-music/CMakeLists.txt in QtCreator, configure project, and build.
+
+
 

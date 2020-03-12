@@ -154,7 +154,6 @@ void MusicDatabase::libraryItemFound(Artist artist, Song song, Album album, QByt
     QList<Song> songs = database::find<song::title, song::artist, song::album>(db, song.title(), song.artist(), song.album());
 
     if(songs.size() == 0) {
-        std::cout << "inserting song with length " << song.track_length().toStdString() << std::endl;
         database::insert(db, song);
         songs = database::find<song::title, song::artist, song::album>(db, song.title(), song.artist(), song.album());
         emit addedNewSong(songs.front());
@@ -163,7 +162,7 @@ void MusicDatabase::libraryItemFound(Artist artist, Song song, Album album, QByt
 
 void MusicDatabase::addArtworkToAlbum(Album album, QByteArray artwork) {
     QSqlQuery addArtQuery;
-    std::cout << "Ading art " << album.title().toStdString() <<  std::endl;
+    std::cout << "Ading art " << artwork.toStdString() <<  std::endl;
     addArtQuery.prepare(QLatin1String("UPDATE Albums SET art = :image WHERE (artist = :artist AND title = :album)"));
     addArtQuery.bindValue(QLatin1String(":artist"), album.artist());
     addArtQuery.bindValue(QLatin1String(":album"), album.title());
