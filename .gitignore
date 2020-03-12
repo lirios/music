@@ -3,3 +3,6 @@ liri-music.pro.user
 **.user
 build
 Testing
+**autosave
+*.tcl
+ecm_uninstall.cmake
