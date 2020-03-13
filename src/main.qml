@@ -68,6 +68,21 @@ FluidControls.ApplicationWindow {
         singleAlbum.songList = album.getSong;
     }
 
+    function getAllSongs(){
+        multiAlbum = musichelper.getAllSongs();
+
+        let songarr = [];
+        for(let i = 0; i < multiAlbum.length; i++) {
+            for(let o = 0; o < multiAlbum[i].songList.length; o++){
+                songarr.push(multiAlbum[i].songList[o]);
+            }
+        }
+
+
+        multiAlbumSongList = songarr;
+        multiAlbumTitle = "All Songs";
+    }
+
     function getArtistAlbums(artist){
         multiAlbum = musichelper.getArtistAlbums(artist);
 
@@ -82,7 +97,6 @@ FluidControls.ApplicationWindow {
         multiAlbumSongList = songarr;
         multiAlbumTitle = artist;
 
-        console.log("Got albums", multiAlbum[0].title);
     }
 
     function nextSong(){
@@ -177,13 +191,16 @@ FluidControls.ApplicationWindow {
 
     Timer {
         id: delayedPlay
-        interval: 100; running: false; repeat: false
+        interval: 100
+        running: false
+        repeat: false
         onTriggered: {
+
             window.currentSongLength = parseInt(playMusic.duration)
             //durationBar.setMaximum(parseInt(playMusic.duration))
             durationTimer.start()
-
             playMusic.play()
+
 
         }
 

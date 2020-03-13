@@ -160,11 +160,12 @@ Page {
                         MouseArea {
                             anchors.fill: parent
                             onClicked: {
+                                playMusic.source = "file:///" + model.modelData.path
                                 window.currentSong = model.modelData
                                 window.currentSongList = window.singleAlbum.songList
                                 window.currentSongIndex = model.index;
-                                playMusic.source = "file:///" + model.modelData.path
-                                playMusic.play()
+
+                                //playMusic.play()
 
                             }
                         }

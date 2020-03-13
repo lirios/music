@@ -1,7 +1,6 @@
 #include "musicscanner.h"
 #include "moc_musicscanner.cpp"
 #include "musicdatabase.h"
-
 #include <QDir>
 #include <QUrl>
 #include <QList>
@@ -18,7 +17,6 @@
 #include <taglib/id3v2tag.h>
 #include <typeinfo>
 #include <taglib/tpicturemap.h>
-
 #include <taglib/id3v1tag.h>
 
 
@@ -43,21 +41,13 @@ void MusicScanner::directoryChanged(const QString &path)
 
 void MusicScanner::scan(const QDir& dir) {
     QDir::Filters directoryFilters = QDir::Files | QDir::NoDotAndDotDot | QDir::Dirs | QDir::NoSymLinks;
-
     QFileInfoList entries = dir.entryInfoList(directoryFilters, QDir::Name);
 
-
-    for(const auto& entry : entries) {
-        if(entry.isDir())
-        {
+    for (const auto& entry : entries) {
+        if (entry.isDir()) {
             watcher.addPath(entry.absolutePath());
             scan(QDir { entry.absoluteFilePath() });
-        }
-        else {
-            //QGst::DiscovererInfoPtr info;
-
-
-
+        } else {
             QMimeDatabase db;
             QMimeType mime = db.mimeTypeForFile(entry.absoluteFilePath());
 
@@ -69,21 +59,19 @@ void MusicScanner::scan(const QDir& dir) {
                 TagLib::FileRef f(path.toCString());
                 TagLib::Tag *tag = f.tag();
                 TagLib::AudioProperties *prop = f.audioProperties();
-
                 QString file_path = entry.absoluteFilePath();
-
                 Artist artist;
 
-                if(!QString::fromUtf8(tag->artist().toCString(true)).isEmpty())
+                if (!QString::fromUtf8(tag->artist().toCString(true)).isEmpty()) {
                   artist = Artist { 0, QString::fromUtf8(tag->artist().toCString(true)) };
-                else
+                } else {
                   artist = Artist { 0, QLatin1String("Unknown Artist") };
+                }
 
                 Song song;
-                if(!QString::fromUtf8(tag->title().toCString(true)).isEmpty()){
-                    //std::cout << "Got length of " << info->tags().title().toStdString() << info->duration() << std::endl;
+                if (!QString::fromUtf8(tag->title().toCString(true)).isEmpty()) {
                   song = Song { 0, file_path, QString::fromUtf8(tag->title().toCString(true)), 0, 0, QLatin1String("placeholder"), QString::number(prop->length()) };
-                }else {
+                } else {
                   QString path = MusicDatabase::get().getMusicFolder();
                   QString title = entry.fileName();
                   song = Song { 0, entry.absoluteFilePath(), title, 0, 0, QLatin1String("placeholder"),  QString::number(prop->length()) };
@@ -91,13 +79,12 @@ void MusicScanner::scan(const QDir& dir) {
 
                 Album album;
 
-                if(!QString::fromUtf8(tag->album().toCString(true)).isEmpty())
+                if (!QString::fromUtf8(tag->album().toCString(true)).isEmpty()) {
                   album = Album { 0, QString::fromUtf8(tag->album().toCString(true)), 0, QLatin1String("placeholder") };
-                else
+                } else {
                   album = Album { 0, QLatin1String("Unknown Album"), 0, QLatin1String("placeholder") };
+                }
 
-                //emit foundSong(song);
-                //emit foundAlbum(album);
 
                 QByteArray artwork;
                 int Size;
@@ -111,9 +98,7 @@ void MusicScanner::scan(const QDir& dir) {
                 }
 
                 emit foundLibraryItem(artist, song, album, artwork);
-
             }
-
         }
     }
 }

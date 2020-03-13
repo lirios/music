@@ -72,7 +72,6 @@ QList<QObject*> SongModel::getSongsByArtist(int id) const {
 
 QString SongModel::getArtist(int id) const {
     QString artist = MusicDatabase::get().getArtist(id);
-    std::cout << "Artist " << artist.toStdString() << std::endl;
     return artist;
 }
 

@@ -36,9 +36,6 @@ MusicDatabase& MusicDatabase::get() {
 
 QList<Album> MusicDatabase::getAllAlbums() {
     QList<Album> aa = database::find<Album>(db);
-    for(int i = 0; i < aa.count(); i++){
-        std::cout << "GOT ALBUM " << aa[i].title().toStdString() << std::endl;
-    }
     return aa;
 }
 
@@ -60,7 +57,6 @@ QString MusicDatabase::getArtist(int id){
 
     for(const auto& artist : artists){
         currentArtist = artist.name();
-
     }
     return currentArtist;
 
@@ -70,8 +66,6 @@ QString MusicDatabase::getAlbum(int id){
     QList<Album> albums = database::find<album::id>(db, id);
     QString currentAlbum = albums[0].title();
     return currentAlbum;
-
-
 }
 
 QList<Song> MusicDatabase::getAllSongs() {
@@ -162,7 +156,6 @@ void MusicDatabase::libraryItemFound(Artist artist, Song song, Album album, QByt
 
 void MusicDatabase::addArtworkToAlbum(Album album, QByteArray artwork) {
     QSqlQuery addArtQuery;
-    std::cout << "Ading art " << artwork.toStdString() <<  std::endl;
     addArtQuery.prepare(QLatin1String("UPDATE Albums SET art = :image WHERE (artist = :artist AND title = :album)"));
     addArtQuery.bindValue(QLatin1String(":artist"), album.artist());
     addArtQuery.bindValue(QLatin1String(":album"), album.title());

@@ -47,9 +47,6 @@ Tab {
 
                 delegate: Item {
                     Material.elevation: 2
-                    Component.onCompleted: {
-                        console.log("MODEL !", title);
-                    }
 
                     Pane {
                         height: 180

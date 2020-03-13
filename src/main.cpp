@@ -57,17 +57,14 @@ Q_IMPORT_PLUGIN(FluidTemplatesPlugin)
 int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-
     QGuiApplication app(argc, argv);
-    // Register Liri Music
-    qmlRegisterType<LiriMusic>("com.liri.music", 1, 0, "LiriMusic");
-
     QQmlApplicationEngine engine;
+
     qRegisterMetaType<Album>();
     qRegisterMetaType<Song>();
     qRegisterMetaType<Artist>();
+    qmlRegisterType<LiriMusic>("com.liri.music", 1, 0, "LiriMusic");
 
-    std::cout << "APP Running At " << QCoreApplication::applicationDirPath().toStdString() << std::endl;
     engine.addImportPath(QCoreApplication::applicationDirPath() + QDir::separator() + QLatin1String("..") +
                         QDir::separator() + QLatin1String("fluid") + QDir::separator() + QLatin1String("qml"));
 
@@ -96,17 +93,11 @@ int main(int argc, char *argv[])
 
     AlbumModel albumModel;
     ArtistModel artistModel;
-    SongModel songModel;
 
     engine.rootContext()->setContextProperty(QLatin1String("allSongObjects"), QVariant::fromValue(MusicDatabase::get().getAllSongs()));
-    //engine.rootContext()->setContextProperty("allArtists", QVariant::fromValue(MusicDatabase::get().getAllArtists()));
     engine.rootContext()->setContextProperty(QLatin1String("albumModel"), &albumModel);
-    engine.rootContext()->setContextProperty(QLatin1String("songModel"), &songModel);
     engine.rootContext()->setContextProperty(QLatin1String("artistModel"), &artistModel);
-
     engine.addImageProvider(QLatin1String("art"), new AlbumArtProvider());
-
-
 
     MusicScanner scanner {};
     MusicDatabase& db = MusicDatabase::get();
@@ -115,12 +106,6 @@ int main(int argc, char *argv[])
     QObject::connect(&scanner, &MusicScanner::foundLibraryItem, &db, &MusicDatabase::libraryItemFound);
     QObject::connect(&db,&MusicDatabase::addedNewAlbum, &albumModel, &AlbumModel::addAlbum);
     QObject::connect(&db, &MusicDatabase::addedNewArtist, &artistModel, &ArtistModel::addArtist);
-
-    QObject::connect(&albumModel, &AlbumModel::addedNewAlbum, [&engine, &albumModel](){
-        std::cout << "Adding album to ui" << std::endl;
-        //engine.rootContext()->setContextProperty("albumModel", &albumModel);
-    });
-
 
     QThread t;
     scanner.moveToThread(&t);

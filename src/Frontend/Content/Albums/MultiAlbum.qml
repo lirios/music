@@ -129,7 +129,6 @@ Page {
                 ListView {
                     Material.elevation: 2
                     model: {
-                        console.log("Album: ", modelData);
                         return modelData.songList;
                     }
 

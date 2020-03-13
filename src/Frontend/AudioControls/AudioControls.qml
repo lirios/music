@@ -178,9 +178,7 @@ Pane {
         MouseArea {
             anchors.fill: parent
             onClicked: {
-                for(let i = 0; i < albumModel.length; i++){
-                    console.log("Item is ", albumModel[i].title);
-                }
+
 
                 /*
                 let albumV = {

@@ -36,6 +36,7 @@ public:
     Q_INVOKABLE QString getSingleAlbum(qint64);
     QList<Album> getAlbums(){ return m_albums; };
     Q_INVOKABLE QList<QObject*> getArtistAlbums(QString);
+    Q_INVOKABLE QList<QObject*> getAllSongs();
 
     void setAlbums(QList<Album> albums) {
         m_albums = albums;
