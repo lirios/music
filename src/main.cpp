@@ -93,10 +93,12 @@ int main(int argc, char *argv[])
 
     AlbumModel albumModel;
     ArtistModel artistModel;
+    SongModel songModel;
 
     engine.rootContext()->setContextProperty(QLatin1String("allSongObjects"), QVariant::fromValue(MusicDatabase::get().getAllSongs()));
     engine.rootContext()->setContextProperty(QLatin1String("albumModel"), &albumModel);
     engine.rootContext()->setContextProperty(QLatin1String("artistModel"), &artistModel);
+    engine.rootContext()->setContextProperty(QLatin1String("songModel"), &songModel);
     engine.addImageProvider(QLatin1String("art"), new AlbumArtProvider());
 
     MusicScanner scanner {};
