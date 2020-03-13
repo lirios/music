@@ -2,7 +2,7 @@
 
 A modern music app for modern people.
 
-![Liri UI](https://github.com/lirios/music/blob/master/images/liri3.png "Liri UI")
+![Liri UI](https://github.com/lirios/music/blob/master/images/liri-windows.PNG "Liri UI")
 
 ![Liri UI](https://github.com/lirios/music/blob/master/images/liri4.png "Liri Single Album View")
 

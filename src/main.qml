@@ -239,8 +239,8 @@ FluidControls.ApplicationWindow {
     // Try to call liri getAlbums:
 
 
-    width: 1024
-    height: 600
+    width: 1040
+    height: 630
 
     title: qsTr("Liri Music")
 

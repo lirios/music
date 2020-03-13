@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.10.0)
 project("LiriMusic"
     VERSION "1.0.0"
     DESCRIPTION "Modern music app for modern people"
-
+    LANGUAGES CXX C
 )
 
 ## Shared macros and functions:

@@ -36,8 +36,12 @@ Page {
         clip: true
         width:parent.width
         height:parent.height - 200
-        contentHeight: (lv.model.length * 50) + 50
+        contentHeight: rect.height + 100
 
+        Rectangle {
+            width: parent.width
+            height: childrenRect.height
+            color: "transparent"
 
         RowLayout {
             id: rl
@@ -52,6 +56,7 @@ Page {
                 rightMargin: 30
                 bottomMargin: 50
             }
+            height: rect.height
 
 
 
@@ -117,11 +122,11 @@ Page {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
 
-                height: parent.height
+                height: childrenRect.height
 
                 Material.elevation: 3
                 Material.background: "white"
-                z: 3
+
                 padding: 0
 
 
@@ -129,15 +134,18 @@ Page {
                     Material.elevation: 2
                     model: window.singleAlbum.songList
                     id: lv
-                    anchors.fill: parent
+                    height: childrenRect.height
+                    width: parent.width
+
 
                     delegate: ListItem {
                         text: model.modelData.title
                         width: parent.width
+                        height: 50
                         highlighted: window.currentSong ? (model.modelData.title == window.currentSong.title) : false
 
                         Text {
-                            text: model.modelData.track_length
+                            text: window.formatTime(model.modelData.track_length)
                             anchors {
                                 top: parent.top
                                 right: parent.right
@@ -166,6 +174,8 @@ Page {
                     }
                 }
             }
+
+        }
 
         }
 

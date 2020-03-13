@@ -93,7 +93,7 @@ Page {
                             }
 
                             Text {
-                                text: model.modelData.title
+                                text: window.multiAlbum[model.modelIndex].title
                                 Layout.preferredHeight: 18
                                 Layout.preferredWidth: 200
                                 font.pixelSize: 16
