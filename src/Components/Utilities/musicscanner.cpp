@@ -3,16 +3,22 @@
 #include "musicdatabase.h"
 
 #include <QDir>
+#include <QUrl>
 #include <QList>
 #include <QMimeType>
 #include <QMimeDatabase>
 #include <QThread>
 #include <iostream>
 #include <taglib/mpegfile.h>
+#include <taglib/tbytevector.h>
 #include <taglib/attachedpictureframe.h>
 #include <taglib/id3v2frame.h>
 #include <taglib/id3v2header.h>
 #include <taglib/id3v2tag.h>
+
+#include <taglib/tpicturemap.h>
+
+#include <taglib/id3v1tag.h>
 
 
 MusicScanner::MusicScanner():
@@ -55,7 +61,7 @@ void MusicScanner::scan(const QDir& dir) {
 
             // This block only works for mp3
             if(mime.name().toStdString().find("audio/mpeg") != std::string::npos){
-
+                entry.dir().toNativeSeparators(entry.absoluteFilePath());
                 TagLib::String path = entry.absoluteFilePath().toStdString();
                 TagLib::FileRef f(path.toCString());
                 TagLib::Tag *tag = f.tag();
@@ -94,18 +100,21 @@ void MusicScanner::scan(const QDir& dir) {
                 QByteArray artwork;
 
                 TagLib::MPEG::File mpegFile(path.toCString());
-                std::cout << "got file? " << mpegFile.ID3v1Tag() << std::endl;
+                std::cout << "got file? " << path.toCString() << tag->pictures().isEmpty() << std::endl;
+
                 TagLib::ID3v2::Tag *id3v2tag = mpegFile.ID3v2Tag();
+
                 TagLib::ID3v2::FrameList Frame ;
-                TagLib::ID3v2::AttachedPictureFrame *PicFrame ;
+                TagLib::ID3v2::AttachedPictureFrame *PicFrame  ;
                 void *RetImage = NULL, *SrcImage ;
 
+                //std::cout << pi.size() << std::endl;
                 static const char *IdPicture = "APIC";
                 int Size ;
                 if ( id3v2tag )
                   {
                     // picture frame
-                    Frame = id3v2tag->frameListMap()[IdPicture] ;
+                    Frame = id3v2tag->frameListMap()["APIC"] ;
                     if (!Frame.isEmpty() )
                     {
                         std::cout << "GOT IMAGE " << std::endl;
@@ -134,6 +143,7 @@ void MusicScanner::scan(const QDir& dir) {
                   }
                   else
                   {
+                    // I guess for now, fall back to grabbing image data from current dir?
                     std::cout<< "id3v2 not present" << std::endl;
                   }
 
