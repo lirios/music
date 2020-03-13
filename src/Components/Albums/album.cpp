@@ -37,6 +37,10 @@ QString Album::art() const {
     return m_art;
 }
 
+QList<QObject*> Album::songList() const {
+    return m_songList;
+}
+
 void Album::setId(quint64 id) {
     m_id = id;
 }
@@ -51,4 +55,8 @@ void Album::setArtist(quint64 artist) {
 
 void Album::setArt(const QString &art) {
     m_art = art;
+}
+
+void Album::setSongList(const QList<QObject*> &songList){
+    m_songList = songList;
 }

@@ -174,6 +174,29 @@ Pane {
             leftMargin:10
         }
         source: nowPlayingAlbum.text ? (nowPlayingAlbum.text != "placeholder") ? "image://art/" + nowPlayingAlbum.text : "" : ""
+
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                for(let i = 0; i < albumModel.length; i++){
+                    console.log("Item is ", albumModel[i].title);
+                }
+
+                /*
+                let albumV = {
+                    id: id,
+                    title: title,
+                    art: art,
+                    artist: musichelper.getSingleArtist(artist),
+                    songList: songModel.getSongsByAlbum(id)
+                }
+                window.singleAlbum = albumV;
+
+                */
+                //window.pageStack.push(Qt.resolvedUrl("/Frontend/Content/Albums/Album.qml"))
+
+            }
+        }
     }
 
     Label {

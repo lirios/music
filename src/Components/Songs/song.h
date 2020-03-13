@@ -14,11 +14,11 @@ class Song : public QObject
 
     Q_PROPERTY(quint64 id READ id WRITE setId)
     Q_PROPERTY(QString path READ path WRITE setPath)
-    Q_PROPERTY(QString title READ title WRITE setTitle CONSTANT)
-    Q_PROPERTY(quint64 album READ album WRITE setAlbum CONSTANT)
-    Q_PROPERTY(quint64 artist READ artist WRITE setArtist)
+    Q_PROPERTY(QString title READ title WRITE setTitle NOTIFY title_changed)
+    Q_PROPERTY(quint64 album READ album WRITE setAlbum  NOTIFY album_changed)
+    Q_PROPERTY(quint64 artist READ artist WRITE setArtist  NOTIFY artist_changed)
     Q_PROPERTY(QString art READ art CONSTANT)
-    Q_PROPERTY(QString track_length READ track_length WRITE setTrack_length)
+    Q_PROPERTY(QString track_length READ track_length WRITE setTrack_length NOTIFY track_length_changed)
 
 
     QString m_path;
@@ -51,6 +51,11 @@ public:
     void setArtist(quint64);
     void setArt(const QString& art);
     void setTrack_length(const QString& track_length);
+signals:
+    void title_changed();
+    void album_changed();
+    void artist_changed();
+    void track_length_changed();
 };
 
 Q_DECLARE_METATYPE(Song);

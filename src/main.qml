@@ -51,6 +51,8 @@ FluidControls.ApplicationWindow {
 
     property var singleAlbum;
     property var multiAlbum;
+    property var multiAlbumSongList;
+    property var multiAlbumTitle;
     property var currentSong;
     property var isPlaying: false;
     property var currentTime: 0;
@@ -68,6 +70,17 @@ FluidControls.ApplicationWindow {
 
     function getArtistAlbums(artist){
         multiAlbum = musichelper.getArtistAlbums(artist);
+
+        let songarr = [];
+        for(let i = 0; i < multiAlbum.length; i++) {
+            for(let o = 0; o < multiAlbum[i].songList.length; o++){
+                songarr.push(multiAlbum[i].songList[o]);
+            }
+        }
+
+
+        multiAlbumSongList = songarr;
+        multiAlbumTitle = artist;
 
         console.log("Got albums", multiAlbum[0].title);
     }
