@@ -114,9 +114,10 @@ Page {
 
             Pane {
                 Layout.fillWidth: true
-                Layout.fillHeight: true
+                Layout.fillHeight: false
                 id: lv2
-                height: childrenRect.height
+                height: (modelData.songList.length) * 50
+                anchors.top: parent.top
 
                 Material.elevation: 3
                 Material.background: "white"
