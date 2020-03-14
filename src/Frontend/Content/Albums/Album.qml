@@ -91,9 +91,10 @@ Page {
 
                     Text {
                         text: window.singleAlbum.title
-                        Layout.preferredHeight: 18
+                        id: albTitle
                         Layout.preferredWidth: 200
                         font.pixelSize: 16
+                        wrapMode: Text.WordWrap
                     }
 
                     Text {
@@ -102,6 +103,10 @@ Page {
                         Layout.preferredWidth: 200
                         color: "#666"
                         font.pixelSize: 14
+                        anchors {
+                            top: albTitle.bottom
+                            topMargin: 5
+                        }
                     }
 
                     Text {

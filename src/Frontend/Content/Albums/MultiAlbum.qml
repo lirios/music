@@ -11,19 +11,6 @@ Page {
     width:parent.width
     height:parent.height + 30
 
-
-
-    anchors {
-        left: parent.left
-        top: parent.top
-        right: parent.right
-        bottom: parent.bottom
-
-
-    }
-
-
-
     ListView {
         Material.elevation: 2
         model: window.multiAlbum
@@ -56,11 +43,8 @@ Page {
                 Layout.minimumHeight: childrenRect.height
                 Material.elevation: 0
                 color: "transparent"
-                anchors {
-                    top: parent.top
 
-                    bottomMargin: 50
-                }
+                Layout.alignment: Qt.AlignTop
 
 
                 ColumnLayout {
@@ -84,10 +68,11 @@ Page {
                     }
 
                     Text {
+                        id: albTitle
                         text: model.modelData.title
-                        Layout.preferredHeight: 18
                         Layout.preferredWidth: 200
                         font.pixelSize: 16
+                        wrapMode: Text.WordWrap
                     }
 
                     Text {
@@ -96,6 +81,10 @@ Page {
                         Layout.preferredWidth: 200
                         color: "#666"
                         font.pixelSize: 14
+                        anchors {
+                            top: albTitle.bottom
+                            topMargin: 5
+                        }
                     }
 
                     Text {
@@ -117,7 +106,7 @@ Page {
                 Layout.fillHeight: false
                 id: lv2
                 height: (modelData.songList.length) * 50
-                anchors.top: parent.top
+                Layout.alignment: Qt.AlignTop
 
                 Material.elevation: 3
                 Material.background: "white"

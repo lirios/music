@@ -63,7 +63,7 @@ Tab {
                         Rectangle {
                             gradient: Gradient {
                                     GradientStop { position: 0.0; color: Qt.rgba(0, 0, 0, 0) }
-                                    GradientStop { position: 1.0; color: "#000" }
+                                    GradientStop { position: 1.0; color: Qt.rgba(0, 0, 0, .6) }
                                 }
                             height:180
                             width:180
@@ -79,6 +79,10 @@ Tab {
                                     rightMargin: 10
 
                                 }
+                                width:180
+                                font.pixelSize: 14
+                                wrapMode: Text.WordWrap
+                                style: Text.Raised
                                 color: "#fff"
 
                             }
