@@ -9,7 +9,8 @@ A modern music app for modern people.
 ## Installation
 
 ### Requirements
-- [TagLib](https://taglib.org)
+- Taglib
+	- Please compile the version found [here](https://github.com/nickgermaine/taglib) which has the third party tpicturemap.h included
 - [Qt 5.14](https://www.qt.io/) (Other versions may work, but Liri Music was developed using 5.14)
 - [Fluid](https://github.com/lirios/fluid) (Included as a submodule)
 
