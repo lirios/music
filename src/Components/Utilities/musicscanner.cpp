@@ -16,8 +16,10 @@
 #include <taglib/id3v2header.h>
 #include <taglib/id3v2tag.h>
 #include <typeinfo>
-#include <taglib/tpicturemap.h>
+//#include "/usr/local/include/taglib/tpicturemap.h"
 #include <taglib/id3v1tag.h>
+#include <taglib/tstring.h>
+#include <taglib/tstring.h>
 
 
 MusicScanner::MusicScanner():
@@ -50,54 +52,74 @@ void MusicScanner::scan(const QDir& dir) {
         } else {
             QMimeDatabase db;
             QMimeType mime = db.mimeTypeForFile(entry.absoluteFilePath());
+            std::cout << "MIME: " << mime.name().toStdString() << std::endl;
 
             // This block only works for mp3
-            if(mime.name().toStdString().find("audio/mpeg") != std::string::npos){
+            if(mime.name().toStdString().find("audio") != std::string::npos){
+                std::cout << "MIME: " << mime.name().toStdString() << std::endl;
                 entry.dir().toNativeSeparators(entry.absoluteFilePath());
 
-                const TagLib::String path = entry.absoluteFilePath().toUtf8().data();
-                TagLib::FileRef f(path.toCString());
-                TagLib::Tag *tag = f.tag();
-                TagLib::AudioProperties *prop = f.audioProperties();
-                QString file_path = entry.absoluteFilePath();
-                Artist artist;
 
-                if (!QString::fromUtf8(tag->artist().toCString(true)).isEmpty()) {
-                  artist = Artist { 0, QString::fromUtf8(tag->artist().toCString(true)) };
-                } else {
-                  artist = Artist { 0, QLatin1String("Unknown Artist") };
+                try {
+                    const TagLib::String path = entry.absoluteFilePath().toUtf8().data();
+                    TagLib::FileRef f(path.toCString());
+
+                    if (!f.isNull()) {
+                    TagLib::Tag *tag = f.tag();
+                    TagLib::AudioProperties *prop = f.audioProperties();
+                    QString file_path = entry.absoluteFilePath();
+                    Artist artist;
+
+
+
+
+
+                    if (!QString::fromUtf8(tag->artist().toCString(true)).isEmpty()) {
+                      artist = Artist { 0, QString::fromUtf8(tag->artist().toCString(true)) };
+                    } else {
+                      artist = Artist { 0, QLatin1String("Unknown Artist") };
+                    }
+
+                    Song song;
+                    if (!QString::fromUtf8(tag->title().toCString(true)).isEmpty()) {
+                      song = Song { 0, file_path, QString::fromUtf8(tag->title().toCString(true)), 0, 0, QLatin1String("placeholder"), QString::number(prop->length()) };
+                    } else {
+                      QString path = MusicDatabase::get().getMusicFolder();
+                      QString title = entry.fileName();
+                      song = Song { 0, entry.absoluteFilePath(), title, 0, 0, QLatin1String("placeholder"),  QString::number(prop->length()) };
+                    }
+
+                    Album album;
+
+                    if (!QString::fromUtf8(tag->album().toCString(true)).isEmpty()) {
+                      album = Album { 0, QString::fromUtf8(tag->album().toCString(true)), 0, QLatin1String("placeholder") };
+                    } else {
+                      album = Album { 0, QLatin1String("Unknown Album"), 0, QLatin1String("placeholder") };
+                    }
+
+
+
+                    QByteArray artwork;
+                    int Size;
+
+                    /*
+                    // Iterate over pictures
+                    for(const auto &p : tag->pictures()){
+                        Size = p.second.front().data().size();
+                        QByteArray outputBuffer { Size, 0 };
+                        artwork.resize(Size);
+                        artwork = {p.second.front().data().data(), Size};
+                    }
+                    */
+
+                    emit foundLibraryItem(artist, song, album, artwork);
+                    }
+                } catch(const std::exception& e) {
+                    std::cout << "Excepting " << e.what() << std::endl;
+
                 }
 
-                Song song;
-                if (!QString::fromUtf8(tag->title().toCString(true)).isEmpty()) {
-                  song = Song { 0, file_path, QString::fromUtf8(tag->title().toCString(true)), 0, 0, QLatin1String("placeholder"), QString::number(prop->length()) };
-                } else {
-                  QString path = MusicDatabase::get().getMusicFolder();
-                  QString title = entry.fileName();
-                  song = Song { 0, entry.absoluteFilePath(), title, 0, 0, QLatin1String("placeholder"),  QString::number(prop->length()) };
-                }
 
-                Album album;
-
-                if (!QString::fromUtf8(tag->album().toCString(true)).isEmpty()) {
-                  album = Album { 0, QString::fromUtf8(tag->album().toCString(true)), 0, QLatin1String("placeholder") };
-                } else {
-                  album = Album { 0, QLatin1String("Unknown Album"), 0, QLatin1String("placeholder") };
-                }
-
-
-                QByteArray artwork;
-                int Size;
-
-                // Iterate over pictures
-                for(const auto &p : tag->pictures()){
-                    Size = p.second.front().data().size();
-                    QByteArray outputBuffer { Size, 0 };
-                    artwork.resize(Size);
-                    artwork = {p.second.front().data().data(), Size};
-                }
-
-                emit foundLibraryItem(artist, song, album, artwork);
             }
         }
     }

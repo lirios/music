@@ -16,7 +16,7 @@ QML_IMPORT_PATH = $$OUT_PWD/../fluid/qml
 QML_DESIGNER_IMPORT_PATH =
 CONFIG += link_pkgconfig
 PKGCONFIG += Qt5GStreamer-1.0
-
+CONFIG += c++14
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked deprecated (the exact warnings
@@ -29,6 +29,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 SOURCES += main.cpp \
+    Components/Artists/artistmodel.cpp \
     Components/Base/base.cpp \
     Components/Albums/album.cpp \
     Components/Albums/albumartprovider.cpp \
@@ -42,6 +43,7 @@ SOURCES += main.cpp \
     Components/Utilities/musicscanner.cpp
 
 HEADERS += \
+    Components/Artists/artistmodel.h \
     Components/Base/base.h \
     Components/Albums/album.h \
     Components/Albums/albumartprovider.h \
@@ -54,7 +56,9 @@ HEADERS += \
     Components/Utilities/musicdatabase.h \
     Components/Utilities/musicscanner.h \
     Components/Utilities/database.h \
-    Components/Utilities/schema.h
+    Components/Utilities/schema.h \
+    Components/Utilities/tpicture.h \
+    Components/Utilities/tpicturemap.h
 
 android {
     # Bundle Fluid QML plugins with the application
@@ -125,5 +129,10 @@ win32:CONFIG(release, debug|release): {
     DEPENDPATH += "C:/Program Files (x86)/taglib/include"
 }
 
+LIBS += -ltag
+INCLUDEPATH += "/usr/include/taglib"
+DEPENDPATH += "/usr/include"
+
 DISTFILES += \
     README.md
+

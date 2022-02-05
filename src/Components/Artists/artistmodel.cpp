@@ -1,6 +1,6 @@
+
 #include "artistmodel.h"
 #include "../Utilities/musicdatabase.h"
-#include "moc_artistmodel.cpp"
 #include <stdio.h>
 #include <iostream>
 
@@ -26,23 +26,21 @@ QVariant ArtistModel::data(const QModelIndex &index, int role) const
     Artist current = artists.at(index.row());
     switch(role)
     {
-    case NameRole:
-        return QVariant::fromValue(current.name());
-    case IdRole:
-        return QVariant::fromValue(current.id());
-    }
+        case NameRole:
+            return QVariant::fromValue(current.name());
+        case IdRole:
+            return QVariant::fromValue(current.id());
+        }
     return QVariant();
 
 }
 
-
-
-void ArtistModel::addArtist(const Artist &artist)
+void ArtistModel::addArtist(const Artist &Artist)
 {
     emit beginInsertRows(QModelIndex(), rowCount(QModelIndex()), rowCount(QModelIndex()));
-    artists.append(artist);
+    artists.append(Artist);
     emit endInsertRows();
-    //emit addedNewAlbum(album);
+    //emit addedNewArtist(Artist);
 
 }
 
