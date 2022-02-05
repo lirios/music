@@ -3,7 +3,7 @@ Liri Music
 
 #### Core Developers
 
- * [Nick Qi](https://github.com/nickqidev)
+ * [Nick Germaine](https://github.com/nickgermaine)
 
 #### Contributors
 
