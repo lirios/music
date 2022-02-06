@@ -2,16 +2,20 @@
 
 A modern music app for modern people.
 
-![Liri UI](https://github.com/lirios/music/blob/master/images/liri-windows.PNG "Liri UI")
+Currently there is rudimentary support for offline functionality.  When the program starts, it will scan your ~/Music folder and add items into an sqlite database.  You can then navigate through your music collection and play items.
 
-![Liri UI](https://github.com/lirios/music/blob/master/images/liri4.png "Liri Single Album View")
+As development progresses, there will be an option to add multiple music locations to scan, an ability to initiate a new music scan while in the app, create and manage local playlists, and more.
+
+
+![Liri UI](https://github.com/lirios/music/blob/master/images/liri-2020-1.png "Liri UI")
+
+![Liri UI](https://github.com/lirios/music/blob/master/images/liri-2020-2.png "Liri Single Album View")
 
 ## Installation
 
 ### Requirements
-- Taglib
-	- Please compile the version found [here](https://github.com/nickgermaine/taglib) which has the third party tpicturemap.h included
-- [Qt 5.14](https://www.qt.io/) (Other versions may work, but Liri Music was developed using 5.14)
+- [Taglib](https://github.com/taglib/taglib)
+- [Qt 5.15](https://www.qt.io/)
 - [Fluid](https://github.com/lirios/fluid) (Included as a submodule)
 
 #### Environment Prep
@@ -36,9 +40,7 @@ After installing Qt5 and TagLib cd wherever you want to store this project, and:
     # Still in Liri Music root
     mkdir build && cd build
 
-    # NOTE
-    # CMAKE_INSTALL_PREFIX is required in order to get fluid to build lib directory.
-    # Also, make and make install are required to get everything built correctly.
+    # CMAKE MAY CURRENTLY NOT WORK.  QMAKE WORKS RIGHT NOW
 
     # if LINUX:
     cmake .. -DCMAKE_INSTALL_PREFIX=release

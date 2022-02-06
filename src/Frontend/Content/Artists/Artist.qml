@@ -5,7 +5,8 @@ import QtQuick.Controls.Material 2.0
 import Fluid.Controls 1.0
 import "../Albums/"
 
-
+import QtGraphicalEffects 1.15
+import QtQuick.Controls.Material.impl 2.12
 
 Page {
     title: "Artist"
@@ -70,10 +71,64 @@ Page {
                     spacing: 10
 
 
-                    Image {
-                        Layout.preferredHeight: 200
-                        Layout.preferredWidth: 200
-                        source: "file:///" + window.singleAlbum.art
+                    Rectangle {
+                        width: 200
+                        height: 200
+
+                        Material.elevation: 2
+
+                        Pane {
+                            Layout.preferredHeight: 200
+                            Layout.preferredWidth: 200
+                            height: 200
+                            width: 200
+                            padding: 0
+                            Material.elevation: 2
+                            id: control
+                                property int radius: 10
+                                background: Rectangle {
+                                    color: control.Material.backgroundColor
+                                    radius: control.Material.elevation > 0 ? control.radius : 0
+
+                                    layer.enabled: control.enabled && control.Material.elevation > 0
+                                    layer.effect: ElevationEffect {
+                                        elevation: control.Material.elevation
+                                    }
+                                }
+
+
+                            Rectangle {
+                                height: 200
+                                width: 200
+                                id: img
+
+                                property bool rounded: true
+
+                                    layer.enabled: rounded
+                                    layer.effect: OpacityMask {
+                                        maskSource: Item {
+                                            width: img.width
+                                            height: img.height
+                                            Rectangle {
+                                                anchors.centerIn: parent
+                                                width: img.adapt ? img.width : Math.min(img.width, img.height)
+                                                height: img.adapt ? img.height : width
+                                                radius: 10
+                                            }
+                                        }
+                                    }
+                                    Image {
+
+                                        Layout.preferredHeight: 200
+                                        Layout.preferredWidth: 200
+                                        height: 200
+                                        width: 200
+                                        source:  (window.singleAlbum.art != "placeholder") ? "image://art/" + window.singleAlbum.title : ""
+                                    }
+                            }
+
+
+                        }
                     }
 
                     Text {
