@@ -44,6 +44,7 @@ QList<Song> MusicDatabase::getSongsByAlbum(int id){
 }
 
 QList<Song> MusicDatabase::getSongsByArtist(int id){
+
     return database::find<song::artist>(db, id);
 }
 
