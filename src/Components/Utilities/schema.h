@@ -1,11 +1,14 @@
 #ifndef LIRI_MUSIC_SCHEMA_H
 #define LIRI_MUSIC_SCHEMA_H
 
+
 namespace album {
     struct id;
     struct title;
     struct artist;
     struct art;
+    struct genre;
+    struct year;
 }
 
 namespace song {
@@ -15,6 +18,9 @@ namespace song {
     struct artist;
     struct album;
     struct track_length;
+    struct track_number;
+    struct genre;
+    struct year;
 }
 
 namespace artist {
@@ -55,6 +61,20 @@ namespace database {
         using type = QByteArray;
         using belongs_to = Album;
         static constexpr const char* dbType = "BLOB";
+    };
+
+    template<> struct ColumnTraits<album::genre> {
+        static constexpr const char* name = "genre";
+        using type = QByteArray;
+        using belongs_to = Album;
+        static constexpr const char* dbType = "TEXT";
+    };
+
+    template<> struct ColumnTraits<album::year> {
+        static constexpr const char* name = "year";
+        using type = QByteArray;
+        using belongs_to = Album;
+        static constexpr const char* dbType = "TEXT";
     };
 
     template<> struct ColumnTraits<song::id> {
@@ -99,6 +119,33 @@ namespace database {
         static constexpr const char* dbType = "TEXT";
     };
 
+
+template<> struct ColumnTraits<song::genre> {
+    static constexpr const char* name = "genre";
+    using type = QString;
+    using belongs_to = Song;
+    static constexpr const char* dbType = "TEXT";
+};
+
+
+
+template<> struct ColumnTraits<song::track_number> {
+    static constexpr const char* name = "track_number";
+    using type = QString;
+    using belongs_to = Song;
+    static constexpr const char* dbType = "TEXT";
+};
+
+
+
+template<> struct ColumnTraits<song::year> {
+    static constexpr const char* name = "year";
+    using type = QString;
+    using belongs_to = Song;
+    static constexpr const char* dbType = "TEXT";
+};
+
+
     template<> struct ColumnTraits<artist::id> {
         static constexpr const char* name = "id";
         using type = quint64;
@@ -140,7 +187,10 @@ namespace database {
                                 album::id,
                                 album::title,
                                 album::artist,
-                                album::art>;
+                                album::art,
+                                album::genre,
+                                album::year
+        >;
     };
 
     template<> struct Table<Song> {
@@ -151,7 +201,11 @@ namespace database {
                                 song::path,
                                 song::artist,
                                 song::album,
-                                song::track_length>;
+                                song::track_length,
+                                song::track_number,
+                                song::genre,
+                                song::year
+           >;
     };
 
     template<> struct Table<Artist> {

@@ -19,6 +19,9 @@ class Song : public QObject
     Q_PROPERTY(quint64 artist READ artist WRITE setArtist  NOTIFY artist_changed)
     Q_PROPERTY(QString art READ art CONSTANT)
     Q_PROPERTY(QString track_length READ track_length WRITE setTrack_length NOTIFY track_length_changed)
+    Q_PROPERTY(QString genre READ genre WRITE setGenre)
+    Q_PROPERTY(QString track_number READ track_number WRITE setTrackNumber)
+    Q_PROPERTY(QString year READ year WRITE setYear)
 
 
     QString m_path;
@@ -28,10 +31,13 @@ class Song : public QObject
     QString m_art;
     quint64 m_id;
     QString m_length;
+    QString m_genre;
+    QString m_track_number;
+    QString m_year;
 
 public:
     Song();
-    explicit Song(quint64, const QString &path, const QString &title, quint64 album, quint64 artist, const QString &art, const QString& length);
+    explicit Song(quint64, const QString &path, const QString &title, quint64 album, quint64 artist, const QString &art, const QString& length, const QString& genre, const QString& track_number, const QString& year);
     Song(const Song&);
 
     Song& operator=(const Song&);
@@ -43,6 +49,9 @@ public:
     QString art() const;
     quint64 id() const;
     QString track_length() const;
+    QString genre() const;
+    QString track_number() const;
+    QString year() const;
 
     void setId(quint64);
     void setPath(const QString& path);
@@ -51,6 +60,10 @@ public:
     void setArtist(quint64);
     void setArt(const QString& art);
     void setTrack_length(const QString& track_length);
+    void setGenre(const QString& genre);
+    void setTrackNumber(const QString& track_number);
+    void setYear(const QString& year);
+
 signals:
     void title_changed();
     void album_changed();

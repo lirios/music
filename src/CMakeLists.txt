@@ -95,6 +95,7 @@ liri_add_executable(${CMAKE_PROJECT_NAME}
     Qt5::Quick
     Qt5::QuickControls2
     Qt5::Sql
+    Qt5::Widgets
     ${TAGLIB_LIBRARIES}
 
 
@@ -103,6 +104,8 @@ liri_add_executable(${CMAKE_PROJECT_NAME}
 target_compile_features(${CMAKE_PROJECT_NAME} PRIVATE
     cxx_noexcept
 )
+
+target_compile_features(${CMAKE_PROJECT_NAME} PRIVATE cxx_std_17)
 
 
 target_compile_definitions(${CMAKE_PROJECT_NAME} PRIVATE -DBOOST_PP_VARIADICS)

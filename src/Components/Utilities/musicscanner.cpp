@@ -63,6 +63,7 @@ void MusicScanner::scan(const QDir& dir) {
         } else {
             QMimeDatabase db;
             QMimeType mime = db.mimeTypeForFile(entry.absoluteFilePath());
+            bool fallbackImage = false;
 
             // This block only works for audio files
             if(mime.name().toStdString().find("audio") != std::string::npos){
@@ -124,11 +125,13 @@ void MusicScanner::scan(const QDir& dir) {
 
                                  }
                                }
+                             } else {
+                                 fallbackImage = true;
                              }
                            }
                            else
                            {
-                              std::cout<< "image not available" << std::endl;
+                              fallbackImage = true;
                            }
 
                     } else if (mime.name().toStdString().find("audio") != std::string::npos) {
@@ -138,6 +141,17 @@ void MusicScanner::scan(const QDir& dir) {
                              *  looking for an image in the folder to use as the artwork for the album/song.
                              *
                              *  */
+                            fallbackImage = true;
+
+                    }
+
+                    if (fallbackImage) {
+                        /*
+                         *
+                         * In the event that we couldn't grab the image from the file, we will attempt to get an image from the current dir
+                         *
+                         * */
+
 
 
                         for (const auto& en : entries) {
@@ -168,20 +182,27 @@ void MusicScanner::scan(const QDir& dir) {
                     }
 
                     Song song;
+
+                    QString genre(tag->genre().toCString());
+                    QString track_number(tag->track());
+                    QString year(tag->year());
                     if (!QString::fromUtf8(tag->title().toCString(true)).isEmpty()) {
-                      song = Song { 0, file_path, QString::fromUtf8(tag->title().toCString(true)), 0, 0, QLatin1String("placeholder"), QString::number(prop->length()) };
+
+
+
+                      song = Song { 0, file_path, QString::fromUtf8(tag->title().toCString(true)), 0, 0, QLatin1String("placeholder"), QString::number(prop->length()), genre, track_number, year };
                     } else {
                       QString path = MusicDatabase::get().getMusicFolder();
                       QString title = entry.fileName();
-                      song = Song { 0, entry.absoluteFilePath(), title, 0, 0, QLatin1String("placeholder"),  QString::number(prop->length()) };
+                      song = Song { 0, entry.absoluteFilePath(), title, 0, 0, QLatin1String("placeholder"),  QString::number(prop->length()), QString(""), 0, QString("") };
                     }
 
                     Album album;
 
                     if (!QString::fromUtf8(tag->album().toCString(true)).isEmpty()) {
-                      album = Album { 0, QString::fromUtf8(tag->album().toCString(true)), 0, QLatin1String("placeholder") };
+                      album = Album { 0, QString::fromUtf8(tag->album().toCString(true)), 0, QLatin1String("placeholder"), genre, year };
                     } else {
-                      album = Album { 0, QLatin1String("Unknown Album"), 0, QLatin1String("placeholder") };
+                      album = Album { 0, QLatin1String("Unknown Album"), 0, QLatin1String("placeholder"), genre, year };
                     }
 
 

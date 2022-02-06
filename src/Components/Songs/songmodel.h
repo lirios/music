@@ -17,7 +17,10 @@ public:
         AlbumRole,
         PathRole,
         IdRole,
-        LengthRole
+        LengthRole,
+        GenreRole,
+        TrackNumberRole,
+        YearRole
     };
 
     SongModel(QObject *parent = 0);

@@ -24,13 +24,13 @@ QList<QObject*> LiriMusic::getArtistAlbums(QString name){
     QList<QObject*> formatted;
 
     for(const auto &alb : ar) {
-        Album *album = new Album(alb.id(), alb.title(), alb.artist(), alb.art());
+        Album *album = new Album(alb.id(), alb.title(), alb.artist(), alb.art(), alb.genre(), alb.year());
 
         QList<Song> songListRaw = MusicDatabase::get().getSongsByAlbum(alb.id());
         QList<QObject*> songList;
 
         for(const auto& song : songListRaw){
-            songList.append(new Song(song.id(), song.path(), song.title(), song.album(), song.artist(), "placeholder", song.track_length()));
+            songList.append(new Song(song.id(), song.path(), song.title(), song.album(), song.artist(), "placeholder", song.track_length(), song.genre(), song.track_number(), song.year()));
         }
         album->setSongList(songList);
         albumList.append(album);
@@ -45,12 +45,12 @@ QList<QObject*> LiriMusic::getAllSongs(){
     QList<QObject*> formatted;
 
     for(const auto &alb : ar) {
-        Album *album = new Album(alb.id(), alb.title(), alb.artist(), alb.art());
+        Album *album = new Album(alb.id(), alb.title(), alb.artist(), alb.art(), alb.genre(), alb.year());
         QList<Song> songListRaw = MusicDatabase::get().getSongsByAlbum(alb.id());
         QList<QObject*> songList;
 
         for(const auto& song : songListRaw){
-            songList.append(new Song(song.id(), song.path(), song.title(), song.album(), song.artist(), "placeholder", song.track_length()));
+            songList.append(new Song(song.id(), song.path(), song.title(), song.album(), song.artist(), "placeholder", song.track_length(), song.genre(), song.track_number(), song.year()));
         }
 
         album->setSongList(songList);

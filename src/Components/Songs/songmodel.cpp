@@ -35,6 +35,12 @@ QVariant SongModel::data(const QModelIndex &index, int role) const
         return QVariant::fromValue(current.id());
     case LengthRole:
         return QVariant::fromValue(current.track_length());
+    case GenreRole:
+        return QVariant::fromValue(current.genre());
+    case TrackNumberRole:
+        return QVariant::fromValue(current.track_number());
+    case YearRole:
+        return QVariant::fromValue(current.year());
     }
     return QVariant();
 
@@ -45,7 +51,7 @@ QList<QObject*> SongModel::getSongsByAlbum(int id) const {
     QList<Song> current = MusicDatabase::get().getSongsByAlbum(id);
 
     for(const auto& song : current){
-        songList.append(new Song(song.id(), song.path(), song.title(), song.album(), song.artist(), "placeholder", song.track_length()));
+        songList.append(new Song(song.id(), song.path(), song.title(), song.album(), song.artist(), "placeholder", song.track_length(), song.genre(), song.track_number(), song.year()));
     }
     return songList;
 }
@@ -55,7 +61,7 @@ QList<QObject*> SongModel::getAllSongs() const {
     QList<Song> current = MusicDatabase::get().getAllSongs();
 
     for(const auto& song : current){
-        songList.append(new Song(song.id(), song.path(), song.title(), song.album(), song.artist(), "placeholder", song.track_length()));
+        songList.append(new Song(song.id(), song.path(), song.title(), song.album(), song.artist(), "placeholder", song.track_length(), song.genre(), song.track_number(), song.year()));
     }
     return songList;
 }
@@ -65,7 +71,7 @@ QList<QObject*> SongModel::getSongsByArtist(int id) const {
     QList<Song> current = MusicDatabase::get().getSongsByArtist(id);
 
     for(const auto& song : current){
-        songList.append(new Song(song.id(), song.path(), song.title(), song.album(), song.artist(), "placeholder", song.track_length()));
+        songList.append(new Song(song.id(), song.path(), song.title(), song.album(), song.artist(), "placeholder", song.track_length(), song.genre(), song.track_number(), song.year()));
     }
     return songList;
 }

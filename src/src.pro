@@ -1,7 +1,7 @@
 TEMPLATE = app
 
 QT += qml svg quick quickcontrols2 core gui sql widgets
-
+CONFIG += c++17
 CONFIG += console qml_debug
 
 RESOURCES += qml.qrc
@@ -16,7 +16,7 @@ QML_IMPORT_PATH = $$OUT_PWD/../fluid/qml
 QML_DESIGNER_IMPORT_PATH =
 CONFIG += link_pkgconfig
 PKGCONFIG += Qt5GStreamer-1.0
-CONFIG += c++14
+
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which as been marked deprecated (the exact warnings

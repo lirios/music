@@ -151,10 +151,13 @@ Page {
 
 
                     delegate: ListItem {
-                        text: model.modelData.title
+                        text: (index + 1) + ".  " + model.modelData.title
                         width: parent.width
                         height: 50
                         highlighted: window.currentSong ? (model.modelData.title == window.currentSong.title) : false
+
+                        id: t
+
 
                         Text {
                             text: window.formatTime(model.modelData.track_length)
