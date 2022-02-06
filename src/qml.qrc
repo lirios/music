@@ -18,5 +18,9 @@
         <file>main.cpp</file>
         <file>Frontend/Content/Artists/Artist.qml</file>
         <file>Frontend/Content/Albums/MultiAlbum.qml</file>
+        <file>Images/placeholder.png</file>
+        <file>Frontend/Content/Common/ImageTile.qml</file>
+        <file>Frontend/Content/Albums/AlbumTile.qml</file>
+        <file>Frontend/Content/Artists/ArtistTile.qml</file>
     </qresource>
 </RCC>

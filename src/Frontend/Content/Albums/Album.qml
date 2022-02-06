@@ -5,6 +5,7 @@ import QtQuick.Controls.Material 2.12
 import Fluid.Controls 1.0
 import QtGraphicalEffects 1.15
 import QtQuick.Controls.Material.impl 2.12
+import "../Common"
 
 Page {
     id: albumPage
@@ -74,65 +75,13 @@ Page {
                 ColumnLayout {
                     spacing: 10
 
-                    Rectangle {
-                        width: 200
-                        height: 200
-
-                        Material.elevation: 2
-
-                        Pane {
-                            Layout.preferredHeight: 200
-                            Layout.preferredWidth: 200
-                            height: 200
-                            width: 200
-                            padding: 0
-                            Material.elevation: 2
-                            id: control
-                                property int radius: 10
-                                background: Rectangle {
-                                    color: control.Material.backgroundColor
-                                    radius: control.Material.elevation > 0 ? control.radius : 0
-
-                                    layer.enabled: control.enabled && control.Material.elevation > 0
-                                    layer.effect: ElevationEffect {
-                                        elevation: control.Material.elevation
-                                    }
-                                }
-
-
-                            Rectangle {
-                                height: 200
-                                width: 200
-                                id: img
-
-                                property bool rounded: true
-
-                                    layer.enabled: rounded
-                                    layer.effect: OpacityMask {
-                                        maskSource: Item {
-                                            width: img.width
-                                            height: img.height
-                                            Rectangle {
-                                                anchors.centerIn: parent
-                                                width: img.adapt ? img.width : Math.min(img.width, img.height)
-                                                height: img.adapt ? img.height : width
-                                                radius: 10
-                                            }
-                                        }
-                                    }
-                                    Image {
-
-                                        Layout.preferredHeight: 200
-                                        Layout.preferredWidth: 200
-                                        height: 200
-                                        width: 200
-                                        source:  (window.singleAlbum.art != "placeholder") ? "image://art/" + window.singleAlbum.title : ""
-                                    }
-                            }
-
-
-                        }
+                    ImageTile {
+                        size: 200
+                        showTitle: false
+                        art: (window.singleAlbum.art != "placeholder") ? "image://art/" + window.singleAlbum.title : ""
+                        title: ''
                     }
+
 
 
 
@@ -181,6 +130,16 @@ Page {
 
                 padding: 0
 
+                property int radius: 10
+                    background: Rectangle {
+                        color: "white"
+                        radius: 10
+
+                        layer.enabled: true
+                        layer.effect: ElevationEffect {
+                            elevation: 3
+                        }
+                    }
 
                 ListView {
                     Material.elevation: 2
@@ -188,6 +147,7 @@ Page {
                     id: lv
                     height: childrenRect.height
                     width: parent.width
+                    interactive: false
 
 
                     delegate: ListItem {
@@ -226,6 +186,10 @@ Page {
 
                     }
                 }
+            }
+
+            Rectangle {
+                width: 50
             }
 
         }

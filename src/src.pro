@@ -2,7 +2,7 @@ TEMPLATE = app
 
 QT += qml svg quick quickcontrols2 core gui sql widgets
 
-CONFIG += c++11
+CONFIG += console qml_debug
 
 RESOURCES += qml.qrc
 RC_ICONS = icons/liri-music.ico

@@ -10,6 +10,9 @@ Page {
     id: albumPage
     title: window.multiAlbumTitle ? window.multiAlbumTitle : "Songs" //window.singleAlbum.title
     width:parent.width
+
+
+
     height:parent.height + 30
 
     ListView {
@@ -19,6 +22,8 @@ Page {
         anchors.fill: parent
         anchors.topMargin: 30
         anchors.bottomMargin: 100
+        anchors.leftMargin: 30
+        spacing: 50
 
         delegate: RowLayout {
             id: rl
@@ -27,9 +32,9 @@ Page {
             anchors {
                 topMargin: 50
                 left: parent.left
-                leftMargin: 30
+
                 right: parent.right
-                rightMargin: 30
+
                 bottomMargin: 100
             }
             height: (model.modelData.songList.length + 1) * 50
@@ -147,36 +152,42 @@ Page {
 
             }
 
-
             Pane {
+                id: rect
                 Layout.fillWidth: true
-                Layout.fillHeight: false
-                id: lv2
-                height: (modelData.songList.length) * 50
-                Layout.alignment: Qt.AlignTop
+                Layout.fillHeight: true
+
+
 
                 Material.elevation: 3
                 Material.background: "white"
 
                 padding: 0
-                property var data_object: model.modelData
-                anchors.bottomMargin: 50
 
+                property int radius: 10
+                    background: Rectangle {
+                        color: "white"
+                        radius: 10
+
+                        layer.enabled: true
+                        layer.effect: ElevationEffect {
+                            elevation: 3
+                        }
+                    }
 
                 ListView {
                     Material.elevation: 2
-                    model: {
-                        return modelData.songList;
-                    }
-
+                    model: modelData.songList
+                    id: lv2
                     height: childrenRect.height
                     width: parent.width
-                    focus: true
+                    interactive: false
+                    anchors.bottomMargin: 50
 
 
                     delegate: ListItem {
-                        text: modelData.title
-                        width: parent.width
+                        text: model.modelData.title
+                        width: lv2.width
                         height: 50
                         highlighted: window.currentSong ? (modelData.title == window.currentSong.title) : false
 
@@ -196,12 +207,12 @@ Page {
                         MouseArea {
                             anchors.fill: parent
                             onClicked: {
-                                window.currentSong = modelData
-
-                                window.currentSongList = multiAlbumSongList
-                                window.currentSongIndex = model.index;
                                 playMusic.source = "file:///" + modelData.path
-                                playMusic.play()
+                                window.currentSong = modelData
+                                window.currentSongList = window.singleAlbum.songList
+                                window.currentSongIndex = index;
+
+                                //playMusic.play()
 
                             }
                         }
@@ -211,6 +222,12 @@ Page {
                     }
                 }
             }
+
+            Rectangle {
+                width: 20
+            }
+
+
 
 
 

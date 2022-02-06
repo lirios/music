@@ -31,6 +31,9 @@ Tab {
                 delegate: Item {
                     Material.elevation: 2
 
+                    ArtistTile {}
+
+                    /*
                     Pane {
                         height: 180
                         width: 180
@@ -76,6 +79,8 @@ Tab {
                             }
                         }
                     }
+
+                    /*/
                 }
             }
         }
