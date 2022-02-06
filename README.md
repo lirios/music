@@ -2,9 +2,9 @@
 
 A modern music app for modern people.
 
-Currently there is rudimentary support for offline functionality.  When the program starts, it will scan your ~/Music folder and add items into an sqlite database.  You can then navigate through your music collection and play items.
+Currently there is rudimentary support for offline functionality.  When the program starts, it will scan your ~/Music folder and add items into an sqlite database.  You can then navigate through your music collection and play items.  If you make changes within your music folder, the app will initiate a new music scan to add new items to the database (but not delete items that have been removed from that folder), but it crashes the app around 32% of the time and idunno why.
 
-As development progresses, there will be an option to add multiple music locations to scan, an ability to initiate a new music scan while in the app, create and manage local playlists, and more.
+As development progresses, there will be an option to add multiple music locations to scan, create and manage local playlists, and more.
 
 
 ![Liri UI](https://github.com/lirios/music/blob/master/images/liri-2020-1.png "Liri UI")
@@ -40,7 +40,6 @@ After installing Qt5 and TagLib cd wherever you want to store this project, and:
     # Still in Liri Music root
     mkdir build && cd build
 
-    # CMAKE MAY CURRENTLY NOT WORK.  QMAKE WORKS RIGHT NOW
 
     # if LINUX:
     cmake .. -DCMAKE_INSTALL_PREFIX=release
