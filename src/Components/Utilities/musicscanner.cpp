@@ -222,7 +222,6 @@ void MusicScanner::scan(const QDir& dir) {
                     }
                     */
 
-                    std::cout << "ARTWORK: " << artwork.data() << std::endl;
 
                     emit foundLibraryItem(artist, song, album, artwork);
                     }

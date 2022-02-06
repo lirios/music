@@ -237,9 +237,16 @@ FluidControls.ApplicationWindow {
         }
         notifyInterval: 100
         Component.onCompleted: {
-            if(loadedFileFolder){
-                playMusic.source = 'file:///' + filePathName
-                delayedPlay.start()
+            console.log("FileFolder", loadedFileFolder, loadedFileFolder);
+            if(loadedFileFolder !== ""){
+
+                var songList = songModel.getLocalSong(loadedFileFolder);
+                console.log("TIT: ", songList[0].path);
+                playMusic.source = 'file:///' + songList[0].path
+                //window.currentSong = songList[0]
+                window.currentSongList = songList
+                window.currentSongIndex = 0;
+                //delayedPlay.start()
             }
         }
 

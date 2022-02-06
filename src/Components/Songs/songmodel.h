@@ -32,6 +32,7 @@ public:
     Q_INVOKABLE QString getArtist(int id) const;
     Q_INVOKABLE QString getAlbum(int id) const;
     Q_INVOKABLE QList<QObject*> getAllSongs() const;
+    Q_INVOKABLE QList<QObject*> getLocalSong(QString path) const;
 
 public slots:
 

@@ -3,6 +3,9 @@
 #include "moc_songmodel.cpp"
 #include <stdio.h>
 #include <iostream>
+#include <QFileInfo>
+#include <taglib/tag.h>
+#include <taglib/fileref.h>
 
 SongModel::SongModel(QObject *parent):
     QAbstractListModel(parent)
@@ -63,6 +66,40 @@ QList<QObject*> SongModel::getAllSongs() const {
     for(const auto& song : current){
         songList.append(new Song(song.id(), song.path(), song.title(), song.album(), song.artist(), "placeholder", song.track_length(), song.genre(), song.track_number(), song.year()));
     }
+    return songList;
+}
+
+
+QList<QObject*> SongModel::getLocalSong(QString path) const {
+    QList<QObject*> songList;
+    std::cout << "PATH " << path.toStdString() << std::endl;
+
+    QFileInfo finfo;
+    Song song;
+    finfo.setFile(path);
+    std::cout << "FINFO: " << finfo.absoluteFilePath().toUtf8().data() << std::endl;
+    const TagLib::String path2 = finfo.absoluteFilePath().toUtf8().data();
+    TagLib::FileRef f(path2.toCString());
+
+    if (!f.isNull()) {
+        TagLib::Tag *tag = f.tag();
+        TagLib::AudioProperties *prop = f.audioProperties();
+        std::cout << "TAG: " << tag->title() << std::endl;
+
+        Song song;
+
+        QString genre(tag->genre().toCString());
+        QString track_number(tag->track());
+        QString year(tag->year());
+        if (!QString::fromUtf8(tag->title().toCString(true)).isEmpty()) {
+
+            std::cout << "Loading file " << finfo.absoluteFilePath().toStdString() << std::endl;
+
+            songList.append(new Song(0, finfo.absoluteFilePath(), QString::fromUtf8(tag->title().toCString(true)), 0, 0, QLatin1String("placeholder"), QString::number(prop->length()), genre, track_number, year));
+
+        }
+    }
+
     return songList;
 }
 

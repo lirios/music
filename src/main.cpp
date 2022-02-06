@@ -43,6 +43,7 @@
 #include "Components/Utilities/musicscanner.h"
 #include "Components/Albums/albumartprovider.h"
 #include <QtQuickControls2>
+#include <taglib/tag.h>
 
 #ifdef QT_STATIC
 #  include <QQmlExtensionPlugin>
@@ -73,8 +74,19 @@ int main(int argc, char *argv[])
 
     engine.addImportPath(QCoreApplication::applicationDirPath() + QDir::separator() + QLatin1String("qml"));
 
-    engine.rootContext()->setContextProperty("loadedFileFolder", QString());
+    //engine.rootContext()->setContextProperty("loadedFileFolder", QString());
 
+
+    if (app.arguments().size() > 1) {
+            // If Vinyl Music was opened with a song path:
+            QFileInfo finfo;
+            Song song;
+            finfo.setFile(app.arguments().at(1));
+
+            engine.rootContext()->setContextProperty("loadedFileFolder", app.arguments().at(1));
+
+
+        }
     // Set initial music folders (later: add support for manually added folders)
     const QStringList musicLocations = QStandardPaths::standardLocations(QStandardPaths::MusicLocation);
     QString musicLocation = musicLocations.isEmpty() ?
