@@ -84,18 +84,20 @@ message(STATUS "FOUND TAGLY ${TAGLIB_LIBRARIES}")
 #liri_add_executable solves Fluid not found error, but causes a ton of other errors in compilation
 liri_add_executable(${CMAKE_PROJECT_NAME}
     SOURCES
-    ${liri_vinyl_SOURCES}
+    	${liri_vinyl_SOURCES}
     RESOURCES
-    qml.qrc
+    	qml.qrc
+    DESKTOP
+        "${CMAKE_CURRENT_SOURCE_DIR}/../res/com.liri.music.desktop"
     LIBRARIES
-    Qt5::Core
-    Qt5::Gui
-    Qt5::Svg
-    Qt5::Qml
-    Qt5::Quick
-    Qt5::QuickControls2
-    Qt5::Sql
-    Qt5::Widgets
+	    Qt5::Core
+	    Qt5::Gui
+	    Qt5::Svg
+	    Qt5::Qml
+	    Qt5::Quick
+	    Qt5::QuickControls2
+	    Qt5::Sql
+	    Qt5::Widgets
     ${TAGLIB_LIBRARIES}
 
 

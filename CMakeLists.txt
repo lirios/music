@@ -40,3 +40,4 @@ include_directories(${TAGLIB_INCLUDES})
 ## Add subdirectories:
 add_subdirectory(fluid)
 add_subdirectory(src)
+add_subdirectory(res)
