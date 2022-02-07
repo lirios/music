@@ -61,6 +61,15 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
     QQmlApplicationEngine engine;
 
+    app.setOrganizationName(QStringLiteral("Liri"));
+    app.setOrganizationDomain(QStringLiteral("liri.io"));
+    app.setApplicationName(QStringLiteral("Music"));
+    app.setDesktopFileName(QStringLiteral("com.liri.music.desktop"));
+    app.setWindowIcon(QIcon(":/res/icons/512x512/com.liri.music.png"));
+
+    // Set the X11 WM_CLASS so X11 desktops can find the desktop file
+    qputenv("RESOURCE_NAME", "com.liri.music");
+
     qRegisterMetaType<Album>();
     qRegisterMetaType<Song>();
     qRegisterMetaType<Artist>();
