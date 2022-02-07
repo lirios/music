@@ -18,7 +18,7 @@ Tab {
         id: flickable
         anchors.fill: parent
         clip: true
-        contentHeight: 400
+        contentHeight: parent.height + 200
         Material.background: "#777"
 
         Item {
@@ -33,6 +33,7 @@ Tab {
                 cellWidth: 200; cellHeight: 200
                 anchors.fill: parent
                 Material.background: "#777"
+                anchors.bottomMargin: 200
                 /*
                 model: ListModel {
                     ListElement {text: "Fable II OST"; art: "qrc:/Images/cover.jpg"}
