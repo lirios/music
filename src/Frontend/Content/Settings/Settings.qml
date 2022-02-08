@@ -21,14 +21,11 @@ FluidControls.Tab {
         folder: "" //shortcuts.home
 
         onAccepted: {
-            console.log("You chose: " + fileDialog.fileUrls)
             musicFolder.getMusicFolder = fileDialog.fileUrls[0].toString()
-            console.log(musicFolder.getMusicFolder)
             fileDialog.close()
 
         }
         onRejected: {
-            console.log("Canceled")
             fileDialog.close()
         }
         Component.onCompleted: visible = false
@@ -102,7 +99,6 @@ FluidControls.Tab {
 
                 delegate: FluidControls.ListItem {
                     text: {
-                        console.log(model.modelData,"SETTING");
                         return model.modelData.value
                     }
                     width: parent.width
@@ -163,7 +159,6 @@ FluidControls.Tab {
 
             delegate: FluidControls.ListItem {
                 text: {
-                    console.log(model.modelData,"SETTING");
                     return model.modelData.value
                 }
                 width: parent.width

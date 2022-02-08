@@ -46,7 +46,7 @@ Pane {
                 Image {
                     height: parent.height
                     width:  {
-                        console.log("ART22", art);
+
                            return parent.width
                            }
 
