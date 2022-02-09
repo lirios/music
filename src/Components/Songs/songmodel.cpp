@@ -37,11 +37,11 @@ QVariant SongModel::data(const QModelIndex &index, int role) const
     case IdRole:
         return QVariant::fromValue(current.id());
     case LengthRole:
-        return QVariant::fromValue(current.track_length());
+        return QVariant::fromValue(current.trackLength());
     case GenreRole:
         return QVariant::fromValue(current.genre());
     case TrackNumberRole:
-        return QVariant::fromValue(current.track_number());
+        return QVariant::fromValue(current.trackNumber());
     case YearRole:
         return QVariant::fromValue(current.year());
     }
@@ -54,7 +54,7 @@ QList<QObject*> SongModel::getSongsByAlbum(int id) const {
     QList<Song> current = MusicDatabase::get().getSongsByAlbum(id);
 
     for(const auto& song : current){
-        songList.append(new Song(song.id(), song.path(), song.title(), song.album(), song.artist(), "placeholder", song.track_length(), song.genre(), song.track_number(), song.year()));
+        songList.append(new Song(song.id(), song.path(), song.title(), song.album(), song.artist(), "placeholder", song.trackLength(), song.genre(), song.trackNumber(), song.year()));
     }
     return songList;
 }
@@ -64,7 +64,7 @@ QList<QObject*> SongModel::getAllSongs() const {
     QList<Song> current = MusicDatabase::get().getAllSongs();
 
     for(const auto& song : current){
-        songList.append(new Song(song.id(), song.path(), song.title(), song.album(), song.artist(), "placeholder", song.track_length(), song.genre(), song.track_number(), song.year()));
+        songList.append(new Song(song.id(), song.path(), song.title(), song.album(), song.artist(), "placeholder", song.trackLength(), song.genre(), song.trackNumber(), song.year()));
     }
     return songList;
 }
@@ -89,13 +89,13 @@ QList<QObject*> SongModel::getLocalSong(QString path) const {
         Song song;
 
         QString genre(tag->genre().toCString());
-        QString track_number(tag->track());
+        QString trackNumber(tag->track());
         QString year(tag->year());
         if (!QString::fromUtf8(tag->title().toCString(true)).isEmpty()) {
 
             std::cout << "Loading file " << finfo.absoluteFilePath().toStdString() << std::endl;
 
-            songList.append(new Song(0, finfo.absoluteFilePath(), QString::fromUtf8(tag->title().toCString(true)), 0, 0, QLatin1String("placeholder"), QString::number(prop->length()), genre, track_number, year));
+            songList.append(new Song(0, finfo.absoluteFilePath(), QString::fromUtf8(tag->title().toCString(true)), 0, 0, QLatin1String("placeholder"), QString::number(prop->length()), genre, trackNumber, year));
 
         }
     }
@@ -108,7 +108,7 @@ QList<QObject*> SongModel::getSongsByArtist(int id) const {
     QList<Song> current = MusicDatabase::get().getSongsByArtist(id);
 
     for(const auto& song : current){
-        songList.append(new Song(song.id(), song.path(), song.title(), song.album(), song.artist(), "placeholder", song.track_length(), song.genre(), song.track_number(), song.year()));
+        songList.append(new Song(song.id(), song.path(), song.title(), song.album(), song.artist(), QStringLiteral("placeholder"), song.trackLength(), song.genre(), song.trackNumber(), song.year()));
     }
     return songList;
 }
@@ -130,6 +130,6 @@ QHash<int, QByteArray> SongModel::roleNames() const
     roles[AlbumRole] = "album";
     roles[PathRole] = "path";
     roles[IdRole] = "id";
-    roles[LengthRole] = "track_length";
+    roles[LengthRole] = "trackLength";
     return roles;
 }

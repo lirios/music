@@ -30,7 +30,7 @@ QList<QObject*> LiriMusic::getArtistAlbums(QString name){
         QList<QObject*> songList;
 
         for(const auto& song : songListRaw){
-            songList.append(new Song(song.id(), song.path(), song.title(), song.album(), song.artist(), "placeholder", song.track_length(), song.genre(), song.track_number(), song.year()));
+            songList.append(new Song(song.id(), song.path(), song.title(), song.album(), song.artist(), QStringLiteral("placeholder"), song.trackLength(), song.genre(), song.trackNumber(), song.year()));
         }
         album->setSongList(songList);
         albumList.append(album);
@@ -50,7 +50,7 @@ QList<QObject*> LiriMusic::getAllSongs(){
         QList<QObject*> songList;
 
         for(const auto& song : songListRaw){
-            songList.append(new Song(song.id(), song.path(), song.title(), song.album(), song.artist(), "placeholder", song.track_length(), song.genre(), song.track_number(), song.year()));
+            songList.append(new Song(song.id(), song.path(), song.title(), song.album(), song.artist(), QStringLiteral("placeholder"), song.trackLength(), song.genre(), song.trackNumber(), song.year()));
         }
 
         album->setSongList(songList);

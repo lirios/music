@@ -6,15 +6,11 @@
 
 class Artist : public QObject {
     Q_OBJECT
-
-    Q_PROPERTY(QString name READ name WRITE setName)
-    Q_PROPERTY(quint64 id READ id WRITE setId)
-
-    QString m_name;
-    quint64 m_id;
+    Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
+    Q_PROPERTY(quint64 id READ id WRITE setId NOTIFY idChanged)
 public:
-    Artist();
-    Artist(quint64, const QString &);
+    explicit Artist(QObject *parent = nullptr);
+    Artist(quint64, const QString &name, QObject *parent = nullptr);
     Artist(const Artist&);
 
     Artist& operator=(const Artist&);
@@ -24,6 +20,14 @@ public:
 
     void setId(quint64);
     void setName(const QString&);
+
+Q_SIGNALS:
+    void nameChanged(const QString &name);
+    void idChanged(quint64 id);
+
+private:
+    QString m_name;
+    quint64 m_id;
 };
 
 Q_DECLARE_METATYPE(Artist)
